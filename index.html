@@ -13,7 +13,9 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;" data-bs-theme="light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">
+        <img src="public/assets/images/logo_ipf.png" alt="Instituto Politécnico Formosa">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -49,12 +51,69 @@
 </header>
 
 <main>
+
+     <section id="informacion" class="container my-5">
+        <div class="text-center mb-5">
+            <h2 class="outfit-bold mb-3">¿De qué se trata?</h2>
+            <p class="outfit-regular lead mx-auto" style="max-width: 800px;">
+                Un espacio digital creado para que los estudiantes del Instituto Politécnico Formosa puedan compartir ideas, sugerencias y propuestas que contribuyan al crecimiento y mejora de nuestra institución.
+            </p>
+        </div>
+        
+        <div class="row mb-5">
+            <div class="col-lg-6 mb-4">
+                <div class="info-card h-100 p-4">
+                    <h3 class="outfit-semibold mb-3">¿Cómo funciona?</h3>
+                    <p class="outfit-regular mb-3">
+                        Los estudiantes pueden crear una cuenta gratuita y acceder a un espacio donde publicar sus propuestas. Cada idea puede recibir comentarios y sugerencias de la comunidad, fomentando el diálogo y la colaboración.
+                    </p>
+                    <p class="outfit-regular">
+                        La plataforma busca fortalecer la comunicación entre estudiantes, docentes y directivos, permitiendo canalizar de manera ordenada y constructiva iniciativas sobre infraestructura, actividades, metodologías y proyectos.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="info-card h-100 p-4">
+                    <h3 class="outfit-semibold mb-3">Beneficios</h3>
+                    <ul class="list-unstyled outfit-regular">
+                        <li class="mb-2">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Participación activa en la vida institucional
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Visibilidad para tus ideas y proyectos
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Colaboración con otros estudiantes
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Impacto real en la mejora del instituto
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Canal directo con la administración
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <p class="outfit-regular text-muted">
+                Con este canal, cada voz estudiantil podrá transformarse en un aporte concreto para el desarrollo académico, cultural y comunitario del instituto.
+            </p>
+        </div>
+    </section>
+
     <section id="registro-usuarios" class="container my-5">
         <div class="text-center">
             <h2 class="mb-4">¿Te gustaría empezar?</h2>
             <div class="d-flex justify-content-center gap-3">
                 <!-- Botón Iniciar Sesión -->
-                <button type="button" class="btn btn-custom-primary btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <button type="button" class="btn btn-outline-custom-primary btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">
                     Iniciar Sesión
                 </button>
                 <!-- Botón Registrarse -->
@@ -64,6 +123,7 @@
             </div>
         </div>
     </section>
+
 </main>
 
 <!-- Modal Iniciar Sesión -->
@@ -147,6 +207,103 @@
         </div>
     </div>
 </div>
+
+<footer class="footer-custom mt-5">
+    <div class="container">
+        <div class="row py-5">
+            <!-- Logo y descripción -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="footer-brand archivo-black-regular mb-3">aportAR</h5>
+                <p class="footer-text mb-3">
+                    Conectando corazones solidarios con causas que transforman el mundo. 
+                    Juntos construimos un futuro mejor.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link me-3" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link me-3" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link me-3" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Enlaces rápidos -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h6 class="footer-title outfit-semibold mb-3">Enlaces Rápidos</h6>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Inicio</a></li>
+                    <li><a href="#" class="footer-link">Donaciones</a></li>
+                    <li><a href="#" class="footer-link">Proyectos</a></li>
+                    <li><a href="#" class="footer-link">Voluntariado</a></li>
+                    <li><a href="#" class="footer-link">Nosotros</a></li>
+                </ul>
+            </div>
+            
+            <!-- Soporte -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h6 class="footer-title outfit-semibold mb-3">Soporte</h6>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Centro de Ayuda</a></li>
+                    <li><a href="#" class="footer-link">Contacto</a></li>
+                    <li><a href="#" class="footer-link">FAQ</a></li>
+                    <li><a href="#" class="footer-link">Seguridad</a></li>
+                    <li><a href="#" class="footer-link">Denuncias</a></li>
+                </ul>
+            </div>
+            
+            <!-- Newsletter -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h6 class="footer-title outfit-semibold mb-3">Mantente Conectado</h6>
+                <p class="footer-text mb-3">
+                    Recibe las últimas noticias sobre proyectos e iniciativas de nuestra plataforma y comunidad.
+                </p>
+                <form class="newsletter-form">
+                    <div class="input-group">
+                        <input type="email" class="form-control newsletter-input" placeholder="Tu email">
+                        <button class="btn btn-newsletter" type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+                <small class="footer-text d-block mt-2">
+                    Sin spam, solo contenido valioso 💚
+                </small>
+            </div>
+        </div>
+        
+        <!-- Línea separadora -->
+        <hr class="footer-divider">
+        
+        <!-- Footer bottom -->
+        <div class="row py-3 align-items-center">
+            <div class="col-md-6">
+                <p class="footer-copyright mb-0">
+                    © 2025 <strong>aportAR</strong>. Todos los derechos reservados.
+                </p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#" class="footer-link me-3">Términos de Uso</a>
+                <a href="#" class="footer-link me-3">Privacidad</a>
+                <a href="#" class="footer-link">Cookies</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Elemento decorativo -->
+    <div class="footer-decoration"></div>
+</footer>
+
+<!-- Font Awesome para iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
 
 </body>
 </html>
