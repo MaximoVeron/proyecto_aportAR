@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="public/assets/css/styles.css">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="public/assets/css/fonts.css">
+    <link rel="stylesheet" href="public/assets/css/styles.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;" data-bs-theme="light">
@@ -37,7 +39,7 @@
 
 <header>
     <div>
-        <h1>
+        <h1 class="text-center outfit-bold" style="font-size: 2.5rem; margin-top: 10px; margin-bottom: 10px;">
             Bienvenido a aportAR
         </h1>
     </div>
@@ -45,6 +47,106 @@
         <img src="public/assets/images/banner_index.png" alt="banner de la pagina" class="img-fluid" style="width: 100%; height: auto;">
     </div>
 </header>
+
+<main>
+    <section id="registro-usuarios" class="container my-5">
+        <div class="text-center">
+            <h2 class="mb-4">¿Te gustaría empezar?</h2>
+            <div class="d-flex justify-content-center gap-3">
+                <!-- Botón Iniciar Sesión -->
+                <button type="button" class="btn btn-custom-primary btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    Iniciar Sesión
+                </button>
+                <!-- Botón Registrarse -->
+                <button type="button" class="btn btn-outline-custom-primary btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal">
+                    Registrarse
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Modal Iniciar Sesión -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="loginModalLabel">Iniciar Sesión</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <label for="loginEmail" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="loginEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">
+                            Recordarme
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" form="loginForm" class="btn btn-custom-primary">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Registrarse -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="registerModalLabel">Crear Cuenta</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="registerFirstName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="registerFirstName" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="registerLastName" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="registerLastName" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerEmail" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="registerEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerPassword" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="registerPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                        <input type="password" class="form-control" id="confirmPassword" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                        <label class="form-check-label" for="agreeTerms">
+                            Acepto los <a href="#" class="text-decoration-none">términos y condiciones</a>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" form="registerForm" class="btn btn-custom-primary">Crear Cuenta</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
