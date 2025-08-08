@@ -1,0 +1,129 @@
+/* Importar tipografías de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
+
+/* Variables CSS para las tipografías */
+:root {
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-outfit: 'Outfit', sans-serif;
+    --font-archivo-black: 'Archivo Black', sans-serif;
+}
+
+/* Clases utilitarias básicas para tipografías */
+.font-montserrat {
+    font-family: var(--font-montserrat);
+}
+
+.font-outfit {
+    font-family: var(--font-outfit);
+}
+
+.font-archivo-black {
+    font-family: var(--font-archivo-black);
+}
+
+/* Clases específicas para Montserrat con pesos exactos */
+.montserrat-thin {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.montserrat-light {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.montserrat-regular {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.montserrat-medium {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.montserrat-semibold {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.montserrat-bold {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.montserrat-black {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* Clases específicas para Outfit con pesos exactos */
+.outfit-thin {
+    font-family: "Outfit", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.outfit-light {
+    font-family: "Outfit", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.outfit-regular {
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.outfit-medium {
+    font-family: "Outfit", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.outfit-semibold {
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.outfit-bold {
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.outfit-black {
+    font-family: "Outfit", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* Estilos base */
+body {
+    font-family: var(--font-montserrat);
+    line-height: 1.6;
+}
+
+/* Ejemplo de uso en headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-outfit);
+    font-weight: 600;
+}
+
+/* Clases específicas para Archivo Black */
+.archivo-black-regular {
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
