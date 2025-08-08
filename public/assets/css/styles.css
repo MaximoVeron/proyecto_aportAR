@@ -1,0 +1,62 @@
+/* Botones personalizados con color verde */
+.btn-custom-primary {
+    background-color: #2e7b21;
+    border-color: #2e7b21;
+    color: white;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-custom-primary:hover {
+    background-color: #25661c;
+    border-color: #25661c;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(46, 123, 33, 0.3);
+}
+
+.btn-custom-primary:focus,
+.btn-custom-primary.focus {
+    background-color: #25661c;
+    border-color: #25661c;
+    color: white;
+    box-shadow: 0 0 0 0.2rem rgba(46, 123, 33, 0.5);
+}
+
+.btn-custom-primary:active,
+.btn-custom-primary.active {
+    background-color: #1f5518;
+    border-color: #1f5518;
+    color: white;
+}
+
+.btn-outline-custom-primary {
+    color: #2e7b21;
+    border-color: #2e7b21;
+    background-color: transparent;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-outline-custom-primary:hover {
+    background-color: #2e7b21;
+    border-color: #2e7b21;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(46, 123, 33, 0.3);
+}
+
+.btn-outline-custom-primary:focus,
+.btn-outline-custom-primary.focus {
+    background-color: #2e7b21;
+    border-color: #2e7b21;
+    color: white;
+    box-shadow: 0 0 0 0.2rem rgba(46, 123, 33, 0.5);
+}
+
+.btn-outline-custom-primary:active,
+.btn-outline-custom-primary.active {
+    background-color: #1f5518;
+    border-color: #1f5518;
+    color: white;
+}
+
+
