@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="public/assets/css/styles.css">
 </head>
 <body>
+    
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;" data-bs-theme="light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-        <img src="public/assets/images/logo_ipf.png" alt="Instituto Politécnico Formosa">
+        <img src="public/assets/images/index.images/logo_ipf.png" alt="Instituto Politécnico Formosa">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -25,7 +26,7 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="https://www.ipf.edu.ar/" target="_blank">IPF</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
@@ -42,11 +43,11 @@
 <header>
     <div>
         <h1 class="text-center outfit-bold" style="font-size: 2.5rem; margin-top: 10px; margin-bottom: 10px;">
-            Bienvenido a aportAR
+            Bienvenido a 
         </h1>
     </div>
     <div>
-        <img src="public/assets/images/banner_index.png" alt="banner de la pagina" class="img-fluid" style="width: 100%; height: auto;">
+        <img src="public/assets/images/index.images/banner_index.png" alt="banner de la pagina" class="img-fluid" style="width: 100%; height: auto;">
     </div>
 </header>
 
@@ -219,13 +220,13 @@
                     Juntos construimos un futuro mejor.
                 </p>
                 <div class="social-links">
-                    <a href="#" class="social-link me-3" aria-label="Facebook">
+                    <a href="https://www.facebook.com/share/19X3yNHRps/?mibextid=wwXIfr" target="_blank" class="social-link me-3" aria-label="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
                     <a href="#" class="social-link me-3" aria-label="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="social-link me-3" aria-label="Instagram">
+                    <a href="https://www.instagram.com/ipformosa?igsh=MXVyOXlwcmJ2a2pndA==" target="_blank" class="social-link me-3" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
                     <a href="#" class="social-link" aria-label="LinkedIn">
@@ -239,10 +240,9 @@
                 <h6 class="footer-title outfit-semibold mb-3">Enlaces Rápidos</h6>
                 <ul class="footer-links">
                     <li><a href="#" class="footer-link">Inicio</a></li>
-                    <li><a href="#" class="footer-link">Donaciones</a></li>
                     <li><a href="#" class="footer-link">Proyectos</a></li>
-                    <li><a href="#" class="footer-link">Voluntariado</a></li>
-                    <li><a href="#" class="footer-link">Nosotros</a></li>
+                    <li><a href="#" class="footer-link" data-bs-toggle="modal" data-bs-target="#voluntariadoModal">Voluntariado</a></li>
+                    <li><a href="#" class="footer-link" data-bs-toggle="modal" data-bs-target="#nosotrosModal">Nosotros</a></li>
                 </ul>
             </div>
             
@@ -250,11 +250,10 @@
             <div class="col-lg-2 col-md-6 mb-4">
                 <h6 class="footer-title outfit-semibold mb-3">Soporte</h6>
                 <ul class="footer-links">
-                    <li><a href="#" class="footer-link">Centro de Ayuda</a></li>
-                    <li><a href="#" class="footer-link">Contacto</a></li>
-                    <li><a href="#" class="footer-link">FAQ</a></li>
-                    <li><a href="#" class="footer-link">Seguridad</a></li>
-                    <li><a href="#" class="footer-link">Denuncias</a></li>
+                    <li><a href="#" class="footer-link" data-bs-toggle="modal" data-bs-target="#contactoModal">Contacto</a></li>
+                    <li><a href="#" class="footer-link" data-bs-toggle="modal" data-bs-target="#faqModal">FAQ</a></li>
+                    <li><a href="#" class="footer-link" data-bs-toggle="modal" data-bs-target="#seguridadModal">Seguridad</a></li>
+                    <li><a href="#" class="footer-link" data-bs-toggle="modal" data-bs-target="#denunciasModal">Denuncias</a></li>
                 </ul>
             </div>
             
@@ -299,6 +298,542 @@
     <!-- Elemento decorativo -->
     <div class="footer-decoration"></div>
 </footer>
+
+    </div>
+</div>
+
+<!-- Modal Contacto -->
+<div class="modal fade" id="contactoModal" tabindex="-1" aria-labelledby="contactoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content support-modal">
+            <div class="modal-header support-header">
+                <div class="support-header-content">
+                    <i class="fas fa-envelope support-icon"></i>
+                    <h1 class="modal-title fs-4 outfit-bold" id="contactoModalLabel">Contáctanos</h1>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body support-body p-4">
+                <div class="text-center mb-4">
+                    <h3 class="outfit-semibold mb-3 text-success">¿Necesitas ayuda? ¡Estamos aquí!</h3>
+                    <p class="outfit-regular lead">
+                        Nuestro equipo está disponible para resolver tus dudas y brindarte el mejor soporte.
+                    </p>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h5 class="outfit-semibold">Teléfono</h5>
+                            <p class="outfit-regular">+54 370 456-7890</p>
+                            <small class="text-muted">Lunes a Viernes 8:00 - 18:00</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h5 class="outfit-semibold">Email</h5>
+                            <p class="outfit-regular">soporte@aportar.edu.ar</p>
+                            <small class="text-muted">Respuesta en 24 horas</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-section">
+                    <h5 class="outfit-semibold mb-3 text-center">Envíanos un mensaje</h5>
+                    <form class="contact-form">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="email" class="form-control" placeholder="Tu email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select" required>
+                                <option value="">Selecciona un tema</option>
+                                <option value="tecnico">Problema técnico</option>
+                                <option value="cuenta">Problemas con mi cuenta</option>
+                                <option value="sugerencia">Sugerencia</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="4" placeholder="Describe tu consulta..." required></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer support-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-custom-primary">
+                    <i class="fas fa-paper-plane me-2"></i>
+                    Enviar Mensaje
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal FAQ -->
+<div class="modal fade" id="faqModal" tabindex="-1" aria-labelledby="faqModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content support-modal">
+            <div class="modal-header support-header">
+                <div class="support-header-content">
+                    <i class="fas fa-question-circle support-icon"></i>
+                    <h1 class="modal-title fs-4 outfit-bold" id="faqModalLabel">Preguntas Frecuentes</h1>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body support-body p-4">
+                <div class="text-center mb-4">
+                    <h3 class="outfit-semibold mb-3 text-success">¿Tienes dudas? Aquí están las respuestas</h3>
+                </div>
+                
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button outfit-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                ¿Cómo creo una cuenta en aportAR?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body outfit-regular">
+                                Simplemente haz clic en el botón "Registrarse" en la página principal, completa tus datos y confirma tu email. ¡Es gratis y solo toma unos minutos!
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed outfit-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                ¿Puedo publicar cualquier tipo de propuesta?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body outfit-regular">
+                                Sí, cualquier propuesta constructiva relacionada con la mejora del IPF es bienvenida. Solo asegúrate de que sea respetuosa y esté orientada al crecimiento institucional.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed outfit-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                ¿Cómo sé si mi propuesta fue vista por las autoridades?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body outfit-regular">
+                                Las propuestas más votadas y relevantes son revisadas mensualmente por un comité mixto de estudiantes y directivos. Recibirás notificaciones sobre el estado de tu propuesta.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed outfit-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                ¿Es segura mi información personal?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body outfit-regular">
+                                Absolutamente. Utilizamos encriptación de datos y nunca compartimos tu información personal. Solo se muestra tu nombre en las propuestas que publiques.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer support-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-custom-primary" data-bs-toggle="modal" data-bs-target="#contactoModal" data-bs-dismiss="modal">
+                    <i class="fas fa-envelope me-2"></i>
+                    ¿Más preguntas? Contáctanos
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Seguridad -->
+<div class="modal fade" id="seguridadModal" tabindex="-1" aria-labelledby="seguridadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content support-modal">
+            <div class="modal-header support-header">
+                <div class="support-header-content">
+                    <i class="fas fa-shield-alt support-icon"></i>
+                    <h1 class="modal-title fs-4 outfit-bold" id="seguridadModalLabel">Seguridad</h1>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body support-body p-4">
+                <div class="text-center mb-4">
+                    <h3 class="outfit-semibold mb-3 text-success">Tu seguridad es nuestra prioridad</h3>
+                    <p class="outfit-regular lead">
+                        Implementamos las mejores prácticas de seguridad para proteger tu información.
+                    </p>
+                </div>
+                
+                <div class="security-features">
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="security-content">
+                            <h5 class="outfit-semibold">Encriptación de datos</h5>
+                            <p class="outfit-regular">Toda tu información está protegida con encriptación SSL de 256 bits.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="security-content">
+                            <h5 class="outfit-semibold">Verificación de identidad</h5>
+                            <p class="outfit-regular">Solo estudiantes del IPF pueden crear cuentas mediante verificación de email institucional.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="security-content">
+                            <h5 class="outfit-semibold">Moderación activa</h5>
+                            <p class="outfit-regular">Nuestro equipo revisa constantemente el contenido para mantener un ambiente seguro.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="security-content">
+                            <h5 class="outfit-semibold">Respaldo de información</h5>
+                            <p class="outfit-regular">Realizamos backups automáticos para proteger tu información.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="security-tips mt-4">
+                    <h5 class="outfit-semibold mb-3">Consejos de seguridad:</h5>
+                    <ul class="outfit-regular">
+                        <li>Usa una contraseña fuerte y única</li>
+                        <li>No compartas tus credenciales con nadie</li>
+                        <li>Reporta cualquier actividad sospechosa</li>
+                        <li>Mantén actualizada tu información de contacto</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer support-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-custom-primary" data-bs-toggle="modal" data-bs-target="#denunciasModal" data-bs-dismiss="modal">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Reportar Problema
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Denuncias -->
+<div class="modal fade" id="denunciasModal" tabindex="-1" aria-labelledby="denunciasModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content support-modal">
+            <div class="modal-header support-header">
+                <div class="support-header-content">
+                    <i class="fas fa-exclamation-triangle support-icon"></i>
+                    <h1 class="modal-title fs-4 outfit-bold" id="denunciasModalLabel">Denuncias</h1>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body support-body p-4">
+                <div class="text-center mb-4">
+                    <h3 class="outfit-semibold mb-3 text-danger">Reporta contenido inapropiado</h3>
+                    <p class="outfit-regular lead">
+                        Ayúdanos a mantener un ambiente seguro y respetuoso para todos.
+                    </p>
+                </div>
+                
+                <div class="report-types mb-4">
+                    <h5 class="outfit-semibold mb-3">¿Qué puedes reportar?</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="report-card">
+                                <i class="fas fa-comment-slash"></i>
+                                <h6 class="outfit-semibold">Contenido ofensivo</h6>
+                                <p class="small">Comentarios o propuestas con lenguaje inapropiado</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="report-card">
+                                <i class="fas fa-ban"></i>
+                                <h6 class="outfit-semibold">Spam o irrelevante</h6>
+                                <p class="small">Contenido no relacionado con el IPF</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="report-card">
+                                <i class="fas fa-user-times"></i>
+                                <h6 class="outfit-semibold">Acoso</h6>
+                                <p class="small">Comportamiento intimidatorio hacia otros usuarios</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="report-card">
+                                <i class="fas fa-copy"></i>
+                                <h6 class="outfit-semibold">Contenido duplicado</h6>
+                                <p class="small">Propuestas repetidas o copiadas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="report-form-section">
+                    <h5 class="outfit-semibold mb-3">Hacer una denuncia</h5>
+                    <form class="report-form">
+                        <div class="mb-3">
+                            <label class="form-label outfit-semibold">Tipo de problema</label>
+                            <select class="form-select" required>
+                                <option value="">Selecciona el tipo de problema</option>
+                                <option value="ofensivo">Contenido ofensivo</option>
+                                <option value="spam">Spam o irrelevante</option>
+                                <option value="acoso">Acoso</option>
+                                <option value="duplicado">Contenido duplicado</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label outfit-semibold">URL o ID del contenido</label>
+                            <input type="text" class="form-control" placeholder="Ej: /propuesta/123 o ID del usuario">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label outfit-semibold">Describe el problema</label>
+                            <textarea class="form-control" rows="4" placeholder="Explica detalladamente el problema..." required></textarea>
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <small>Todas las denuncias son revisadas por nuestro equipo de moderación en un plazo máximo de 24 horas.</small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer support-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger">
+                    <i class="fas fa-flag me-2"></i>
+                    Enviar Denuncia
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nosotros -->
+<div class="modal fade" id="nosotrosModal" tabindex="-1" aria-labelledby="nosotrosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content about-modal">
+            <div class="modal-header about-header">
+                <div class="about-header-content">
+                    <i class="fas fa-users about-icon"></i>
+                    <h1 class="modal-title fs-3 outfit-bold" id="nosotrosModalLabel">Conoce nuestro equipo</h1>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body about-body p-0">
+                <!-- Imagen del equipo -->
+                <div class="about-image-container">
+                    <img src="public/assets/images/index.images/maxyamin.png.jpg" alt="Equipo de aportAR" class="about-team-image">
+                    <div class="about-image-overlay">
+                        <h2 class="outfit-bold text-white">Estudiantes construyendo el futuro</h2>
+                    </div>
+                </div>
+                
+                <!-- Contenido descriptivo -->
+                <div class="about-content p-4">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="text-center mb-4">
+                                    <h3 class="outfit-bold mb-3" style="color: #2e7b21;">¿Quiénes somos?</h3>
+                                    <p class="outfit-regular lead">
+                                        Somos un grupo de estudiantes apasionados del <strong>Instituto Politécnico Formosa</strong> 
+                                        que decidió tomar acción para mejorar nuestra comunidad educativa.
+                                    </p>
+                                </div>
+                                
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="about-feature-card">
+                                            <div class="about-feature-icon">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </div>
+                                            <h5 class="outfit-semibold">Nuestra Visión</h5>
+                                            <p class="outfit-regular">
+                                                Crear un espacio donde cada voz estudiantil tenga el poder de generar 
+                                                cambios positivos y duraderos en nuestra institución.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="about-feature-card">
+                                            <div class="about-feature-icon">
+                                                <i class="fas fa-heart"></i>
+                                            </div>
+                                            <h5 class="outfit-semibold">Nuestra Misión</h5>
+                                            <p class="outfit-regular">
+                                                Facilitar la comunicación entre estudiantes, docentes y directivos 
+                                                mediante una plataforma digital innovadora y accesible.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="about-story">
+                                    <h4 class="outfit-semibold mb-3" style="color: #2e7b21;">Nuestra Historia</h4>
+                                    <p class="outfit-regular mb-3">
+                                        Todo comenzó cuando nos preguntamos: <em>"¿como podemos ayudar a mejorar nuestra institución?"</em>
+                                    </p>
+                                    <p class="outfit-regular mb-3">
+                                        Así nació <strong>aportAR</strong>, una plataforma pensada por estudiantes, 
+                                        para estudiantes, con el objetivo de democratizar la participación en la vida 
+                                        institucional y convertir cada propuesta en una oportunidad de crecimiento.
+                                    </p>
+                                    <p class="outfit-regular">
+                                        Hoy, continuamos trabajando con el mismo entusiasmo del primer día, 
+                                        convencidos de que juntos podemos construir el instituto que soñamos.
+                                    </p>
+                                </div>
+                                
+                                <div class="about-values mt-4">
+                                    <h4 class="outfit-semibold mb-3 text-center" style="color: #2e7b21;">Nuestros Valores</h4>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-2">
+                                            <div class="value-item">
+                                                <i class="fas fa-handshake"></i>
+                                                <span>Colaboración</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <div class="value-item">
+                                                <i class="fas fa-balance-scale"></i>
+                                                <span>Transparencia</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <div class="value-item">
+                                                <i class="fas fa-rocket"></i>
+                                                <span>Innovación</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer about-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-custom-primary">
+                    <i class="fas fa-envelope me-2"></i>
+                    Contáctanos
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Voluntariado -->
+<div class="modal fade" id="voluntariadoModal" tabindex="-1" aria-labelledby="voluntariadoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content volunteer-modal">
+            <div class="modal-header volunteer-header">
+                <div class="volunteer-header-content">
+                    <i class="fas fa-hands-helping volunteer-icon"></i>
+                    <h1 class="modal-title fs-4 outfit-bold" id="voluntariadoModalLabel">¡Únete a nuestro equipo!</h1>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body volunteer-body p-4">
+                <div class="text-center mb-4">
+                    <h3 class="outfit-semibold mb-3 text-success">¿Quieres ser parte del cambio?</h3>
+                    <p class="outfit-regular lead">
+                        Si estás interesado en participar del proyecto <strong>aportAR</strong> como voluntario, 
+                        tenemos diferentes roles disponibles para ti.
+                    </p>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="volunteer-card">
+                            <div class="volunteer-card-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h5 class="outfit-semibold">Moderador</h5>
+                            <p class="outfit-regular small">
+                                Ayuda a mantener un ambiente respetuoso y constructivo en la plataforma, 
+                                revisando contenido y facilitando el diálogo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="volunteer-card">
+                            <div class="volunteer-card-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h5 class="outfit-semibold">Desarrollador</h5>
+                            <p class="outfit-regular small">
+                                Contribuye al desarrollo técnico de la plataforma, 
+                                implementando nuevas funcionalidades y mejoras.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="volunteer-contact">
+                    <div class="text-center mb-3">
+                        <h5 class="outfit-semibold">¿Cómo contactarnos?</h5>
+                        <p class="outfit-regular">
+                            Ponte en contacto con nosotros y te atenderemos a la brevedad. 
+                            ¡Estamos emocionados de conocerte!
+                        </p>
+                    </div>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>voluntarios@aportar.edu.ar</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+54 370 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp: +54 9 370 123-4567</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer volunteer-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-custom-primary">
+                    <i class="fas fa-paper-plane me-2"></i>
+                    Contactar Ahora
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Font Awesome para iconos -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
