@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración - aportAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../assets/images/index.images/logo_ipf.png" alt="Instituto Politécnico Formosa" width="40" height="32">
+                <span class="ms-2 outfit-semibold">aportAR Admin</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#propuestas">Propuestas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#usuarios">Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reportes">Reportes</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container-fluid mt-4">
+        <div class="row">
+            <!-- Sidebar con información -->
+            <div class="col-lg-8">
+                <div class="card info-card h-100">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="outfit-semibold mb-0">
+                            <i class="fas fa-chart-line me-2"></i>
+                            Panel de Control - aportAR
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="outfit-semibold text-success mb-3">Estadísticas Generales</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><i class="fas fa-users text-primary me-2"></i>Usuarios Activos</span>
+                                        <span class="badge bg-primary rounded-pill">127</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><i class="fas fa-lightbulb text-warning me-2"></i>Propuestas Publicadas</span>
+                                        <span class="badge bg-warning rounded-pill">45</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><i class="fas fa-check-circle text-success me-2"></i>Propuestas Aprobadas</span>
+                                        <span class="badge bg-success rounded-pill">23</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><i class="fas fa-clock text-info me-2"></i>En Revisión</span>
+                                        <span class="badge bg-info rounded-pill">12</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><i class="fas fa-flag text-danger me-2"></i>Reportes Pendientes</span>
+                                        <span class="badge bg-danger rounded-pill">3</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="outfit-semibold text-success mb-3">Acciones Rápidas</h5>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-custom-primary">
+                                        <i class="fas fa-plus me-2"></i>Nueva Propuesta
+                                    </button>
+                                    <button class="btn btn-outline-custom-primary">
+                                        <i class="fas fa-users me-2"></i>Gestionar Usuarios
+                                    </button>
+                                    <button class="btn btn-outline-custom-primary">
+                                        <i class="fas fa-file-alt me-2"></i>Generar Reporte
+                                    </button>
+                                    <button class="btn btn-outline-custom-primary">
+                                        <i class="fas fa-cog me-2"></i>Configuración
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="outfit-semibold text-success mb-3">Actividad Reciente</h5>
+                                <div class="list-group">
+                                    <div class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">Nueva propuesta: "Mejoras en laboratorio de informática"</h6>
+                                            <small>Hace 3 min</small>
+                                        </div>
+                                        <p class="mb-1">Propuesta enviada por Juan Pérez (4to año)</p>
+                                        <small>Estado: Pendiente de revisión</small>
+                                    </div>
+                                    <div class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">Usuario registrado: María González</h6>
+                                            <small>Hace 15 min</small>
+                                        </div>
+                                        <p class="mb-1">Nuevo estudiante verificado del 2do año</p>
+                                    </div>
+                                    <div class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">Propuesta aprobada: "Espacio recreativo estudiantil"</h6>
+                                            <small>Hace 1 hora</small>
+                                        </div>
+                                        <p class="mb-1">Aprobada por el comité de revisión</p>
+                                        <small>Estado: En implementación</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Imagen y información lateral -->
+            <div class="col-lg-4">
+                <div class="row h-100">
+                    <div class="col-12 mb-3">
+                        <div class="card info-card h-100">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="outfit-semibold mb-0">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Información del Sistema
+                                </h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <!-- Imagen del equipo o logo -->
+                                <div class="mb-3">
+                                    <img src="../assets/images/index.images/logo_ipf.png" 
+                                         alt="Instituto Politécnico Formosa" 
+                                         class="img-fluid rounded-3"
+                                         style="max-height: 150px; object-fit: contain;">
+                                </div>
+                                
+                                <!-- Lista de información al lado (debajo en mobile) -->
+                                <div class="system-info">
+                                    <h6 class="outfit-semibold text-success mb-3">Estado del Sistema</h6>
+                                    <ul class="list-unstyled text-start">
+                                        <li class="mb-2">
+                                            <i class="fas fa-circle text-success me-2"></i>
+                                            <span class="outfit-regular">Servidor: Online</span>
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-circle text-success me-2"></i>
+                                            <span class="outfit-regular">Base de datos: Conectada</span>
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-circle text-warning me-2"></i>
+                                            <span class="outfit-regular">Backup: En progreso</span>
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-circle text-success me-2"></i>
+                                            <span class="outfit-regular">Seguridad: Activa</span>
+                                        </li>
+                                    </ul>
+                                    
+                                    <hr>
+                                    
+                                    <h6 class="outfit-semibold text-success mb-3">Información</h6>
+                                    <ul class="list-unstyled text-start">
+                                        <li class="mb-2">
+                                            <strong>Versión:</strong> v1.0.0
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Última actualización:</strong> 10/08/2025
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Tiempo activo:</strong> 7 días
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- CSS personalizado para mejorar el layout -->
+    <style>
+        .system-info ul li {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* En pantallas grandes, la imagen y lista estarán uno al lado del otro */
+        @media (min-width: 992px) {
+            .admin-layout {
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .admin-image {
+                flex: 0 0 150px;
+            }
+            
+            .admin-content {
+                flex: 1;
+            }
+        }
+        
+        /* Mejorar el diseño responsive */
+        @media (max-width: 768px) {
+            .col-lg-8, .col-lg-4 {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</body>
+</html>
