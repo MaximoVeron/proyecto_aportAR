@@ -462,37 +462,615 @@
         </div>
 
         <div id="feed-sugerencias" class="feed-content d-none">
-            <div class="card info-card">
-                <div class="card-header bg-success text-white">
-                    <h5 class="outfit-semibold mb-0">
-                        <i class="fas fa-lightbulb me-2"></i>
-                        Feed de Sugerencias
-                    </h5>
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card info-card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="outfit-semibold mb-0">
+                                <i class="fas fa-lightbulb me-2"></i>
+                                Feed de Sugerencias - Moderación
+                            </h5>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="text-center text-muted">
-                        <i class="fas fa-lightbulb fa-3x mb-3"></i><br>
-                        Esta sección estará disponible próximamente.<br>
-                        Aquí podrás moderar las sugerencias de mejora.
-                    </p>
+            </div>
+            
+            <!-- Lista de Sugerencias -->
+            <div class="row">
+                <!-- Sugerencia 1 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card suggestion-card h-100">
+                        <div class="card-body">
+                            <div class="suggestion-header mb-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="suggestion-topic">
+                                        <span class="badge bg-info mb-2">📚 Infraestructura</span>
+                                        <h6 class="card-title outfit-semibold">Mejoras en la Biblioteca</h6>
+                                    </div>
+                                    <small class="text-muted">Hace 1h</small>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-content mb-3">
+                                <p class="card-text">
+                                    Creo que la biblioteca necesita más espacios de estudio silencioso. 
+                                    Actualmente solo hay 4 mesas y siempre están ocupadas. Mi sugerencia 
+                                    es habilitar el aula 201 como sala de estudio durante los recreos y 
+                                    después de clases.
+                                </p>
+                                <p class="card-text small text-muted">
+                                    También sería útil tener más enchufes para las laptops y mejorar 
+                                    la iluminación en la zona de lectura.
+                                </p>
+                            </div>
+                            
+                            <div class="suggestion-author mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="author-avatar me-2">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <small class="fw-bold">María González</small>
+                                        <br><small class="text-muted">2do año - Administración</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-stats mb-3">
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-eye me-1"></i>34 vistas
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-comment me-1"></i>7 comentarios
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-thumbs-up me-1"></i>18 apoyos
+                                </span>
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-thumbs-down me-1"></i>2 desacuerdos
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia1')">
+                                    <i class="fas fa-comment me-1"></i>Ver Comentarios
+                                </button>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('sugerencia1')">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost('sugerencia1')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-dark" onclick="reportUser('sugerencia1')">
+                                        <i class="fas fa-flag"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sugerencia 2 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card suggestion-card h-100">
+                        <div class="card-body">
+                            <div class="suggestion-header mb-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="suggestion-topic">
+                                        <span class="badge bg-warning mb-2">🍽️ Servicios</span>
+                                        <h6 class="card-title outfit-semibold">Horarios del Buffet</h6>
+                                    </div>
+                                    <small class="text-muted">Hace 3h</small>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-content mb-3">
+                                <p class="card-text">
+                                    El buffet cierra muy temprano (15:30) y muchos estudiantes que tenemos 
+                                    clases hasta las 16:00 nos quedamos sin poder comprar algo para merendar. 
+                                    Sugiero extender el horario hasta las 16:30 al menos.
+                                </p>
+                                <p class="card-text small text-muted">
+                                    Además, estaría bueno que agreguen más opciones saludables como frutas 
+                                    o yogur, no solo comida chatarra.
+                                </p>
+                            </div>
+                            
+                            <div class="suggestion-author mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="author-avatar me-2">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <small class="fw-bold">Pedro Martínez</small>
+                                        <br><small class="text-muted">3er año - Electrónica</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-stats mb-3">
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-eye me-1"></i>52 vistas
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-comment me-1"></i>12 comentarios
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-thumbs-up me-1"></i>31 apoyos
+                                </span>
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-thumbs-down me-1"></i>3 desacuerdos
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia2')">
+                                    <i class="fas fa-comment me-1"></i>Ver Comentarios
+                                </button>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('sugerencia2')">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost('sugerencia2')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-dark" onclick="reportUser('sugerencia2')">
+                                        <i class="fas fa-flag"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sugerencia 3 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card suggestion-card h-100">
+                        <div class="card-body">
+                            <div class="suggestion-header mb-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="suggestion-topic">
+                                        <span class="badge bg-success mb-2">🎓 Académico</span>
+                                        <h6 class="card-title outfit-semibold">Talleres de Programación</h6>
+                                    </div>
+                                    <small class="text-muted">Hace 6h</small>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-content mb-3">
+                                <p class="card-text">
+                                    Propongo que se abran talleres opcionales de programación en diferentes 
+                                    lenguajes (Python, JavaScript, C++) para estudiantes de todas las carreras. 
+                                    Hoy en día la programación es útil en cualquier campo.
+                                </p>
+                                <p class="card-text small text-muted">
+                                    Podrían ser los sábados por la mañana, 2 horas por semana. Estoy seguro 
+                                    que muchos estudiantes se inscribirían.
+                                </p>
+                            </div>
+                            
+                            <div class="suggestion-author mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="author-avatar me-2">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <small class="fw-bold">Luis Fernández</small>
+                                        <br><small class="text-muted">4to año - Informática</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-stats mb-3">
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-eye me-1"></i>67 vistas
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-comment me-1"></i>15 comentarios
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-thumbs-up me-1"></i>42 apoyos
+                                </span>
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-thumbs-down me-1"></i>1 desacuerdos
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia3')">
+                                    <i class="fas fa-comment me-1"></i>Ver Comentarios
+                                </button>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('sugerencia3')">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost('sugerencia3')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-dark" onclick="reportUser('sugerencia3')">
+                                        <i class="fas fa-flag"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sugerencia 4 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card suggestion-card h-100">
+                        <div class="card-body">
+                            <div class="suggestion-header mb-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="suggestion-topic">
+                                        <span class="badge bg-danger mb-2">🚨 Crítica</span>
+                                        <h6 class="card-title outfit-semibold">Wifi del Instituto</h6>
+                                    </div>
+                                    <small class="text-muted">Hace 1d</small>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-content mb-3">
+                                <p class="card-text">
+                                    El wifi del instituto es muy lento y se corta constantemente. Es imposible 
+                                    hacer trabajos que requieran internet o asistir a clases virtuales cuando 
+                                    hay problemas técnicos.
+                                </p>
+                                <p class="card-text small text-muted">
+                                    Creo que deberían mejorar la infraestructura de red y tener más puntos 
+                                    de acceso, especialmente en los laboratorios.
+                                </p>
+                            </div>
+                            
+                            <div class="suggestion-author mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="author-avatar me-2">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <small class="fw-bold">Ana Rodríguez</small>
+                                        <br><small class="text-muted">1er año - Informática</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-stats mb-3">
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-eye me-1"></i>89 vistas
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-comment me-1"></i>23 comentarios
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-thumbs-up me-1"></i>56 apoyos
+                                </span>
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-thumbs-down me-1"></i>4 desacuerdos
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia4')">
+                                    <i class="fas fa-comment me-1"></i>Ver Comentarios
+                                </button>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('sugerencia4')">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost('sugerencia4')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-dark" onclick="reportUser('sugerencia4')">
+                                        <i class="fas fa-flag"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div id="feed-problematicas" class="feed-content d-none">
-            <div class="card info-card">
-                <div class="card-header bg-danger text-white">
-                    <h5 class="outfit-semibold mb-0">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        Feed de Problemáticas
-                    </h5>
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card info-card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="outfit-semibold mb-0">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Feed de Problemáticas - Moderación
+                            </h5>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="text-center text-muted">
-                        <i class="fas fa-exclamation-triangle fa-3x mb-3"></i><br>
-                        Esta sección estará disponible próximamente.<br>
-                        Aquí podrás moderar los reportes de problemáticas.
-                    </p>
+            </div>
+            
+            <!-- Lista de Problemáticas -->
+            <div class="row">
+                <!-- Problemática 1 -->
+                <div class="col-12 mb-4">
+                    <div class="card problem-card">
+                        <div class="card-header problem-header">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="problem-info">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="badge bg-danger me-2">🚨 URGENTE</span>
+                                        <span class="badge bg-info">🏢 Infraestructura</span>
+                                    </div>
+                                    <h5 class="card-title outfit-semibold mb-2">Optimización del Consumo Eléctrico</h5>
+                                    <div class="problem-author">
+                                        <small class="text-muted">
+                                            <i class="fas fa-building me-1"></i>
+                                            Publicado por: <strong>Dirección del IPF</strong> - Hace 2 días
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="problem-status">
+                                    <span class="badge bg-warning">🔄 En Progreso</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="problem-description mb-3">
+                                <p class="card-text">
+                                    <strong>El Problema:</strong> El instituto ha registrado un aumento del 40% 
+                                    en el consumo eléctrico durante los últimos 6 meses. Esto está impactando 
+                                    significativamente en los costos operativos y necesitamos encontrar 
+                                    soluciones innovadoras para optimizar el uso de energía.
+                                </p>
+                                <p class="card-text">
+                                    <strong>Contexto:</strong> Los picos de consumo se registran principalmente 
+                                    en laboratorios de informática (60%), sistemas de climatización (25%) y 
+                                    iluminación general (15%).
+                                </p>
+                                <div class="problem-requirements">
+                                    <h6 class="text-success">¿Qué buscamos?</h6>
+                                    <ul class="small">
+                                        <li>Soluciones prácticas y implementables</li>
+                                        <li>Ideas que no requieran gran inversión inicial</li>
+                                        <li>Propuestas que involucren a la comunidad estudiantil</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="problem-stats mb-3">
+                                <div class="row text-center">
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-primary">12</div>
+                                            <div class="stat-label">Soluciones</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-warning">45</div>
+                                            <div class="stat-label">Comentarios</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-success">89</div>
+                                            <div class="stat-label">Participantes</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-info">156</div>
+                                            <div class="stat-label">Vistas</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-outline-primary" onclick="viewSolutions('problema1')">
+                                    <i class="fas fa-lightbulb me-2"></i>Ver Soluciones Propuestas
+                                </button>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('problema1')">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost('problema1')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-dark" onclick="reportUser('problema1')">
+                                        <i class="fas fa-flag"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problemática 2 -->
+                <div class="col-12 mb-4">
+                    <div class="card problem-card">
+                        <div class="card-header problem-header">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="problem-info">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="badge bg-warning me-2">⚡ MEDIA</span>
+                                        <span class="badge bg-success">🎓 Académico</span>
+                                    </div>
+                                    <h5 class="card-title outfit-semibold mb-2">Mejora en la Retención Estudiantil</h5>
+                                    <div class="problem-author">
+                                        <small class="text-muted">
+                                            <i class="fas fa-user-tie me-1"></i>
+                                            Publicado por: <strong>Coordinación Académica</strong> - Hace 1 semana
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="problem-status">
+                                    <span class="badge bg-primary">🔍 Evaluando</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="problem-description mb-3">
+                                <p class="card-text">
+                                    <strong>El Problema:</strong> Hemos observado que el 25% de los estudiantes 
+                                    de primer año no continúan sus estudios en el segundo año. Necesitamos 
+                                    identificar las causas y desarrollar estrategias para mejorar la retención.
+                                </p>
+                                <p class="card-text">
+                                    <strong>Datos relevantes:</strong> Las materias con mayor índice de 
+                                    abandono son Matemática I (40%), Física (35%) y Programación I (30%).
+                                </p>
+                                <div class="problem-requirements">
+                                    <h6 class="text-success">¿Qué buscamos?</h6>
+                                    <ul class="small">
+                                        <li>Estrategias de apoyo académico</li>
+                                        <li>Programas de mentoría estudiantil</li>
+                                        <li>Actividades de integración y motivación</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="problem-stats mb-3">
+                                <div class="row text-center">
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-primary">8</div>
+                                            <div class="stat-label">Soluciones</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-warning">32</div>
+                                            <div class="stat-label">Comentarios</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-success">67</div>
+                                            <div class="stat-label">Participantes</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-info">124</div>
+                                            <div class="stat-label">Vistas</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-outline-primary" onclick="viewSolutions('problema2')">
+                                    <i class="fas fa-lightbulb me-2"></i>Ver Soluciones Propuestas
+                                </button>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('problema2')">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost('problema2')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-dark" onclick="reportUser('problema2')">
+                                        <i class="fas fa-flag"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problemática 3 -->
+                <div class="col-12 mb-4">
+                    <div class="card problem-card">
+                        <div class="card-header problem-header">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="problem-info">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="badge bg-info me-2">📋 BAJA</span>
+                                        <span class="badge bg-primary">💻 Tecnología</span>
+                                    </div>
+                                    <h5 class="card-title outfit-semibold mb-2">Digitalización de Procesos Administrativos</h5>
+                                    <div class="problem-author">
+                                        <small class="text-muted">
+                                            <i class="fas fa-users me-1"></i>
+                                            Publicado por: <strong>Área de Sistemas</strong> - Hace 3 días
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="problem-status">
+                                    <span class="badge bg-success">✅ Resuelto</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="problem-description mb-3">
+                                <p class="card-text">
+                                    <strong>El Problema:</strong> Muchos trámites administrativos (certificados, 
+                                    constancias, inscripciones) aún se realizan en papel, generando demoras 
+                                    y acumulación de documentación física.
+                                </p>
+                                <p class="card-text">
+                                    <strong>Objetivo:</strong> Implementar un sistema digital que permita a 
+                                    estudiantes realizar trámites online y hacer seguimiento del estado.
+                                </p>
+                                <div class="alert alert-success small">
+                                    <i class="fas fa-check-circle me-1"></i>
+                                    <strong>Actualización:</strong> ¡Gracias a las propuestas estudiantiles, 
+                                    se seleccionó la mejor solución y ya está en desarrollo!
+                                </div>
+                            </div>
+                            
+                            <div class="problem-stats mb-3">
+                                <div class="row text-center">
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-primary">15</div>
+                                            <div class="stat-label">Soluciones</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-warning">78</div>
+                                            <div class="stat-label">Comentarios</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-success">112</div>
+                                            <div class="stat-label">Participantes</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="stat-item">
+                                            <div class="stat-number text-info">289</div>
+                                            <div class="stat-label">Vistas</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-outline-success" onclick="viewSolutions('problema3')">
+                                    <i class="fas fa-trophy me-2"></i>Ver Solución Ganadora
+                                </button>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('problema3')">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost('problema3')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-dark" onclick="reportUser('problema3')">
+                                        <i class="fas fa-flag"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -658,6 +1236,194 @@
                 justify-content: center;
             }
         }
+
+        /* Estilos para tarjetas de sugerencias */
+        .suggestion-card {
+            border: 1px solid rgba(46, 123, 33, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .suggestion-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(46, 123, 33, 0.15);
+            border-color: rgba(46, 123, 33, 0.3);
+        }
+
+        .suggestion-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .suggestion-topic .badge {
+            font-size: 0.75rem;
+            padding: 0.3rem 0.6rem;
+        }
+
+        .suggestion-content {
+            line-height: 1.6;
+        }
+
+        .suggestion-content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .suggestion-content .text-muted {
+            font-style: italic;
+            border-left: 3px solid rgba(46, 123, 33, 0.2);
+            padding-left: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        .suggestion-stats .badge {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.5rem;
+        }
+
+        /* Diferentes colores para tipos de sugerencias */
+        .suggestion-card .badge.bg-info {
+            background-color: #0dcaf0 !important;
+        }
+
+        .suggestion-card .badge.bg-warning {
+            background-color: #ffc107 !important;
+            color: #000 !important;
+        }
+
+        .suggestion-card .badge.bg-success {
+            background-color: #198754 !important;
+        }
+
+        .suggestion-card .badge.bg-danger {
+            background-color: #dc3545 !important;
+        }
+
+        /* Responsive para sugerencias */
+        @media (max-width: 768px) {
+            .suggestion-stats {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
+            
+            .suggestion-stats .badge {
+                font-size: 0.65rem;
+            }
+        }
+
+        /* Estilos para problemáticas */
+        .problem-card {
+            border: 1px solid rgba(220, 53, 69, 0.2);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.15);
+            border-color: rgba(220, 53, 69, 0.4);
+        }
+
+        .problem-header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-bottom: 1px solid rgba(220, 53, 69, 0.1);
+        }
+
+        .problem-description {
+            line-height: 1.6;
+        }
+
+        .problem-description p {
+            margin-bottom: 1rem;
+        }
+
+        .problem-requirements {
+            background: rgba(46, 123, 33, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 4px solid #2e7b21;
+            margin-top: 1rem;
+        }
+
+        .problem-requirements h6 {
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-requirements ul {
+            margin-bottom: 0;
+            padding-left: 1.2rem;
+        }
+
+        .problem-stats {
+            background: rgba(0, 123, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .problem-stats .stat-item {
+            padding: 0.5rem;
+        }
+
+        .problem-stats .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .problem-stats .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Badges de estado de problemáticas */
+        .problem-card .badge.bg-danger {
+            background-color: #dc3545 !important;
+        }
+
+        .problem-card .badge.bg-warning {
+            background-color: #ffc107 !important;
+            color: #000 !important;
+        }
+
+        .problem-card .badge.bg-info {
+            background-color: #0dcaf0 !important;
+        }
+
+        .problem-card .badge.bg-primary {
+            background-color: #0d6efd !important;
+        }
+
+        .problem-card .badge.bg-success {
+            background-color: #198754 !important;
+        }
+
+        /* Alertas de estado */
+        .problem-card .alert {
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Responsive para problemáticas */
+        @media (max-width: 768px) {
+            .problem-stats .row {
+                text-align: center;
+            }
+            
+            .problem-stats .col-3 {
+                margin-bottom: 0.5rem;
+            }
+            
+            .problem-stats .stat-number {
+                font-size: 1.4rem;
+            }
+            
+            .problem-header .d-flex {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
     </style>
 
     <!-- JavaScript para cambiar entre feeds -->
@@ -706,6 +1472,11 @@
                 alert(`Usuario reportado. El caso ha sido escalado a administración.`);
                 // Aquí iría la lógica para reportar al usuario
             }
+        }
+
+        // Funciones específicas para problemáticas
+        function viewSolutions(problemId) {
+            alert(`Abriendo sistema de soluciones para ${problemId}.\n\nAquí podrás ver:\n• Todas las soluciones propuestas\n• Hilos de discusión de cada solución\n• Votos y comentarios de la comunidad\n• Herramientas de moderación específicas\n\nEsta funcionalidad se desarrollará próximamente.`);
         }
     </script>
 </body>
