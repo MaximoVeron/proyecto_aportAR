@@ -894,4 +894,7 @@
     }
 }
 
-
+/* clase para color de fondo igual al nav */
+.bg-greendegrade {
+    background:  linear-gradient(135deg, #2e7b21 0%, #1a4d14 100%);
+}
