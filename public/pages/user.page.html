@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- Navbar de Usuario -->
-    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(135deg, #2e7b21 0%, #1a4d14 100%);" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;" data-bs-theme="light">
         <div class="container-fluid">
             <a class="navbar-brand" href="../../index.html">
                 <img src="../assets/images/index.images/logo_ipf.png" alt="Instituto Politécnico Formosa" width="40" height="32">
@@ -25,22 +25,22 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link active" href="#" onclick="showFeed('home')">
-                            <i class="fas fa-home me-1"></i>Mi Feed
+                            Home
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="showFeed('proyectos')">
-                            <i class="fas fa-project-diagram me-1"></i>Proyectos
+                            Proyectos
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="showFeed('sugerencias')">
-                            <i class="fas fa-lightbulb me-1"></i>Sugerencias
+                            Sugerencias
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="showFeed('problematicas')">
-                            <i class="fas fa-exclamation-triangle me-1"></i>Problemáticas
+                            Problemáticas
                         </a>
                     </li>
                 </ul>
@@ -73,7 +73,7 @@
                 <!-- Perfil del Usuario -->
                 <div class="col-lg-4 mb-4">
                     <div class="card info-card h-100">
-                        <div class="card-header text-white" style="background: linear-gradient(135deg, #2e7b21, #1a4d14);">
+                        <div class="card-header text-white bg-greendegrade">
                             <h5 class="outfit-semibold mb-0">
                                 <i class="fas fa-user me-2"></i>
                                 Mi Perfil
@@ -146,7 +146,7 @@
                 <!-- Feed de Actividad Reciente -->
                 <div class="col-lg-8 mb-4">
                     <div class="card info-card h-100">
-                        <div class="card-header text-white" style="background: linear-gradient(135deg, #2e7b21, #1a4d14);">
+                        <div class="card-header text-white bg-greendegrade">
                             <h5 class="outfit-semibold mb-0">
                                 <i class="fas fa-rss me-2"></i>
                                 Feed Principal
@@ -288,7 +288,6 @@
                         <div class="project-image">
                             <img src="../assets/images/index.images/banner_index.png" class="card-img-top" alt="aportAR Website">
                             <div class="project-badge">
-                                <span class="badge bg-success">💻 Web</span>
                             </div>
                         </div>
                         <div class="card-body">
@@ -347,9 +346,6 @@
                             <div class="placeholder-image d-flex align-items-center justify-content-center">
                                 <i class="fas fa-mobile-alt fa-3x text-muted"></i>
                             </div>
-                            <div class="project-badge">
-                                <span class="badge bg-primary">📱 Mobile</span>
-                            </div>
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-start mb-2">
@@ -405,9 +401,6 @@
                         <div class="project-image">
                             <div class="placeholder-image d-flex align-items-center justify-content-center">
                                 <i class="fas fa-microchip fa-3x text-muted"></i>
-                            </div>
-                            <div class="project-badge">
-                                <span class="badge bg-warning">🔧 Hardware</span>
                             </div>
                         </div>
                         <div class="card-body">
@@ -486,10 +479,7 @@
                         <div class="card-body">
                             <div class="suggestion-header mb-3">
                                 <div class="d-flex justify-content-between align-items-start">
-                                    <div class="suggestion-topic">
-                                        <span class="badge bg-info mb-2">📚 Infraestructura</span>
-                                        <h6 class="card-title outfit-semibold">Mejoras en la Biblioteca</h6>
-                                    </div>
+
                                     <small class="text-muted">Hace 1h</small>
                                 </div>
                             </div>
@@ -580,8 +570,6 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div class="problem-info">
                                     <div class="d-flex align-items-center mb-2">
-                                        <span class="badge bg-danger me-2">🚨 URGENTE</span>
-                                        <span class="badge bg-info">🏢 Infraestructura</span>
                                     </div>
                                     <h5 class="card-title outfit-semibold mb-2">Optimización del Consumo Eléctrico</h5>
                                     <div class="problem-author">
@@ -650,7 +638,7 @@
                         </div>
                         <div class="card-footer bg-light">
                             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                                <button class="btn btn-success" onclick="proposeSolution('problema1')">
+                                <button class="btn btn-custom-primary" onclick="proposeSolution('problema1')">
                                     <i class="fas fa-lightbulb me-2"></i>Proponer Mi Solución
                                 </button>
                                 <div class="btn-group">
