@@ -24,7 +24,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#" onclick="showFeed('home')">
+                        <a class="nav-link" href="#" onclick="showFeed('home')">
                             Home
                         </a>
                     </li>
@@ -62,7 +62,7 @@
     </nav>
 
     <!-- Contenido Principal -->
-    <main class="container-fluid" style="padding-top: 80px;">
+    <main class="container-fluid" style="padding-top: 30px;">
         <!-- Feed Home (Perfil + Guía) -->
         <div id="feed-home" class="feed-content">
             <div class="row">
@@ -82,7 +82,6 @@
                                     <i class="fas fa-user-shield"></i>
                                 </div>
                                 <h5 class="outfit-semibold">Juan Carlos Moderador</h5>
-                                <p class="text-muted">Moderador Senior</p>
                             </div>
                             
                             <!-- Estadísticas del moderador -->
@@ -117,14 +116,6 @@
                                     <li class="mb-2">
                                         <i class="fas fa-calendar text-success me-2"></i>
                                         <strong>Desde:</strong> Enero 2025
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="fas fa-clock text-success me-2"></i>
-                                        <strong>Última actividad:</strong> Hace 5 min
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="fas fa-star text-success me-2"></i>
-                                        <strong>Nivel:</strong> Senior
                                     </li>
                                 </ul>
                             </div>
@@ -220,7 +211,7 @@
                             <div class="moderation-summary">
                                 <h6 class="outfit-semibold text-success mb-3">Estado Actual de la Plataforma</h6>
                                 <div class="row">
-                                    <div class="col-md-3 text-center">
+                                    <div class="col-md-5 text-center">
                                         <div class="summary-stat">
                                             <div class="stat-number text-primary">25</div>
                                             <div class="stat-label">Posts Pendientes</div>
@@ -236,12 +227,6 @@
                                         <div class="summary-stat">
                                             <div class="stat-number text-success">156</div>
                                             <div class="stat-label">Posts Aprobados</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 text-center">
-                                        <div class="summary-stat">
-                                            <div class="stat-number text-info">4</div>
-                                            <div class="stat-label">Moderadores Online</div>
                                         </div>
                                     </div>
                                 </div>
@@ -836,17 +821,6 @@
                                 <button class="btn btn-outline-primary" onclick="viewSolutions('problema1')">
                                     <i class="fas fa-lightbulb me-2"></i>Ver Soluciones Propuestas
                                 </button>
-                                <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('problema1')">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost('problema1')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-dark" onclick="reportUser('problema1')">
-                                        <i class="fas fa-flag"></i>
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -922,17 +896,6 @@
                                 <button class="btn btn-outline-primary" onclick="viewSolutions('problema2')">
                                     <i class="fas fa-lightbulb me-2"></i>Ver Soluciones Propuestas
                                 </button>
-                                <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('problema2')">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost('problema2')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-dark" onclick="reportUser('problema2')">
-                                        <i class="fas fa-flag"></i>
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -1005,17 +968,6 @@
                                 <button class="btn btn-outline-success" onclick="viewSolutions('problema3')">
                                     <i class="fas fa-trophy me-2"></i>Ver Solución Ganadora
                                 </button>
-                                <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('problema3')">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost('problema3')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-dark" onclick="reportUser('problema3')">
-                                        <i class="fas fa-flag"></i>
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>
