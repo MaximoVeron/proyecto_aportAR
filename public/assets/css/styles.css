@@ -297,6 +297,11 @@
     transition: all 0.3s ease;
 }
 
+nav {
+    position: fixed;
+    top: 0;
+}
+
 .navbar-brand img:hover {
     transform: scale(1.05);
 }
@@ -896,4 +901,46 @@
 /* clase para color de fondo igual al nav */
 .bg-greendegrade {
     background:  linear-gradient(135deg, #2e7b21 0%, #1a4d14 100%);
+}
+
+/* Navbar fijo (sticky) */
+.navbar.sticky-top {
+    z-index: 1020;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.navbar.sticky-top:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+}
+
+/* Asegurar que el contenido no quede oculto bajo el navbar */
+body {
+    scroll-padding-top: 70px;
+}
+
+/* Mejoras visuales para el navbar */
+.navbar-brand {
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin: 0 2px;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: rgba(46, 123, 33, 0.1);
+    transform: translateY(-1px);
+}
+
+.navbar-nav .nav-link.active {
+    background-color: rgba(46, 123, 33, 0.2);
+    font-weight: 600;
 }
