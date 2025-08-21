@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- Navbar de Usuario -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;" data-bs-theme="light">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" style="background-color: #e3f2fd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" data-bs-theme="light">
         <div class="container-fluid">
             <a class="navbar-brand" href="../../index.html">
                 <img src="../assets/images/index.images/logo_ipf.png" alt="Instituto Politécnico Formosa" width="40" height="32">
@@ -66,7 +66,7 @@
     </nav>
 
     <!-- Contenido Principal -->
-    <main class="container-fluid mt-4">
+    <main class="container-fluid" style="padding-top: 80px;">
         <!-- Feed Home (Perfil + Actividad Reciente) -->
         <div id="feed-home" class="feed-content">
             <div class="row">
@@ -263,18 +263,16 @@
         </div>
 
         <!-- Feed Proyectos (Desde perspectiva de usuario) -->
+        <!-- Feeds adicionales (placeholder por ahora) -->
         <div id="feed-proyectos" class="feed-content d-none">
             <div class="row">
                 <div class="col-12 mb-4">
-                    <div class="card info-card">
-                        <div class="card-header bg-greendegrade text-white d-flex justify-content-between align-items-center">
+                    <div class="card info-card h-100">
+                        <div class="card-header bg-greendegrade bg-success text-white">
                             <h5 class="outfit-semibold mb-0">
                                 <i class="fas fa-project-diagram me-2"></i>
-                                Proyectos Estudiantiles
+                                Proyectos
                             </h5>
-                            <button class="btn btn-light btn-sm" onclick="createProject()">
-                                <i class="fas fa-plus me-1"></i>Subir Proyecto
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -282,7 +280,7 @@
             
             <!-- Lista de Proyectos -->
             <div class="row">
-                <!-- Proyecto 1 - Vista Usuario -->
+                <!-- Proyecto 1 - aportAR Website -->
                 <div class="col-lg-6 col-xl-4 mb-4">
                     <div class="card project-card h-100">
                         <div class="project-image">
@@ -312,9 +310,6 @@
                             </div>
                             <div class="project-stats mb-3">
                                 <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-eye me-1"></i>23 vistas
-                                </span>
-                                <span class="badge bg-light text-dark me-2">
                                     <i class="fas fa-comment me-1"></i>5 comentarios
                                 </span>
                                 <span class="badge bg-light text-dark">
@@ -323,28 +318,23 @@
                             </div>
                         </div>
                         <div class="card-footer bg-light">
-                            <div class="user-actions-quick">
-                                <button class="btn btn-sm btn-outline-primary me-2" onclick="likeProject('proyecto1')">
-                                    <i class="fas fa-heart me-1"></i>Me gusta
-                                </button>
-                                <button class="btn btn-sm btn-outline-secondary me-2" onclick="commentProject('proyecto1')">
-                                    <i class="fas fa-comment me-1"></i>Comentar
-                                </button>
-                                <button class="btn btn-sm btn-outline-info" onclick="shareProject('proyecto1')">
-                                    <i class="fas fa-share me-1"></i>Compartir
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('proyecto1')">
+                                    <i class="fas fa-comment me-1"></i>Comentarios
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Más proyectos siguiendo el mismo patrón... -->
                 <!-- Proyecto 2 -->
                 <div class="col-lg-6 col-xl-4 mb-4">
                     <div class="card project-card h-100">
                         <div class="project-image">
                             <div class="placeholder-image d-flex align-items-center justify-content-center">
                                 <i class="fas fa-mobile-alt fa-3x text-muted"></i>
+                            </div>
+                            <div class="project-badge">
                             </div>
                         </div>
                         <div class="card-body">
@@ -369,9 +359,6 @@
                             </div>
                             <div class="project-stats mb-3">
                                 <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-eye me-1"></i>18 vistas
-                                </span>
-                                <span class="badge bg-light text-dark me-2">
                                     <i class="fas fa-comment me-1"></i>8 comentarios
                                 </span>
                                 <span class="badge bg-light text-dark">
@@ -380,15 +367,9 @@
                             </div>
                         </div>
                         <div class="card-footer bg-light">
-                            <div class="user-actions-quick">
-                                <button class="btn btn-sm btn-outline-primary me-2" onclick="likeProject('proyecto2')">
-                                    <i class="fas fa-heart me-1"></i>Me gusta
-                                </button>
-                                <button class="btn btn-sm btn-outline-secondary me-2" onclick="commentProject('proyecto2')">
-                                    <i class="fas fa-comment me-1"></i>Comentar
-                                </button>
-                                <button class="btn btn-sm btn-outline-info" onclick="shareProject('proyecto2')">
-                                    <i class="fas fa-share me-1"></i>Compartir
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('proyecto2')">
+                                    <i class="fas fa-comment me-1"></i>Comentarios
                                 </button>
                             </div>
                         </div>
@@ -401,6 +382,8 @@
                         <div class="project-image">
                             <div class="placeholder-image d-flex align-items-center justify-content-center">
                                 <i class="fas fa-microchip fa-3x text-muted"></i>
+                            </div>
+                            <div class="project-badge">
                             </div>
                         </div>
                         <div class="card-body">
@@ -425,9 +408,6 @@
                             </div>
                             <div class="project-stats mb-3">
                                 <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-eye me-1"></i>31 vistas
-                                </span>
-                                <span class="badge bg-light text-dark me-2">
                                     <i class="fas fa-comment me-1"></i>12 comentarios
                                 </span>
                                 <span class="badge bg-light text-dark">
@@ -436,15 +416,9 @@
                             </div>
                         </div>
                         <div class="card-footer bg-light">
-                            <div class="user-actions-quick">
-                                <button class="btn btn-sm btn-outline-primary me-2" onclick="likeProject('proyecto3')">
-                                    <i class="fas fa-heart me-1"></i>Me gusta
-                                </button>
-                                <button class="btn btn-sm btn-outline-secondary me-2" onclick="commentProject('proyecto3')">
-                                    <i class="fas fa-comment me-1"></i>Comentar
-                                </button>
-                                <button class="btn btn-sm btn-outline-info" onclick="shareProject('proyecto3')">
-                                    <i class="fas fa-share me-1"></i>Compartir
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('proyecto3')">
+                                    <i class="fas fa-comment me-1"></i>Ver Comentarios
                                 </button>
                             </div>
                         </div>
@@ -454,18 +428,15 @@
         </div>
 
         <!-- Feed Sugerencias (Desde perspectiva de usuario) -->
-        <div id="feed-sugerencias" class="feed-content d-none">
+         <div id="feed-sugerencias" class="feed-content d-none">
             <div class="row">
                 <div class="col-12 mb-4">
                     <div class="card info-card">
-                        <div class="card-header bg-greendegrade text-white d-flex justify-content-between align-items-center">
+                        <div class="card-header bg-greendegrade text-white">
                             <h5 class="outfit-semibold mb-0">
                                 <i class="fas fa-lightbulb me-2"></i>
-                                Sugerencias y Opiniones
+                                Sugerencias
                             </h5>
-                            <button class="btn btn-light btn-sm" onclick="createSuggestion()">
-                                <i class="fas fa-plus me-1"></i>Nueva Sugerencia
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -479,7 +450,9 @@
                         <div class="card-body">
                             <div class="suggestion-header mb-3">
                                 <div class="d-flex justify-content-between align-items-start">
-
+                                    <div class="suggestion-topic">
+                                        <h6 class="card-title outfit-semibold">Mejoras en la Biblioteca</h6>
+                                    </div>
                                     <small class="text-muted">Hace 1h</small>
                                 </div>
                             </div>
@@ -511,37 +484,192 @@
                             
                             <div class="suggestion-stats mb-3">
                                 <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-eye me-1"></i>34 vistas
-                                </span>
-                                <span class="badge bg-light text-dark me-2">
                                     <i class="fas fa-comment me-1"></i>7 comentarios
                                 </span>
                                 <span class="badge bg-light text-dark me-2">
                                     <i class="fas fa-thumbs-up me-1"></i>18 apoyos
                                 </span>
-                                <span class="badge bg-light text-dark">
-                                    <i class="fas fa-thumbs-down me-1"></i>2 desacuerdos
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia1')">
+                                    <i class="fas fa-comment me-1"></i>Comentarios
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sugerencia 2 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card suggestion-card h-100">
+                        <div class="card-body">
+                            <div class="suggestion-header mb-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="suggestion-topic">
+                                        <h6 class="card-title outfit-semibold">Horarios del Buffet</h6>
+                                    </div>
+                                    <small class="text-muted">Hace 3h</small>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-content mb-3">
+                                <p class="card-text">
+                                    El buffet cierra muy temprano (15:30) y muchos estudiantes que tenemos 
+                                    clases hasta las 16:00 nos quedamos sin poder comprar algo para merendar. 
+                                    Sugiero extender el horario hasta las 16:30 al menos.
+                                </p>
+                                <p class="card-text small text-muted">
+                                    Además, estaría bueno que agreguen más opciones saludables como frutas 
+                                    o yogur, no solo comida chatarra.
+                                </p>
+                            </div>
+                            
+                            <div class="suggestion-author mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="author-avatar me-2">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <small class="fw-bold">Pedro Martínez</small>
+                                        <br><small class="text-muted">3er año - Electrónica</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-stats mb-3">
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-comment me-1"></i>12 comentarios
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-thumbs-up me-1"></i>31 apoyos
                                 </span>
                             </div>
                         </div>
                         <div class="card-footer bg-light">
-                            <div class="user-actions-quick">
-                                <button class="btn btn-sm btn-outline-success me-2" onclick="supportSuggestion('sugerencia1')">
-                                    <i class="fas fa-thumbs-up me-1"></i>Apoyar
-                                </button>
-                                <button class="btn btn-sm btn-outline-secondary me-2" onclick="commentSuggestion('sugerencia1')">
-                                    <i class="fas fa-comment me-1"></i>Comentar
-                                </button>
-                                <button class="btn btn-sm btn-outline-info" onclick="shareSuggestion('sugerencia1')">
-                                    <i class="fas fa-share me-1"></i>Compartir
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia2')">
+                                    <i class="fas fa-comment me-1"></i>Comentarios
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Continuar con más sugerencias similares... -->
-                <!-- Las demás sugerencias siguen el mismo patrón -->
+                <!-- Sugerencia 3 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card suggestion-card h-100">
+                        <div class="card-body">
+                            <div class="suggestion-header mb-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="suggestion-topic">
+                                        <h6 class="card-title outfit-semibold">Talleres de Programación</h6>
+                                    </div>
+                                    <small class="text-muted">Hace 6h</small>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-content mb-3">
+                                <p class="card-text">
+                                    Propongo que se abran talleres opcionales de programación en diferentes 
+                                    lenguajes (Python, JavaScript, C++) para estudiantes de todas las carreras. 
+                                    Hoy en día la programación es útil en cualquier campo.
+                                </p>
+                                <p class="card-text small text-muted">
+                                    Podrían ser los sábados por la mañana, 2 horas por semana. Estoy seguro 
+                                    que muchos estudiantes se inscribirían.
+                                </p>
+                            </div>
+                            
+                            <div class="suggestion-author mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="author-avatar me-2">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <small class="fw-bold">Luis Fernández</small>
+                                        <br><small class="text-muted">4to año - Informática</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-stats mb-3">
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-comment me-1"></i>15 comentarios
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-thumbs-up me-1"></i>42 apoyos
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia3')">
+                                    <i class="fas fa-comment me-1"></i>Comentarios
+                                </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sugerencia 4 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card suggestion-card h-100">
+                        <div class="card-body">
+                            <div class="suggestion-header mb-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="suggestion-topic">
+                                        <h6 class="card-title outfit-semibold">Wifi del Instituto</h6>
+                                    </div>
+                                    <small class="text-muted">Hace 1d</small>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-content mb-3">
+                                <p class="card-text">
+                                    El wifi del instituto es muy lento y se corta constantemente. Es imposible 
+                                    hacer trabajos que requieran internet o asistir a clases virtuales cuando 
+                                    hay problemas técnicos.
+                                </p>
+                                <p class="card-text small text-muted">
+                                    Creo que deberían mejorar la infraestructura de red y tener más puntos 
+                                    de acceso, especialmente en los laboratorios.
+                                </p>
+                            </div>
+                            
+                            <div class="suggestion-author mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="author-avatar me-2">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <small class="fw-bold">Ana Rodríguez</small>
+                                        <br><small class="text-muted">1er año - Informática</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="suggestion-stats mb-3">
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-comment me-1"></i>23 comentarios
+                                </span>
+                                <span class="badge bg-light text-dark me-2">
+                                    <i class="fas fa-thumbs-up me-1"></i>56 apoyos
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="moderation-actions-quick">
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia4')">
+                                    <i class="fas fa-comment me-1"></i>Comentarios
+                                </button>     
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -625,12 +753,6 @@
                                         <div class="stat-item">
                                             <div class="stat-number text-success">89</div>
                                             <div class="stat-label">Participantes</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="stat-item">
-                                            <div class="stat-number text-info">156</div>
-                                            <div class="stat-label">Vistas</div>
                                         </div>
                                     </div>
                                 </div>
