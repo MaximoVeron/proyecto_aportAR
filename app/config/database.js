@@ -24,3 +24,4 @@ export const initDB = async () =>{
         console.error("error al conectarse a la base de datos")
     };
 };
+

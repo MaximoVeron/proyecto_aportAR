@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
-import userRoutes from "./src/routes/user.routes.js";
+import userRoutes from "./app/routes/user.routes.js"
 import taskRoutes from "./src/routes/task.routes.js";
 import { initDB } from "./src/config/database.js";
 import profileRoutes from "./src/routes/profile.routes.js";
@@ -18,7 +18,7 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/role", rolesRoutes);
 app.use("/api/user-role", userRoleRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 initDB().then(() => {
   app.listen(PORT, () => {

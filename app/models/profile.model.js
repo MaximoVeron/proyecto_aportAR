@@ -5,12 +5,12 @@ import UserModel from "./user.models.js";
 export const ProfileModel = sequelize.define(
   "profile",
   {
-    bio: {
-      type: DataTypes.STRING(255),
+    name: {
+      type: DataTypes.STRING(100),
       allowNull: true,
     },
-    avatar_url: {
-      type: DataTypes.STRING(255),
+    last_name: {
+      type: DataTypes.STRING(100),
       allowNull: true,
     }
   },
