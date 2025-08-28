@@ -23,6 +23,14 @@ export const TaskModel = sequelize.define(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    user_id: {
+  type: DataTypes.INTEGER,
+  allowNull: false,
+  references: {
+    model: "users",
+    key: "id"
+  }
+    },
   },
   {
     timestamps: false,
