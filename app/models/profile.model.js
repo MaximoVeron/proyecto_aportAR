@@ -2,17 +2,38 @@ import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
 import UserModel from "./user.model.js";
 
-export const ProfileModel = sequelize.define(
+const profileModel = sequelize.define(
   "profile",
   {
-    name: {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    carrera: {
       type: DataTypes.STRING(100),
       allowNull: true,
     },
-    last_name: {
+    año_cursado: {
       type: DataTypes.STRING(100),
       allowNull: true,
-    }
+    },
+    bio: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    foto: {
+      type: DataTypes.BLOB("long"),
+      allowNull: false,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: UserModel,
+        key: "id",
+      },
+    },
   },
   {
     tableName: "profiles",
@@ -21,5 +42,7 @@ export const ProfileModel = sequelize.define(
 );
 
 // Relación uno a uno
-UserModel.hasOne(ProfileModel, { foreignKey: "user_id", as: "profile" });
-ProfileModel.belongsTo(UserModel, { foreignKey: "user_id", as: "user" });
+UserModel.hasOne(profileModel, { foreignKey: "user_id", as: "profile" });
+profileModel.belongsTo(UserModel, { foreignKey: "user_id", as: "user" });
+
+export default profileModel;

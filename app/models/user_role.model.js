@@ -1,16 +1,26 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
-import { RoleModel } from "./role.model.js";
 import UserModel from "./user.model.js";
+import RoleModel from "./role.model.js";
+// import RoleModel from "./role.model.js";
+// import UserModel from "./user.model.js";
 
-export const UserRoleModel = sequelize.define(
-  "User_Role",
+const UserRoleModel = sequelize.define(
+  "user_role",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: UserModel,
+        key: "id",
+      },
     },
   },
   {
@@ -30,3 +40,5 @@ RoleModel.belongsToMany(UserModel, {
   foreignKey: "role_id",
   as: "users",
 });
+
+export default UserRoleModel;

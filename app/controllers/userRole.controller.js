@@ -1,7 +1,6 @@
-import { UserRoleModel } from "../models/user_role.model.js";
-import UserModel from "../models/user.models.js";
-import { RoleModel } from "../models/role.model.js";
-
+import UserModel from "../models/user.model.js";
+import UserRoleModel from "../models/user_role.model.js";
+import RoleModel from "../models/role.model.js";
 
 export const assignRoleToUser = async (req, res) => {
   const { userId, roleId } = req.body;

@@ -3,7 +3,7 @@ import express from "express";
 import {
   createRole,
   getAllRoles,
-} from "../controllers/role.controllers.js";
+} from "../controllers/role.controller.js";
 
 const rolesRoutes = express.Router();
 

@@ -2,8 +2,8 @@ import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
 
 
-export const TaskModel = sequelize.define(
-  "Task",
+const TaskModel = sequelize.define(
+  "task",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -24,12 +24,12 @@ export const TaskModel = sequelize.define(
       defaultValue: false,
     },
     user_id: {
-  type: DataTypes.INTEGER,
-  allowNull: false,
-  references: {
-    model: "users",
-    key: "id"
-  }
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+      model: "users",
+      key: "id"
+      }
     },
   },
   {

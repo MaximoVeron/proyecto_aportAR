@@ -1,5 +1,5 @@
-import TaskModel from "../models/task.models.js";
-import UserModel from "../models/user.models.js";
+import TaskModel from "../models/task.model.js";
+import UserModel from "../models/user.model.js";
 
 export const createTask = async (req, res) => {
   const { title, description, isComplete, userId } = req.body;

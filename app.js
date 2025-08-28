@@ -1,11 +1,11 @@
 import dotenv from "dotenv";
 import express from "express";
-import userRoutes from "./app/routes/user.routes.js"
-import taskRoutes from "./src/routes/task.routes.js";
-import { initDB } from "./src/config/database.js";
-import profileRoutes from "./src/routes/profile.routes.js";
-import rolesRoutes from "./src/routes/role.routes.js";
-import userRoleRoutes from "./src/routes/userRole.routes.js";
+import userRoutes from "./app/routes/user.routes.js";
+import taskRoutes from "./app/routes/task.routes.js";
+import profileRoutes from "./app/routes/profile.routes.js";
+import rolesRoutes from "./app/routes/role.routes.js";
+import userRoleRoutes from "./app/routes/userRole.routes.js";
+import { initDB } from "./app/config/database.js";
 
 dotenv.config();
 const app = express();
