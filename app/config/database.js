@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
     process.env.DB_PASSWORD,
     {
         host: process.env.DB_HOST,
-        dialect: process.env.DB_DIALECT
+        dialect: process.env.DIALECT
     },
 );
 
@@ -24,3 +24,4 @@ export const initDB = async () =>{
         console.error("error al conectarse a la base de datos")
     };
 };
+
