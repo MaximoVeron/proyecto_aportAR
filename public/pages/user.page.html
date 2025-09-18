@@ -1,1109 +1,1378 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>aportAR - Plataforma Estudiantil</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/fonts.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/fonts.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <!-- Navbar de Usuario -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" style="background-color: #e3f2fd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" data-bs-theme="light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../../index.html">
-                <img src="../assets/images/index.images/logo_ipf.png" alt="Instituto Politécnico Formosa" width="40" height="32">
-                <span class="ms-2 outfit-semibold">aportAR</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary sticky-top"
+      style="
+        background-color: #e3f2fd;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      "
+      data-bs-theme="light"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">
+          <img
+            src="../assets/images/index.images/logo_ipf.png"
+            alt="Instituto Politécnico Formosa"
+            width="40"
+            height="32"
+          />
+          <span class="ms-2 outfit-semibold">aportAR</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#" onclick="showFeed('home')">
+                Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showFeed('proyectos')">
+                Proyectos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showFeed('sugerencias')">
+                Sugerencias
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showFeed('problematicas')">
+                Problemáticas
+              </a>
+            </li>
+          </ul>
+          <div class="navbar-nav">
+            <button
+              class="btn btn-outline-light me-2"
+              onclick="openCreateModal()"
+            >
+              <i class="fas fa-plus me-1"></i>Crear Post
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#" onclick="showFeed('home')">
-                            Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showFeed('proyectos')">
-                            Proyectos
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showFeed('sugerencias')">
-                            Sugerencias
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showFeed('problematicas')">
-                            Problemáticas
-                        </a>
-                    </li>
-                </ul>
-                <div class="navbar-nav">
-                    <button class="btn btn-outline-light me-2" onclick="openCreateModal()">
-                        <i class="fas fa-plus me-1"></i>Crear Post
-                    </button>
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user me-1"></i> María González
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Mi Perfil</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-bookmark me-2"></i>Mis Posts</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-user me-1"></i> María González
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="#"
+                    ><i class="fas fa-user me-2"></i>Mi Perfil</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    ><i class="fas fa-bookmark me-2"></i>Mis Posts</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    ><i class="fas fa-cog me-2"></i>Configuración</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    ><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a
+                  >
+                </li>
+              </ul>
             </div>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Contenido Principal -->
-    <main class="container-fluid" style="padding-top: 80px;">
-        <!-- Feed Home (Perfil + Actividad Reciente) -->
-        <div id="feed-home" class="feed-content">
-            <div class="row">
-                <!-- Perfil del Usuario -->
-                <div class="col-lg-4 mb-4">
-                    <div class="card info-card h-100">
-                        <div class="card-header text-white bg-greendegrade">
-                            <h5 class="outfit-semibold mb-0">
-                                <i class="fas fa-user me-2"></i>
-                                Mi Perfil
-                            </h5>
-                        </div>
-                        <div class="card-body text-center">
-                            <!-- Avatar del usuario -->
-                            <div class="mb-3">
-                                <div class="user-avatar mx-auto mb-3">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <h5 class="outfit-semibold">María González</h5>
-                                <p class="text-muted">2do año - Administración</p>
-                            </div>
-                            
-                            <!-- Estadísticas del usuario -->
-                            <div class="user-stats">
-                                <div class="row text-center">
-                                    <div class="col-4">
-                                        <div class="stat-item">
-                                            <div class="stat-number">8</div>
-                                            <div class="stat-label">Posts</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="stat-item">
-                                            <div class="stat-number">24</div>
-                                            <div class="stat-label">Comentarios</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="stat-item">
-                                            <div class="stat-number">156</div>
-                                            <div class="stat-label">Likes</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <hr>
-                            
-                            <!-- Información del usuario -->
-                            <div class="user-info text-start">
-                                <ul class="list-unstyled">
-                                    <li class="mb-2">
-                                        <i class="fas fa-calendar text-success me-2"></i>
-                                        <strong>Miembro desde:</strong> Marzo 2025
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="fas fa-clock text-success me-2"></i>
-                                        <strong>Última actividad:</strong> Hace 10 min
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="fas fa-medal text-success me-2"></i>
-                                        <strong>Nivel:</strong> Contribuidor Activo
-                                    </li>
-                                </ul>
-                            </div>
-                            
-                            <!-- Botón de acción -->
-                            <div class="mt-3">
-                                <button class="btn btn-custom-primary w-100" onclick="openCreateModal()">
-                                    <i class="fas fa-plus me-2"></i>Crear Nuevo Post
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+    <main class="container-fluid" style="padding-top: 80px">
+      <!-- Feed Home (Perfil + Actividad Reciente) -->
+      <div id="feed-home" class="feed-content">
+        <div class="row">
+          <!-- Perfil del Usuario -->
+          <div class="col-lg-4 mb-4">
+            <div class="card info-card h-100">
+              <div class="card-header text-white bg-greendegrade">
+                <h5 class="outfit-semibold mb-0">
+                  <i class="fas fa-user me-2"></i>
+                  Mi Perfil
+                </h5>
+              </div>
+              <div class="card-body text-center">
+                <!-- Avatar del usuario -->
+                <div class="mb-3">
+                  <div class="user-avatar mx-auto mb-3">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <h5 class="outfit-semibold">María González</h5>
+                  <p class="text-muted">2do año - Administración</p>
                 </div>
 
-                <!-- Feed de Actividad Reciente -->
-                <div class="col-lg-8 mb-4">
-                    <div class="card info-card h-100">
-                        <div class="card-header text-white bg-greendegrade">
-                            <h5 class="outfit-semibold mb-0">
-                                <i class="fas fa-rss me-2"></i>
-                                Feed Principal
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <!-- Posts recientes del feed principal -->
-                            <div class="activity-feed">
-                                <!-- Post 1 -->
-                                <div class="feed-post mb-4">
-                                    <div class="post-header d-flex align-items-center mb-2">
-                                        <div class="author-avatar-small me-2">
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                        <div>
-                                            <strong>Luis Fernández</strong>
-                                            <span class="text-muted">publicó en</span>
-                                            <span class="badge bg-success">Proyectos</span>
-                                            <br><small class="text-muted">Hace 2 horas</small>
-                                        </div>
-                                    </div>
-                                    <div class="post-content">
-                                        <h6 class="outfit-semibold">Sistema de Gestión de Biblioteca</h6>
-                                        <p class="mb-2">Estoy desarrollando un sistema web para digitalizar el préstamo de libros. ¿Qué opinan de la interfaz?</p>
-                                        <div class="post-actions">
-                                            <button class="btn btn-sm btn-outline-primary me-2" onclick="likePost('post1')">
-                                                <i class="fas fa-heart me-1"></i>Me gusta (12)
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary me-2" onclick="openComments('post1')">
-                                                <i class="fas fa-comment me-1"></i>Comentarios (5)
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-info" onclick="sharePost('post1')">
-                                                <i class="fas fa-share me-1"></i>Compartir
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <!-- Post 2 -->
-                                <div class="feed-post mb-4">
-                                    <div class="post-header d-flex align-items-center mb-2">
-                                        <div class="author-avatar-small me-2">
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                        <div>
-                                            <strong>Ana Rodríguez</strong>
-                                            <span class="text-muted">publicó en</span>
-                                            <span class="badge bg-info">Sugerencias</span>
-                                            <br><small class="text-muted">Hace 4 horas</small>
-                                        </div>
-                                    </div>
-                                    <div class="post-content">
-                                        <h6 class="outfit-semibold">WiFi en el Instituto</h6>
-                                        <p class="mb-2">¿Alguien más tiene problemas con la velocidad del WiFi? Propongo crear una petición para mejorarlo.</p>
-                                        <div class="post-actions">
-                                            <button class="btn btn-sm btn-outline-primary me-2" onclick="likePost('post2')">
-                                                <i class="fas fa-thumbs-up me-1"></i>Apoyo (34)
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary me-2" onclick="openComments('post2')">
-                                                <i class="fas fa-comment me-1"></i>Comentarios (18)
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-warning" onclick="supportSuggestion('post2')">
-                                                <i class="fas fa-hand-paper me-1"></i>Unirme
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <!-- Post 3 -->
-                                <div class="feed-post mb-4">
-                                    <div class="post-header d-flex align-items-center mb-2">
-                                        <div class="institutional-avatar me-2">
-                                            <i class="fas fa-building"></i>
-                                        </div>
-                                        <div>
-                                            <strong>Dirección IPF</strong>
-                                            <span class="text-muted">publicó en</span>
-                                            <span class="badge bg-danger">Problemáticas</span>
-                                            <br><small class="text-muted">Hace 1 día</small>
-                                        </div>
-                                    </div>
-                                    <div class="post-content">
-                                        <h6 class="outfit-semibold">Optimización del Consumo Eléctrico</h6>
-                                        <p class="mb-2">Necesitamos sus ideas para reducir el consumo eléctrico. ¡Sus soluciones pueden marcar la diferencia!</p>
-                                        <div class="post-actions">
-                                            <button class="btn btn-sm btn-outline-success me-2" onclick="proposeSolution('problema1')">
-                                                <i class="fas fa-lightbulb me-1"></i>Proponer Solución
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary me-2" onclick="openComments('problema1')">
-                                                <i class="fas fa-comments me-1"></i>Ver Soluciones (12)
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-info" onclick="viewProblem('problema1')">
-                                                <i class="fas fa-eye me-1"></i>Ver Detalles
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Botón para cargar más -->
-                            <div class="text-center mt-4">
-                                <button class="btn btn-outline-custom-primary" onclick="loadMorePosts()">
-                                    <i class="fas fa-refresh me-2"></i>Cargar más posts
-                                </button>
-                            </div>
-                        </div>
+                <!-- Estadísticas del usuario -->
+                <div class="user-stats">
+                  <div class="row text-center">
+                    <div class="col-4">
+                      <div class="stat-item">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Posts</div>
+                      </div>
                     </div>
+                    <div class="col-4">
+                      <div class="stat-item">
+                        <div class="stat-number">24</div>
+                        <div class="stat-label">Comentarios</div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="stat-item">
+                        <div class="stat-number">156</div>
+                        <div class="stat-label">Likes</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+                <hr />
+
+                <!-- Información del usuario -->
+                <div class="user-info text-start">
+                  <ul class="list-unstyled">
+                    <li class="mb-2">
+                      <i class="fas fa-calendar text-success me-2"></i>
+                      <strong>Miembro desde:</strong> Marzo 2025
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-clock text-success me-2"></i>
+                      <strong>Última actividad:</strong> Hace 10 min
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-medal text-success me-2"></i>
+                      <strong>Nivel:</strong> Contribuidor Activo
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Botón de acción -->
+                <div class="mt-3">
+                  <button
+                    class="btn btn-custom-primary w-100"
+                    onclick="openCreateModal()"
+                  >
+                    <i class="fas fa-plus me-2"></i>Crear Nuevo Post
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Feed de Actividad Reciente -->
+          <div class="col-lg-8 mb-4">
+            <div class="card info-card h-100">
+              <div class="card-header text-white bg-greendegrade">
+                <h5 class="outfit-semibold mb-0">
+                  <i class="fas fa-rss me-2"></i>
+                  Feed Principal
+                </h5>
+              </div>
+              <div class="card-body">
+                <!-- Posts recientes del feed principal -->
+                <div class="activity-feed">
+                  <!-- Post 1 -->
+                  <div class="feed-post mb-4">
+                    <div class="post-header d-flex align-items-center mb-2">
+                      <div class="author-avatar-small me-2">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <strong>Luis Fernández</strong>
+                        <span class="text-muted">publicó en</span>
+                        <span class="badge bg-success">Proyectos</span>
+                        <br /><small class="text-muted">Hace 2 horas</small>
+                      </div>
+                    </div>
+                    <div class="post-content">
+                      <h6 class="outfit-semibold">
+                        Sistema de Gestión de Biblioteca
+                      </h6>
+                      <p class="mb-2">
+                        Estoy desarrollando un sistema web para digitalizar el
+                        préstamo de libros. ¿Qué opinan de la interfaz?
+                      </p>
+                      <div class="post-actions">
+                        <button
+                          class="btn btn-sm btn-outline-primary me-2"
+                          onclick="likePost('post1')"
+                        >
+                          <i class="fas fa-heart me-1"></i>Me gusta (12)
+                        </button>
+                        <button
+                          class="btn btn-sm btn-outline-secondary me-2"
+                          onclick="openComments('post1')"
+                        >
+                          <i class="fas fa-comment me-1"></i>Comentarios (5)
+                        </button>
+                        <button
+                          class="btn btn-sm btn-outline-info"
+                          onclick="sharePost('post1')"
+                        >
+                          <i class="fas fa-share me-1"></i>Compartir
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr />
+
+                  <!-- Post 2 -->
+                  <div class="feed-post mb-4">
+                    <div class="post-header d-flex align-items-center mb-2">
+                      <div class="author-avatar-small me-2">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <strong>Ana Rodríguez</strong>
+                        <span class="text-muted">publicó en</span>
+                        <span class="badge bg-info">Sugerencias</span>
+                        <br /><small class="text-muted">Hace 4 horas</small>
+                      </div>
+                    </div>
+                    <div class="post-content">
+                      <h6 class="outfit-semibold">WiFi en el Instituto</h6>
+                      <p class="mb-2">
+                        ¿Alguien más tiene problemas con la velocidad del WiFi?
+                        Propongo crear una petición para mejorarlo.
+                      </p>
+                      <div class="post-actions">
+                        <button
+                          class="btn btn-sm btn-outline-primary me-2"
+                          onclick="likePost('post2')"
+                        >
+                          <i class="fas fa-thumbs-up me-1"></i>Apoyo (34)
+                        </button>
+                        <button
+                          class="btn btn-sm btn-outline-secondary me-2"
+                          onclick="openComments('post2')"
+                        >
+                          <i class="fas fa-comment me-1"></i>Comentarios (18)
+                        </button>
+                        <button
+                          class="btn btn-sm btn-outline-warning"
+                          onclick="supportSuggestion('post2')"
+                        >
+                          <i class="fas fa-hand-paper me-1"></i>Unirme
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr />
+
+                  <!-- Post 3 -->
+                  <div class="feed-post mb-4">
+                    <div class="post-header d-flex align-items-center mb-2">
+                      <div class="institutional-avatar me-2">
+                        <i class="fas fa-building"></i>
+                      </div>
+                      <div>
+                        <strong>Dirección IPF</strong>
+                        <span class="text-muted">publicó en</span>
+                        <span class="badge bg-danger">Problemáticas</span>
+                        <br /><small class="text-muted">Hace 1 día</small>
+                      </div>
+                    </div>
+                    <div class="post-content">
+                      <h6 class="outfit-semibold">
+                        Optimización del Consumo Eléctrico
+                      </h6>
+                      <p class="mb-2">
+                        Necesitamos sus ideas para reducir el consumo eléctrico.
+                        ¡Sus soluciones pueden marcar la diferencia!
+                      </p>
+                      <div class="post-actions">
+                        <button
+                          class="btn btn-sm btn-outline-success me-2"
+                          onclick="proposeSolution('problema1')"
+                        >
+                          <i class="fas fa-lightbulb me-1"></i>Proponer Solución
+                        </button>
+                        <button
+                          class="btn btn-sm btn-outline-secondary me-2"
+                          onclick="openComments('problema1')"
+                        >
+                          <i class="fas fa-comments me-1"></i>Ver Soluciones
+                          (12)
+                        </button>
+                        <button
+                          class="btn btn-sm btn-outline-info"
+                          onclick="viewProblem('problema1')"
+                        >
+                          <i class="fas fa-eye me-1"></i>Ver Detalles
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Botón para cargar más -->
+                <div class="text-center mt-4">
+                  <button
+                    class="btn btn-outline-custom-primary"
+                    onclick="loadMorePosts()"
+                  >
+                    <i class="fas fa-refresh me-2"></i>Cargar más posts
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feed Proyectos (Desde perspectiva de usuario) -->
+      <!-- Feeds adicionales (placeholder por ahora) -->
+      <div id="feed-proyectos" class="feed-content d-none">
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div class="card info-card h-100">
+              <div class="card-header bg-greendegrade bg-success text-white">
+                <h5 class="outfit-semibold mb-0">
+                  <i class="fas fa-project-diagram me-2"></i>
+                  Proyectos
+                </h5>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Feed Proyectos (Desde perspectiva de usuario) -->
-        <!-- Feeds adicionales (placeholder por ahora) -->
-        <div id="feed-proyectos" class="feed-content d-none">
-            <div class="row">
-                <div class="col-12 mb-4">
-                    <div class="card info-card h-100">
-                        <div class="card-header bg-greendegrade bg-success text-white">
-                            <h5 class="outfit-semibold mb-0">
-                                <i class="fas fa-project-diagram me-2"></i>
-                                Proyectos
-                            </h5>
-                        </div>
-                    </div>
+        <!-- Lista de Proyectos -->
+        <div class="row">
+          <!-- Proyecto 1 - aportAR Website -->
+          <div class="col-lg-6 col-xl-4 mb-4">
+            <div class="card project-card h-100">
+              <div class="project-image">
+                <img
+                  src="../assets/images/index.images/banner_index.png"
+                  class="card-img-top"
+                  alt="aportAR Website"
+                />
+                <div class="project-badge"></div>
+              </div>
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-start mb-2"
+                >
+                  <h6 class="card-title outfit-semibold">
+                    aportAR - Plataforma Web
+                  </h6>
+                  <small class="text-muted">Hace 2h</small>
                 </div>
+                <p class="card-text small">
+                  Plataforma web para que estudiantes del IPF compartan
+                  propuestas y sugerencias. Incluye sistema de usuarios, modales
+                  y diseño responsive.
+                </p>
+                <div class="project-author mb-3">
+                  <div class="d-flex align-items-center">
+                    <div class="author-avatar me-2">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                      <small class="fw-bold">Maximo Veron</small>
+                      <br /><small class="text-muted"
+                        >4to año - Informática</small
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="project-stats mb-3">
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-comment me-1"></i>5 comentarios
+                  </span>
+                  <span class="badge bg-light text-dark">
+                    <i class="fas fa-heart me-1"></i>12 likes
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer bg-light">
+                <div class="moderation-actions-quick">
+                  <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    onclick="openComments('proyecto1')"
+                  >
+                    <i class="fas fa-comment me-1"></i>Comentarios
+                  </button>
+                </div>
+              </div>
             </div>
-            
-            <!-- Lista de Proyectos -->
-            <div class="row">
-                <!-- Proyecto 1 - aportAR Website -->
-                <div class="col-lg-6 col-xl-4 mb-4">
-                    <div class="card project-card h-100">
-                        <div class="project-image">
-                            <img src="../assets/images/index.images/banner_index.png" class="card-img-top" alt="aportAR Website">
-                            <div class="project-badge">
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h6 class="card-title outfit-semibold">aportAR - Plataforma Web</h6>
-                                <small class="text-muted">Hace 2h</small>
-                            </div>
-                            <p class="card-text small">
-                                Plataforma web para que estudiantes del IPF compartan propuestas y sugerencias. 
-                                Incluye sistema de usuarios, modales y diseño responsive.
-                            </p>
-                            <div class="project-author mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="author-avatar me-2">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <small class="fw-bold">Maximo Veron</small>
-                                        <br><small class="text-muted">4to año - Informática</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="project-stats mb-3">
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-comment me-1"></i>5 comentarios
-                                </span>
-                                <span class="badge bg-light text-dark">
-                                    <i class="fas fa-heart me-1"></i>12 likes
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-light">
-                            <div class="moderation-actions-quick">
-                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('proyecto1')">
-                                    <i class="fas fa-comment me-1"></i>Comentarios
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          </div>
 
-                <!-- Proyecto 2 -->
-                <div class="col-lg-6 col-xl-4 mb-4">
-                    <div class="card project-card h-100">
-                        <div class="project-image">
-                            <div class="placeholder-image d-flex align-items-center justify-content-center">
-                                <i class="fas fa-mobile-alt fa-3x text-muted"></i>
-                            </div>
-                            <div class="project-badge">
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h6 class="card-title outfit-semibold">App de Notas IPF</h6>
-                                <small class="text-muted">Hace 5h</small>
-                            </div>
-                            <p class="card-text small">
-                                Aplicación móvil para que estudiantes puedan tomar notas, organizar materias 
-                                y compartir apuntes entre compañeros.
-                            </p>
-                            <div class="project-author mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="author-avatar me-2">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <small class="fw-bold">Ana García</small>
-                                        <br><small class="text-muted">3er año - Informática</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="project-stats mb-3">
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-comment me-1"></i>8 comentarios
-                                </span>
-                                <span class="badge bg-light text-dark">
-                                    <i class="fas fa-heart me-1"></i>15 likes
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-light">
-                            <div class="moderation-actions-quick">
-                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('proyecto2')">
-                                    <i class="fas fa-comment me-1"></i>Comentarios
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+          <!-- Proyecto 2 -->
+          <div class="col-lg-6 col-xl-4 mb-4">
+            <div class="card project-card h-100">
+              <div class="project-image">
+                <div
+                  class="placeholder-image d-flex align-items-center justify-content-center"
+                >
+                  <i class="fas fa-mobile-alt fa-3x text-muted"></i>
                 </div>
-
-                <!-- Proyecto 3 -->
-                <div class="col-lg-6 col-xl-4 mb-4">
-                    <div class="card project-card h-100">
-                        <div class="project-image">
-                            <div class="placeholder-image d-flex align-items-center justify-content-center">
-                                <i class="fas fa-microchip fa-3x text-muted"></i>
-                            </div>
-                            <div class="project-badge">
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h6 class="card-title outfit-semibold">Sistema de Riego Automatizado</h6>
-                                <small class="text-muted">Hace 1d</small>
-                            </div>
-                            <p class="card-text small">
-                                Proyecto de IoT con Arduino para automatizar el riego del jardín del instituto. 
-                                Incluye sensores de humedad y control remoto.
-                            </p>
-                            <div class="project-author mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="author-avatar me-2">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <small class="fw-bold">Carlos López</small>
-                                        <br><small class="text-muted">4to año - Electrónica</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="project-stats mb-3">
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-comment me-1"></i>12 comentarios
-                                </span>
-                                <span class="badge bg-light text-dark">
-                                    <i class="fas fa-heart me-1"></i>20 likes
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-light">
-                            <div class="moderation-actions-quick">
-                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('proyecto3')">
-                                    <i class="fas fa-comment me-1"></i>Ver Comentarios
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="project-badge"></div>
+              </div>
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-start mb-2"
+                >
+                  <h6 class="card-title outfit-semibold">App de Notas IPF</h6>
+                  <small class="text-muted">Hace 5h</small>
                 </div>
+                <p class="card-text small">
+                  Aplicación móvil para que estudiantes puedan tomar notas,
+                  organizar materias y compartir apuntes entre compañeros.
+                </p>
+                <div class="project-author mb-3">
+                  <div class="d-flex align-items-center">
+                    <div class="author-avatar me-2">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                      <small class="fw-bold">Ana García</small>
+                      <br /><small class="text-muted"
+                        >3er año - Informática</small
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="project-stats mb-3">
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-comment me-1"></i>8 comentarios
+                  </span>
+                  <span class="badge bg-light text-dark">
+                    <i class="fas fa-heart me-1"></i>15 likes
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer bg-light">
+                <div class="moderation-actions-quick">
+                  <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    onclick="openComments('proyecto2')"
+                  >
+                    <i class="fas fa-comment me-1"></i>Comentarios
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Proyecto 3 -->
+          <div class="col-lg-6 col-xl-4 mb-4">
+            <div class="card project-card h-100">
+              <div class="project-image">
+                <div
+                  class="placeholder-image d-flex align-items-center justify-content-center"
+                >
+                  <i class="fas fa-microchip fa-3x text-muted"></i>
+                </div>
+                <div class="project-badge"></div>
+              </div>
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-start mb-2"
+                >
+                  <h6 class="card-title outfit-semibold">
+                    Sistema de Riego Automatizado
+                  </h6>
+                  <small class="text-muted">Hace 1d</small>
+                </div>
+                <p class="card-text small">
+                  Proyecto de IoT con Arduino para automatizar el riego del
+                  jardín del instituto. Incluye sensores de humedad y control
+                  remoto.
+                </p>
+                <div class="project-author mb-3">
+                  <div class="d-flex align-items-center">
+                    <div class="author-avatar me-2">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                      <small class="fw-bold">Carlos López</small>
+                      <br /><small class="text-muted"
+                        >4to año - Electrónica</small
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="project-stats mb-3">
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-comment me-1"></i>12 comentarios
+                  </span>
+                  <span class="badge bg-light text-dark">
+                    <i class="fas fa-heart me-1"></i>20 likes
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer bg-light">
+                <div class="moderation-actions-quick">
+                  <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    onclick="openComments('proyecto3')"
+                  >
+                    <i class="fas fa-comment me-1"></i>Ver Comentarios
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feed Sugerencias (Desde perspectiva de usuario) -->
+      <div id="feed-sugerencias" class="feed-content d-none">
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div class="card info-card">
+              <div class="card-header bg-greendegrade text-white">
+                <h5 class="outfit-semibold mb-0">
+                  <i class="fas fa-lightbulb me-2"></i>
+                  Sugerencias
+                </h5>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Feed Sugerencias (Desde perspectiva de usuario) -->
-         <div id="feed-sugerencias" class="feed-content d-none">
-            <div class="row">
-                <div class="col-12 mb-4">
-                    <div class="card info-card">
-                        <div class="card-header bg-greendegrade text-white">
-                            <h5 class="outfit-semibold mb-0">
-                                <i class="fas fa-lightbulb me-2"></i>
-                                Sugerencias
-                            </h5>
-                        </div>
+        <!-- Lista de Sugerencias -->
+        <div class="row">
+          <!-- Sugerencia 1 -->
+          <div class="col-lg-6 mb-4">
+            <div class="card suggestion-card h-100">
+              <div class="card-body">
+                <div class="suggestion-header mb-3">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="suggestion-topic">
+                      <h6 class="card-title outfit-semibold">
+                        Mejoras en la Biblioteca
+                      </h6>
                     </div>
+                    <small class="text-muted">Hace 1h</small>
+                  </div>
                 </div>
+
+                <div class="suggestion-content mb-3">
+                  <p class="card-text">
+                    Creo que la biblioteca necesita más espacios de estudio
+                    silencioso. Actualmente solo hay 4 mesas y siempre están
+                    ocupadas. Mi sugerencia es habilitar el aula 201 como sala
+                    de estudio durante los recreos y después de clases.
+                  </p>
+                  <p class="card-text small text-muted">
+                    También sería útil tener más enchufes para las laptops y
+                    mejorar la iluminación en la zona de lectura.
+                  </p>
+                </div>
+
+                <div class="suggestion-author mb-3">
+                  <div class="d-flex align-items-center">
+                    <div class="author-avatar me-2">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                      <small class="fw-bold">María González</small>
+                      <br /><small class="text-muted"
+                        >2do año - Administración</small
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="suggestion-stats mb-3">
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-comment me-1"></i>7 comentarios
+                  </span>
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-thumbs-up me-1"></i>18 apoyos
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer bg-light">
+                <div class="moderation-actions-quick">
+                  <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    onclick="openComments('sugerencia1')"
+                  >
+                    <i class="fas fa-comment me-1"></i>Comentarios
+                  </button>
+                </div>
+              </div>
             </div>
-            
-            <!-- Lista de Sugerencias -->
-            <div class="row">
-                <!-- Sugerencia 1 -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card suggestion-card h-100">
-                        <div class="card-body">
-                            <div class="suggestion-header mb-3">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div class="suggestion-topic">
-                                        <h6 class="card-title outfit-semibold">Mejoras en la Biblioteca</h6>
-                                    </div>
-                                    <small class="text-muted">Hace 1h</small>
-                                </div>
-                            </div>
-                            
-                            <div class="suggestion-content mb-3">
-                                <p class="card-text">
-                                    Creo que la biblioteca necesita más espacios de estudio silencioso. 
-                                    Actualmente solo hay 4 mesas y siempre están ocupadas. Mi sugerencia 
-                                    es habilitar el aula 201 como sala de estudio durante los recreos y 
-                                    después de clases.
-                                </p>
-                                <p class="card-text small text-muted">
-                                    También sería útil tener más enchufes para las laptops y mejorar 
-                                    la iluminación en la zona de lectura.
-                                </p>
-                            </div>
-                            
-                            <div class="suggestion-author mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="author-avatar me-2">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <small class="fw-bold">María González</small>
-                                        <br><small class="text-muted">2do año - Administración</small>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="suggestion-stats mb-3">
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-comment me-1"></i>7 comentarios
-                                </span>
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-thumbs-up me-1"></i>18 apoyos
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-light">
-                            <div class="moderation-actions-quick">
-                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia1')">
-                                    <i class="fas fa-comment me-1"></i>Comentarios
-                                </button>
+          </div>
 
-                            </div>
-                        </div>
+          <!-- Sugerencia 2 -->
+          <div class="col-lg-6 mb-4">
+            <div class="card suggestion-card h-100">
+              <div class="card-body">
+                <div class="suggestion-header mb-3">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="suggestion-topic">
+                      <h6 class="card-title outfit-semibold">
+                        Horarios del Buffet
+                      </h6>
                     </div>
+                    <small class="text-muted">Hace 3h</small>
+                  </div>
                 </div>
 
-                <!-- Sugerencia 2 -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card suggestion-card h-100">
-                        <div class="card-body">
-                            <div class="suggestion-header mb-3">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div class="suggestion-topic">
-                                        <h6 class="card-title outfit-semibold">Horarios del Buffet</h6>
-                                    </div>
-                                    <small class="text-muted">Hace 3h</small>
-                                </div>
-                            </div>
-                            
-                            <div class="suggestion-content mb-3">
-                                <p class="card-text">
-                                    El buffet cierra muy temprano (15:30) y muchos estudiantes que tenemos 
-                                    clases hasta las 16:00 nos quedamos sin poder comprar algo para merendar. 
-                                    Sugiero extender el horario hasta las 16:30 al menos.
-                                </p>
-                                <p class="card-text small text-muted">
-                                    Además, estaría bueno que agreguen más opciones saludables como frutas 
-                                    o yogur, no solo comida chatarra.
-                                </p>
-                            </div>
-                            
-                            <div class="suggestion-author mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="author-avatar me-2">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <small class="fw-bold">Pedro Martínez</small>
-                                        <br><small class="text-muted">3er año - Electrónica</small>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="suggestion-stats mb-3">
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-comment me-1"></i>12 comentarios
-                                </span>
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-thumbs-up me-1"></i>31 apoyos
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-light">
-                            <div class="moderation-actions-quick">
-                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia2')">
-                                    <i class="fas fa-comment me-1"></i>Comentarios
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="suggestion-content mb-3">
+                  <p class="card-text">
+                    El buffet cierra muy temprano (15:30) y muchos estudiantes
+                    que tenemos clases hasta las 16:00 nos quedamos sin poder
+                    comprar algo para merendar. Sugiero extender el horario
+                    hasta las 16:30 al menos.
+                  </p>
+                  <p class="card-text small text-muted">
+                    Además, estaría bueno que agreguen más opciones saludables
+                    como frutas o yogur, no solo comida chatarra.
+                  </p>
                 </div>
 
-                <!-- Sugerencia 3 -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card suggestion-card h-100">
-                        <div class="card-body">
-                            <div class="suggestion-header mb-3">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div class="suggestion-topic">
-                                        <h6 class="card-title outfit-semibold">Talleres de Programación</h6>
-                                    </div>
-                                    <small class="text-muted">Hace 6h</small>
-                                </div>
-                            </div>
-                            
-                            <div class="suggestion-content mb-3">
-                                <p class="card-text">
-                                    Propongo que se abran talleres opcionales de programación en diferentes 
-                                    lenguajes (Python, JavaScript, C++) para estudiantes de todas las carreras. 
-                                    Hoy en día la programación es útil en cualquier campo.
-                                </p>
-                                <p class="card-text small text-muted">
-                                    Podrían ser los sábados por la mañana, 2 horas por semana. Estoy seguro 
-                                    que muchos estudiantes se inscribirían.
-                                </p>
-                            </div>
-                            
-                            <div class="suggestion-author mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="author-avatar me-2">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <small class="fw-bold">Luis Fernández</small>
-                                        <br><small class="text-muted">4to año - Informática</small>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="suggestion-stats mb-3">
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-comment me-1"></i>15 comentarios
-                                </span>
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-thumbs-up me-1"></i>42 apoyos
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-light">
-                            <div class="moderation-actions-quick">
-                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia3')">
-                                    <i class="fas fa-comment me-1"></i>Comentarios
-                                </button>
-                                
-                            </div>
-                        </div>
+                <div class="suggestion-author mb-3">
+                  <div class="d-flex align-items-center">
+                    <div class="author-avatar me-2">
+                      <i class="fas fa-user"></i>
                     </div>
+                    <div>
+                      <small class="fw-bold">Pedro Martínez</small>
+                      <br /><small class="text-muted"
+                        >3er año - Electrónica</small
+                      >
+                    </div>
+                  </div>
                 </div>
 
-                <!-- Sugerencia 4 -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card suggestion-card h-100">
-                        <div class="card-body">
-                            <div class="suggestion-header mb-3">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div class="suggestion-topic">
-                                        <h6 class="card-title outfit-semibold">Wifi del Instituto</h6>
-                                    </div>
-                                    <small class="text-muted">Hace 1d</small>
-                                </div>
-                            </div>
-                            
-                            <div class="suggestion-content mb-3">
-                                <p class="card-text">
-                                    El wifi del instituto es muy lento y se corta constantemente. Es imposible 
-                                    hacer trabajos que requieran internet o asistir a clases virtuales cuando 
-                                    hay problemas técnicos.
-                                </p>
-                                <p class="card-text small text-muted">
-                                    Creo que deberían mejorar la infraestructura de red y tener más puntos 
-                                    de acceso, especialmente en los laboratorios.
-                                </p>
-                            </div>
-                            
-                            <div class="suggestion-author mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="author-avatar me-2">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <small class="fw-bold">Ana Rodríguez</small>
-                                        <br><small class="text-muted">1er año - Informática</small>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="suggestion-stats mb-3">
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-comment me-1"></i>23 comentarios
-                                </span>
-                                <span class="badge bg-light text-dark me-2">
-                                    <i class="fas fa-thumbs-up me-1"></i>56 apoyos
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-light">
-                            <div class="moderation-actions-quick">
-                                <button class="btn btn-sm btn-outline-primary me-2" onclick="openComments('sugerencia4')">
-                                    <i class="fas fa-comment me-1"></i>Comentarios
-                                </button>     
-                            </div>
-                        </div>
-                    </div>
+                <div class="suggestion-stats mb-3">
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-comment me-1"></i>12 comentarios
+                  </span>
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-thumbs-up me-1"></i>31 apoyos
+                  </span>
                 </div>
+              </div>
+              <div class="card-footer bg-light">
+                <div class="moderation-actions-quick">
+                  <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    onclick="openComments('sugerencia2')"
+                  >
+                    <i class="fas fa-comment me-1"></i>Comentarios
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Sugerencia 3 -->
+          <div class="col-lg-6 mb-4">
+            <div class="card suggestion-card h-100">
+              <div class="card-body">
+                <div class="suggestion-header mb-3">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="suggestion-topic">
+                      <h6 class="card-title outfit-semibold">
+                        Talleres de Programación
+                      </h6>
+                    </div>
+                    <small class="text-muted">Hace 6h</small>
+                  </div>
+                </div>
+
+                <div class="suggestion-content mb-3">
+                  <p class="card-text">
+                    Propongo que se abran talleres opcionales de programación en
+                    diferentes lenguajes (Python, JavaScript, C++) para
+                    estudiantes de todas las carreras. Hoy en día la
+                    programación es útil en cualquier campo.
+                  </p>
+                  <p class="card-text small text-muted">
+                    Podrían ser los sábados por la mañana, 2 horas por semana.
+                    Estoy seguro que muchos estudiantes se inscribirían.
+                  </p>
+                </div>
+
+                <div class="suggestion-author mb-3">
+                  <div class="d-flex align-items-center">
+                    <div class="author-avatar me-2">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                      <small class="fw-bold">Luis Fernández</small>
+                      <br /><small class="text-muted"
+                        >4to año - Informática</small
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="suggestion-stats mb-3">
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-comment me-1"></i>15 comentarios
+                  </span>
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-thumbs-up me-1"></i>42 apoyos
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer bg-light">
+                <div class="moderation-actions-quick">
+                  <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    onclick="openComments('sugerencia3')"
+                  >
+                    <i class="fas fa-comment me-1"></i>Comentarios
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sugerencia 4 -->
+          <div class="col-lg-6 mb-4">
+            <div class="card suggestion-card h-100">
+              <div class="card-body">
+                <div class="suggestion-header mb-3">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="suggestion-topic">
+                      <h6 class="card-title outfit-semibold">
+                        Wifi del Instituto
+                      </h6>
+                    </div>
+                    <small class="text-muted">Hace 1d</small>
+                  </div>
+                </div>
+
+                <div class="suggestion-content mb-3">
+                  <p class="card-text">
+                    El wifi del instituto es muy lento y se corta
+                    constantemente. Es imposible hacer trabajos que requieran
+                    internet o asistir a clases virtuales cuando hay problemas
+                    técnicos.
+                  </p>
+                  <p class="card-text small text-muted">
+                    Creo que deberían mejorar la infraestructura de red y tener
+                    más puntos de acceso, especialmente en los laboratorios.
+                  </p>
+                </div>
+
+                <div class="suggestion-author mb-3">
+                  <div class="d-flex align-items-center">
+                    <div class="author-avatar me-2">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                      <small class="fw-bold">Ana Rodríguez</small>
+                      <br /><small class="text-muted"
+                        >1er año - Informática</small
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="suggestion-stats mb-3">
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-comment me-1"></i>23 comentarios
+                  </span>
+                  <span class="badge bg-light text-dark me-2">
+                    <i class="fas fa-thumbs-up me-1"></i>56 apoyos
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer bg-light">
+                <div class="moderation-actions-quick">
+                  <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    onclick="openComments('sugerencia4')"
+                  >
+                    <i class="fas fa-comment me-1"></i>Comentarios
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feed Problemáticas (Desde perspectiva de usuario) -->
+      <div id="feed-problematicas" class="feed-content d-none">
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div class="card info-card">
+              <div class="card-header bg-greendegrade text-white">
+                <h5 class="outfit-semibold mb-0">
+                  <i class="fas fa-exclamation-triangle me-2"></i>
+                  Problemáticas Institucionales - ¡Tu Ayuda es Valiosa!
+                </h5>
+                <p class="mb-0 small">
+                  Colabora con soluciones a los desafíos del instituto
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Feed Problemáticas (Desde perspectiva de usuario) -->
-        <div id="feed-problematicas" class="feed-content d-none">
-            <div class="row">
-                <div class="col-12 mb-4">
-                    <div class="card info-card">
-                        <div class="card-header bg-greendegrade text-white">
-                            <h5 class="outfit-semibold mb-0">
-                                <i class="fas fa-exclamation-triangle me-2"></i>
-                                Problemáticas Institucionales - ¡Tu Ayuda es Valiosa!
-                            </h5>
-                            <p class="mb-0 small">Colabora con soluciones a los desafíos del instituto</p>
-                        </div>
+        <!-- Lista de Problemáticas -->
+        <div class="row">
+          <!-- Problemática 1 -->
+          <div class="col-12 mb-4">
+            <div class="card problem-card">
+              <div class="card-header problem-header">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div class="problem-info">
+                    <div class="d-flex align-items-center mb-2"></div>
+                    <h5 class="card-title outfit-semibold mb-2">
+                      Optimización del Consumo Eléctrico
+                    </h5>
+                    <div class="problem-author">
+                      <small class="text-muted">
+                        <i class="fas fa-building me-1"></i>
+                        Publicado por: <strong>Dirección del IPF</strong> - Hace
+                        2 días
+                      </small>
                     </div>
+                  </div>
+                  <div class="problem-status">
+                    <span class="badge bg-warning">🔄 Buscando Soluciones</span>
+                  </div>
                 </div>
-            </div>
-            
-            <!-- Lista de Problemáticas -->
-            <div class="row">
-                <!-- Problemática 1 -->
-                <div class="col-12 mb-4">
-                    <div class="card problem-card">
-                        <div class="card-header problem-header">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div class="problem-info">
-                                    <div class="d-flex align-items-center mb-2">
-                                    </div>
-                                    <h5 class="card-title outfit-semibold mb-2">Optimización del Consumo Eléctrico</h5>
-                                    <div class="problem-author">
-                                        <small class="text-muted">
-                                            <i class="fas fa-building me-1"></i>
-                                            Publicado por: <strong>Dirección del IPF</strong> - Hace 2 días
-                                        </small>
-                                    </div>
-                                </div>
-                                <div class="problem-status">
-                                    <span class="badge bg-warning">🔄 Buscando Soluciones</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="problem-description mb-3">
-                                <p class="card-text">
-                                    <strong>El Problema:</strong> El instituto ha registrado un aumento del 40% 
-                                    en el consumo eléctrico durante los últimos 6 meses. Esto está impactando 
-                                    significativamente en los costos operativos y necesitamos encontrar 
-                                    soluciones innovadoras para optimizar el uso de energía.
-                                </p>
-                                <p class="card-text">
-                                    <strong>Contexto:</strong> Los picos de consumo se registran principalmente 
-                                    en laboratorios de informática (60%), sistemas de climatización (25%) y 
-                                    iluminación general (15%).
-                                </p>
-                                <div class="problem-requirements">
-                                    <h6 class="text-success">¿Qué buscamos de ti?</h6>
-                                    <ul class="small">
-                                        <li>Soluciones prácticas y implementables</li>
-                                        <li>Ideas que no requieran gran inversión inicial</li>
-                                        <li>Propuestas que involucren a la comunidad estudiantil</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <div class="problem-stats mb-3">
-                                <div class="row text-center">
-                                    <div class="col-3">
-                                        <div class="stat-item">
-                                            <div class="stat-number text-primary">12</div>
-                                            <div class="stat-label">Soluciones</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="stat-item">
-                                            <div class="stat-number text-warning">45</div>
-                                            <div class="stat-label">Comentarios</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="stat-item">
-                                            <div class="stat-number text-success">89</div>
-                                            <div class="stat-label">Participantes</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-light">
-                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                                <button class="btn btn-custom-primary" onclick="proposeSolution('problema1')">
-                                    <i class="fas fa-lightbulb me-2"></i>Proponer Mi Solución
-                                </button>
-                                <div class="btn-group">
-                                    <button class="btn btn-outline-primary" onclick="viewSolutions('problema1')">
-                                        <i class="fas fa-eye me-1"></i>Ver Soluciones
-                                    </button>
-                                    <button class="btn btn-outline-info" onclick="shareProblem('problema1')">
-                                        <i class="fas fa-share me-1"></i>Compartir
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+              <div class="card-body">
+                <div class="problem-description mb-3">
+                  <p class="card-text">
+                    <strong>El Problema:</strong> El instituto ha registrado un
+                    aumento del 40% en el consumo eléctrico durante los últimos
+                    6 meses. Esto está impactando significativamente en los
+                    costos operativos y necesitamos encontrar soluciones
+                    innovadoras para optimizar el uso de energía.
+                  </p>
+                  <p class="card-text">
+                    <strong>Contexto:</strong> Los picos de consumo se registran
+                    principalmente en laboratorios de informática (60%),
+                    sistemas de climatización (25%) y iluminación general (15%).
+                  </p>
+                  <div class="problem-requirements">
+                    <h6 class="text-success">¿Qué buscamos de ti?</h6>
+                    <ul class="small">
+                      <li>Soluciones prácticas y implementables</li>
+                      <li>Ideas que no requieran gran inversión inicial</li>
+                      <li>
+                        Propuestas que involucren a la comunidad estudiantil
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
-                <!-- Más problemáticas siguiendo el mismo patrón... -->
+                <div class="problem-stats mb-3">
+                  <div class="row text-center">
+                    <div class="col-3">
+                      <div class="stat-item">
+                        <div class="stat-number text-primary">12</div>
+                        <div class="stat-label">Soluciones</div>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="stat-item">
+                        <div class="stat-number text-warning">45</div>
+                        <div class="stat-label">Comentarios</div>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="stat-item">
+                        <div class="stat-number text-success">89</div>
+                        <div class="stat-label">Participantes</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-light">
+                <div
+                  class="d-flex justify-content-between align-items-center flex-wrap gap-2"
+                >
+                  <button
+                    class="btn btn-custom-primary"
+                    onclick="proposeSolution('problema1')"
+                  >
+                    <i class="fas fa-lightbulb me-2"></i>Proponer Mi Solución
+                  </button>
+                  <div class="btn-group">
+                    <button
+                      class="btn btn-outline-primary"
+                      onclick="viewSolutions('problema1')"
+                    >
+                      <i class="fas fa-eye me-1"></i>Ver Soluciones
+                    </button>
+                    <button
+                      class="btn btn-outline-info"
+                      onclick="shareProblem('problema1')"
+                    >
+                      <i class="fas fa-share me-1"></i>Compartir
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Más problemáticas siguiendo el mismo patrón... -->
         </div>
+      </div>
     </main>
 
     <!-- Modal para Crear Post -->
-    <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-success text-white">
-                    <h1 class="modal-title fs-5 outfit-semibold" id="createPostModalLabel">
-                        <i class="fas fa-plus me-2"></i>Crear Nuevo Post
-                    </h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div
+      class="modal fade"
+      id="createPostModal"
+      tabindex="-1"
+      aria-labelledby="createPostModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h1
+              class="modal-title fs-5 outfit-semibold"
+              id="createPostModalLabel"
+            >
+              <i class="fas fa-plus me-2"></i>Crear Nuevo Post
+            </h1>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="createPostForm">
+              <div class="mb-3">
+                <label for="postCategory" class="form-label">Categoría</label>
+                <select class="form-select" id="postCategory" required>
+                  <option value="">Selecciona una categoría</option>
+                  <option value="proyecto">💻 Proyecto</option>
+                  <option value="sugerencia">💡 Sugerencia</option>
+                  <option value="opinion">💭 Opinión</option>
+                  <option value="pregunta">❓ Pregunta</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="postTitle" class="form-label">Título</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="postTitle"
+                  placeholder="¿De qué quieres hablar?"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="postContent" class="form-label">Contenido</label>
+                <textarea
+                  class="form-control"
+                  id="postContent"
+                  rows="5"
+                  placeholder="Comparte tu idea, proyecto o sugerencia..."
+                  required
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="postImage" class="form-label"
+                  >Imagen (opcional)</label
+                >
+                <input
+                  type="file"
+                  class="form-control"
+                  id="postImage"
+                  accept="image/*"
+                />
+              </div>
+              <div class="mb-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="allowComments"
+                    checked
+                  />
+                  <label class="form-check-label" for="allowComments">
+                    Permitir comentarios
+                  </label>
                 </div>
-                <div class="modal-body">
-                    <form id="createPostForm">
-                        <div class="mb-3">
-                            <label for="postCategory" class="form-label">Categoría</label>
-                            <select class="form-select" id="postCategory" required>
-                                <option value="">Selecciona una categoría</option>
-                                <option value="proyecto">💻 Proyecto</option>
-                                <option value="sugerencia">💡 Sugerencia</option>
-                                <option value="opinion">💭 Opinión</option>
-                                <option value="pregunta">❓ Pregunta</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="postTitle" class="form-label">Título</label>
-                            <input type="text" class="form-control" id="postTitle" placeholder="¿De qué quieres hablar?" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="postContent" class="form-label">Contenido</label>
-                            <textarea class="form-control" id="postContent" rows="5" placeholder="Comparte tu idea, proyecto o sugerencia..." required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="postImage" class="form-label">Imagen (opcional)</label>
-                            <input type="file" class="form-control" id="postImage" accept="image/*">
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="allowComments" checked>
-                                <label class="form-check-label" for="allowComments">
-                                    Permitir comentarios
-                                </label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" form="createPostForm" class="btn btn-custom-primary">
-                        <i class="fas fa-paper-plane me-2"></i>Publicar
-                    </button>
-                </div>
-            </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              form="createPostForm"
+              class="btn btn-custom-primary"
+            >
+              <i class="fas fa-paper-plane me-2"></i>Publicar
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- CSS personalizado para la página de usuario -->
     <style>
-        /* Avatar del usuario */
-        .user-avatar {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #2e7b21, #1a4d14);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            box-shadow: 0 4px 15px rgba(46, 123, 33, 0.3);
-        }
+      /* Avatar del usuario */
+      .user-avatar {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #2e7b21, #1a4d14);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        box-shadow: 0 4px 15px rgba(46, 123, 33, 0.3);
+      }
 
-        /* Avatares pequeños para posts */
-        .author-avatar-small {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #2e7b21, #1a4d14);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.8rem;
-        }
+      /* Avatares pequeños para posts */
+      .author-avatar-small {
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, #2e7b21, #1a4d14);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.8rem;
+      }
 
-        .institutional-avatar {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #dc3545, #b02a37);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.8rem;
-        }
+      .institutional-avatar {
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, #dc3545, #b02a37);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.8rem;
+      }
 
-        /* Estadísticas del usuario */
-        .user-stats .stat-item {
-            padding: 0.5rem;
-        }
+      /* Estadísticas del usuario */
+      .user-stats .stat-item {
+        padding: 0.5rem;
+      }
 
-        .user-stats .stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2e7b21;
-        }
+      .user-stats .stat-number {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2e7b21;
+      }
 
-        .user-stats .stat-label {
-            font-size: 0.8rem;
-            color: #666;
-        }
+      .user-stats .stat-label {
+        font-size: 0.8rem;
+        color: #666;
+      }
 
-        /* Posts del feed */
-        .feed-post {
-            border-left: 3px solid #2e7b21;
-            padding-left: 1rem;
-            transition: all 0.3s ease;
-        }
+      /* Posts del feed */
+      .feed-post {
+        border-left: 3px solid #2e7b21;
+        padding-left: 1rem;
+        transition: all 0.3s ease;
+      }
 
-        .feed-post:hover {
-            background: rgba(46, 123, 33, 0.05);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: -0.5rem;
-            border-left: 3px solid #2e7b21;
-            margin-left: 0.5rem;
-        }
+      .feed-post:hover {
+        background: rgba(46, 123, 33, 0.05);
+        border-radius: 8px;
+        padding: 1rem;
+        margin: -0.5rem;
+        border-left: 3px solid #2e7b21;
+        margin-left: 0.5rem;
+      }
 
-        /* Acciones de usuario (reemplazan las de moderación) */
+      /* Acciones de usuario (reemplazan las de moderación) */
+      .user-actions-quick {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .user-actions-quick .btn {
+        flex: 1;
+        min-width: 80px;
+      }
+
+      /* Botones de acción en posts */
+      .post-actions .btn {
+        border: none;
+        transition: all 0.3s ease;
+      }
+
+      .post-actions .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      /* Mejoras para problemáticas desde perspectiva de usuario */
+      .problem-requirements {
+        background: rgba(46, 123, 33, 0.05);
+        border-radius: 8px;
+        padding: 1rem;
+        border-left: 4px solid #2e7b21;
+        margin-top: 1rem;
+      }
+
+      /* Responsive para usuario */
+      @media (max-width: 768px) {
         .user-actions-quick {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+          flex-direction: column;
+          width: 100%;
         }
 
         .user-actions-quick .btn {
-            flex: 1;
-            min-width: 80px;
+          width: 100%;
         }
 
-        /* Botones de acción en posts */
+        .feed-post {
+          margin-bottom: 1rem;
+        }
+
+        .post-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
         .post-actions .btn {
-            border: none;
-            transition: all 0.3s ease;
+          flex: 1;
+          min-width: 120px;
         }
+      }
 
-        .post-actions .btn:hover {
-            transform: translateY(-1px);
-        }
+      /* Estilos específicos para navegación de usuario */
+      .navbar-nav .nav-link.active {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        font-weight: 600;
+      }
 
-        /* Mejoras para problemáticas desde perspectiva de usuario */
-        .problem-requirements {
-            background: rgba(46, 123, 33, 0.05);
-            border-radius: 8px;
-            padding: 1rem;
-            border-left: 4px solid #2e7b21;
-            margin-top: 1rem;
-        }
-
-        /* Responsive para usuario */
-        @media (max-width: 768px) {
-            .user-actions-quick {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .user-actions-quick .btn {
-                width: 100%;
-            }
-            
-            .feed-post {
-                margin-bottom: 1rem;
-            }
-            
-            .post-actions {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-            
-            .post-actions .btn {
-                flex: 1;
-                min-width: 120px;
-            }
-        }
-
-        /* Estilos específicos para navegación de usuario */
-        .navbar-nav .nav-link.active {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            font-weight: 600;
-        }
-
-        /* Modal de creación */
-        .modal-header.bg-success {
-            background: linear-gradient(135deg, #2e7b21, #1a4d14) !important;
-        }
+      /* Modal de creación */
+      .modal-header.bg-success {
+        background: linear-gradient(135deg, #2e7b21, #1a4d14) !important;
+      }
     </style>
 
     <!-- JavaScript para funcionalidades de usuario -->
     <script>
-        function showFeed(feedName) {
-            // Ocultar todos los feeds
-            document.querySelectorAll('.feed-content').forEach(feed => {
-                feed.classList.add('d-none');
-            });
-            
-            // Mostrar el feed seleccionado
-            document.getElementById('feed-' + feedName).classList.remove('d-none');
-            
-            // Actualizar navegación activa
-            document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Agregar clase activa al enlace clickeado
-            event.target.classList.add('active');
-        }
+      function showFeed(feedName) {
+        // Ocultar todos los feeds
+        document.querySelectorAll(".feed-content").forEach((feed) => {
+          feed.classList.add("d-none");
+        });
 
-        // Funciones para crear contenido
-        function openCreateModal() {
-            const modal = new bootstrap.Modal(document.getElementById('createPostModal'));
-            modal.show();
-        }
+        // Mostrar el feed seleccionado
+        document.getElementById("feed-" + feedName).classList.remove("d-none");
 
-        function createProject() {
-            alert('¡Genial! Aquí podrás subir tu proyecto.\n\nIncluye:\n• Título y descripción\n• Imágenes o capturas\n• Enlaces al código/demo\n• Tecnologías utilizadas\n\nEsta funcionalidad se desarrollará próximamente.');
-        }
+        // Actualizar navegación activa
+        document.querySelectorAll(".navbar-nav .nav-link").forEach((link) => {
+          link.classList.remove("active");
+        });
 
-        function createSuggestion() {
-            alert('¡Excelente! Comparte tu sugerencia.\n\nPuedes proponer:\n• Mejoras en infraestructura\n• Nuevos servicios\n• Cambios académicos\n• Ideas innovadoras\n\nEsta funcionalidad se desarrollará próximamente.');
-        }
+        // Agregar clase activa al enlace clickeado
+        event.target.classList.add("active");
+      }
 
-        // Funciones de interacción social
-        function likePost(postId) {
-            alert(`Te gusta ${postId}! ❤️`);
-            // Aquí iría la lógica para dar like
-        }
+      // Funciones para crear contenido
+      function openCreateModal() {
+        const modal = new bootstrap.Modal(
+          document.getElementById("createPostModal")
+        );
+        modal.show();
+      }
 
-        function likeProject(projectId) {
-            alert(`¡Proyecto marcado como favorito! 💖\n\n${projectId} ahora está en tus proyectos favoritos.`);
-        }
+      function createProject() {
+        alert(
+          "¡Genial! Aquí podrás subir tu proyecto.\n\nIncluye:\n• Título y descripción\n• Imágenes o capturas\n• Enlaces al código/demo\n• Tecnologías utilizadas\n\nEsta funcionalidad se desarrollará próximamente."
+        );
+      }
 
-        function openComments(postId) {
-            alert(`Abriendo comentarios de ${postId}...\n\nAquí podrás:\n• Ver todos los comentarios\n• Responder a otros usuarios\n• Iniciar discusiones\n• Dar likes a comentarios\n\nEsta funcionalidad se desarrollará próximamente.`);
-        }
+      function createSuggestion() {
+        alert(
+          "¡Excelente! Comparte tu sugerencia.\n\nPuedes proponer:\n• Mejoras en infraestructura\n• Nuevos servicios\n• Cambios académicos\n• Ideas innovadoras\n\nEsta funcionalidad se desarrollará próximamente."
+        );
+      }
 
-        function commentProject(projectId) {
-            const comment = prompt(`¿Qué opinas sobre ${projectId}?\n\nEscribe tu comentario:`);
-            if (comment) {
-                alert(`¡Comentario agregado! 💬\n\n"${comment}"\n\nTu feedback ayuda a mejorar los proyectos de la comunidad.`);
-            }
-        }
+      // Funciones de interacción social
+      function likePost(postId) {
+        alert(`Te gusta ${postId}! ❤️`);
+        // Aquí iría la lógica para dar like
+      }
 
-        function commentSuggestion(suggestionId) {
-            const comment = prompt(`Comparte tu opinión sobre ${suggestionId}:`);
-            if (comment) {
-                alert(`¡Comentario agregado a la discusión! 💭\n\n"${comment}"`);
-            }
-        }
+      function likeProject(projectId) {
+        alert(
+          `¡Proyecto marcado como favorito! 💖\n\n${projectId} ahora está en tus proyectos favoritos.`
+        );
+      }
 
-        function sharePost(postId) {
-            alert(`Compartiendo ${postId}...\n\n¡Ayuda a que más estudiantes vean este contenido!`);
-        }
+      function openComments(postId) {
+        alert(
+          `Abriendo comentarios de ${postId}...\n\nAquí podrás:\n• Ver todos los comentarios\n• Responder a otros usuarios\n• Iniciar discusiones\n• Dar likes a comentarios\n\nEsta funcionalidad se desarrollará próximamente.`
+        );
+      }
 
-        function shareProject(projectId) {
-            alert(`¡Proyecto compartido! 🚀\n\n${projectId} ahora tendrá más visibilidad en la comunidad.`);
+      function commentProject(projectId) {
+        const comment = prompt(
+          `¿Qué opinas sobre ${projectId}?\n\nEscribe tu comentario:`
+        );
+        if (comment) {
+          alert(
+            `¡Comentario agregado! 💬\n\n"${comment}"\n\nTu feedback ayuda a mejorar los proyectos de la comunidad.`
+          );
         }
+      }
 
-        function shareSuggestion(suggestionId) {
-            alert(`¡Sugerencia compartida! 📢\n\nAyudas a que más estudiantes apoyen esta propuesta.`);
+      function commentSuggestion(suggestionId) {
+        const comment = prompt(`Comparte tu opinión sobre ${suggestionId}:`);
+        if (comment) {
+          alert(`¡Comentario agregado a la discusión! 💭\n\n"${comment}"`);
         }
+      }
 
-        function shareProblem(problemId) {
-            alert(`¡Problemática compartida! 📣\n\nMás estudiantes podrán contribuir con soluciones.`);
-        }
+      function sharePost(postId) {
+        alert(
+          `Compartiendo ${postId}...\n\n¡Ayuda a que más estudiantes vean este contenido!`
+        );
+      }
 
-        // Funciones específicas para sugerencias
-        function supportSuggestion(suggestionId) {
-            alert(`¡Apoyas ${suggestionId}! 👍\n\nTu voto ayuda a que la administración considere esta propuesta.`);
-        }
+      function shareProject(projectId) {
+        alert(
+          `¡Proyecto compartido! 🚀\n\n${projectId} ahora tendrá más visibilidad en la comunidad.`
+        );
+      }
 
-        // Funciones específicas para problemáticas
-        function proposeSolution(problemId) {
-            alert(`¡Excelente iniciativa! 💡\n\nAquí podrás:\n• Describir tu solución detalladamente\n• Agregar diagramas o imágenes\n• Explicar los beneficios\n• Colaborar con otros estudiantes\n\nTu contribución puede hacer la diferencia en el instituto.`);
-        }
+      function shareSuggestion(suggestionId) {
+        alert(
+          `¡Sugerencia compartida! 📢\n\nAyudas a que más estudiantes apoyen esta propuesta.`
+        );
+      }
 
-        function viewSolutions(problemId) {
-            alert(`Viendo soluciones propuestas para ${problemId}...\n\nPodrás:\n• Ver todas las propuestas\n• Votar por las mejores\n• Comentar y mejorar ideas\n• Colaborar en soluciones\n\nEsta funcionalidad se desarrollará próximamente.`);
-        }
+      function shareProblem(problemId) {
+        alert(
+          `¡Problemática compartida! 📣\n\nMás estudiantes podrán contribuir con soluciones.`
+        );
+      }
 
-        function followProblem(problemId) {
-            alert(`¡Ahora sigues ${problemId}! 🔔\n\nRecibirás notificaciones sobre:\n• Nuevas soluciones propuestas\n• Actualizaciones del estado\n• Implementación de soluciones`);
-        }
+      // Funciones específicas para sugerencias
+      function supportSuggestion(suggestionId) {
+        alert(
+          `¡Apoyas ${suggestionId}! 👍\n\nTu voto ayuda a que la administración considere esta propuesta.`
+        );
+      }
 
-        function viewProblem(problemId) {
-            alert(`Abriendo vista detallada de ${problemId}...\n\nVerás información completa sobre el problema y cómo puedes ayudar.`);
-        }
+      // Funciones específicas para problemáticas
+      function proposeSolution(problemId) {
+        alert(
+          `¡Excelente iniciativa! 💡\n\nAquí podrás:\n• Describir tu solución detalladamente\n• Agregar diagramas o imágenes\n• Explicar los beneficios\n• Colaborar con otros estudiantes\n\nTu contribución puede hacer la diferencia en el instituto.`
+        );
+      }
 
-        // Función para cargar más posts
-        function loadMorePosts() {
-            alert(`Cargando más contenido...\n\n¡Siempre hay algo nuevo en aportAR! 🔄`);
-        }
+      function viewSolutions(problemId) {
+        alert(
+          `Viendo soluciones propuestas para ${problemId}...\n\nPodrás:\n• Ver todas las propuestas\n• Votar por las mejores\n• Comentar y mejorar ideas\n• Colaborar en soluciones\n\nEsta funcionalidad se desarrollará próximamente.`
+        );
+      }
 
-        // Manejar envío del formulario de creación
-        document.getElementById('createPostForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const category = document.getElementById('postCategory').value;
-            const title = document.getElementById('postTitle').value;
-            const content = document.getElementById('postContent').value;
-            
-            if (category && title && content) {
-                alert(`¡Post creado exitosamente! 🎉\n\nTítulo: "${title}"\nCategoría: ${category}\n\n¡Tu contribución ya está disponible para la comunidad!`);
-                
-                // Cerrar modal
-                const modal = bootstrap.Modal.getInstance(document.getElementById('createPostModal'));
-                modal.hide();
-                
-                // Limpiar formulario
-                document.getElementById('createPostForm').reset();
-            }
+      function followProblem(problemId) {
+        alert(
+          `¡Ahora sigues ${problemId}! 🔔\n\nRecibirás notificaciones sobre:\n• Nuevas soluciones propuestas\n• Actualizaciones del estado\n• Implementación de soluciones`
+        );
+      }
+
+      function viewProblem(problemId) {
+        alert(
+          `Abriendo vista detallada de ${problemId}...\n\nVerás información completa sobre el problema y cómo puedes ayudar.`
+        );
+      }
+
+      // Función para cargar más posts
+      function loadMorePosts() {
+        alert(
+          `Cargando más contenido...\n\n¡Siempre hay algo nuevo en aportAR! 🔄`
+        );
+      }
+
+      // Manejar envío del formulario de creación
+      document
+        .getElementById("createPostForm")
+        ?.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const category = document.getElementById("postCategory").value;
+          const title = document.getElementById("postTitle").value;
+          const content = document.getElementById("postContent").value;
+
+          if (category && title && content) {
+            alert(
+              `¡Post creado exitosamente! 🎉\n\nTítulo: "${title}"\nCategoría: ${category}\n\n¡Tu contribución ya está disponible para la comunidad!`
+            );
+
+            // Cerrar modal
+            const modal = bootstrap.Modal.getInstance(
+              document.getElementById("createPostModal")
+            );
+            modal.hide();
+
+            // Limpiar formulario
+            document.getElementById("createPostForm").reset();
+          }
         });
     </script>
-</body>
+  </body>
 </html>
