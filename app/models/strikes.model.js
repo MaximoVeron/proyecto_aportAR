@@ -1,31 +1,23 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../config/database.js";
+import { model, Schema } from "mongoose";
 
-const strikeModel = sequelize.define("Strike", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
+const StrikeSchema = new Schema(
+  {
+    report_user: {
+      type: Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    publication_user: {
+      type: Types.ObjectId,
+      ref: "Publications",
+      required: true,
+      unique: true,
+    },
+    reason: {
+      type: String,
+      required: true,
+    },
   },
-  id_publication: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  id_user: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  reason: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-}, {
-  tableName: "strikes",
-  timestamps: false,
-});
+);
 
-export default strikeModel;
+export const StrikeMooel = model("Strikes", StrikeSchema);

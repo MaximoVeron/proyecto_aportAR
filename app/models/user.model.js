@@ -1,40 +1,31 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../config/database.js";
-import TaskModel from "./task.model.js";
+import { model, Schema, Types } from "mongoose";
 
-const UserModel = sequelize.define(
-  "user",
+const UserSchema = new Schema(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    nombre: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
-    apellido: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
+    username: {
+      type: String,
+      required: true,
+      unique: true,
     },
     email: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
+      type: String,
+      required: true,
       unique: true,
     },
     password: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
+      type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin","mod","profesor"],
+      default: "user",
+    },
+    is_deleted: {
+      type: Boolean,
+      default: false,
     },
   },
-  {
-    timestamps: false, 
-    tableName: "users",
-  }
 );
 
-UserModel.hasMany(TaskModel, { foreignKey: "user_id", as: "tasks" });
-TaskModel.belongsTo(UserModel, { foreignKey: "user_id", as: "user" });
-
-export default UserModel;
+export const UserModel = model("User", UserSchema);

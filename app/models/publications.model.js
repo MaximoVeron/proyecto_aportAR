@@ -1,39 +1,25 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../config/database.js";
+import { model, Schema, Types } from "mongoose";
 
-const publicationModel = sequelize.define("Publication", {
-  id_publication: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
+const PublicationSchema = new Schema(
+  {
+    author: {
+      type: Types.ObjectId, 
+      ref: "User",
+      required: true,
+    },
+    content: {
+      type: String,
+      required: false,
+    },
+    publication_image: {
+      type: String,
+      required:false
+    },
+    publication_type:{
+      type: String,
+      enum: ["proyecto", "sugerencia"],
+    }
   },
-  id_user: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  title: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-  },
-  content: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  type: {
-    type: DataTypes.ENUM("post", "problematic"),
-    defaultValue: "post",
-  },
-  id_category: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-}, {
-  tableName: "publications",
-  timestamps: false,
-});
+);
 
-export default publicationModel;
+export const PublicationModel = model("Publication", PublicationSchema);

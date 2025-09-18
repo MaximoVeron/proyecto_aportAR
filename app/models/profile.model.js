@@ -1,48 +1,28 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../config/database.js";
-import UserModel from "./user.model.js";
+import { model, Schema, Types } from "mongoose";
 
-const profileModel = sequelize.define(
-  "profile",
+const UserSchema = new Schema(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+    first_name: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    carrera: {
-      type: DataTypes.STRING(100),
-      allowNull: true,
+    last_name: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    año_cursado: {
-      type: DataTypes.STRING(100),
-      allowNull: true,
+    biography: {
+      type: String,
+      required: false,
     },
-    bio: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    foto: {
-      type: DataTypes.BLOB("long"),
-      allowNull: false,
-    },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: UserModel,
-        key: "id",
-      },
-    },
+    owner: {
+      type: Types.ObjectId,
+      ref: "User",
+      required: true,
+      unique: true,
+    }
   },
-  {
-    tableName: "profiles",
-    timestamps: true,
-  }
 );
 
-// Relación uno a uno
-UserModel.hasOne(profileModel, { foreignKey: "user_id", as: "profile" });
-profileModel.belongsTo(UserModel, { foreignKey: "user_id", as: "user" });
-
-export default profileModel;
+export const ProfileModel = model("Profile", ProfileSchema);
