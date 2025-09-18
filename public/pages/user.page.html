@@ -89,7 +89,7 @@
                 role="button"
                 data-bs-toggle="dropdown"
               >
-                <i class="fas fa-user me-1"></i> María González
+                <i class="fas fa-user me-1"></i> Veron Maximo
               </a>
               <ul class="dropdown-menu">
                 <li>
@@ -121,7 +121,7 @@
     </nav>
 
     <!-- Contenido Principal -->
-    <main class="container-fluid" style="padding-top: 80px">
+    <main class="container-fluid" style="padding-top: 30px">
       <!-- Feed Home (Perfil + Actividad Reciente) -->
       <div id="feed-home" class="feed-content">
         <div class="row">
@@ -140,32 +140,8 @@
                   <div class="user-avatar mx-auto mb-3">
                     <i class="fas fa-user"></i>
                   </div>
-                  <h5 class="outfit-semibold">María González</h5>
-                  <p class="text-muted">2do año - Administración</p>
-                </div>
-
-                <!-- Estadísticas del usuario -->
-                <div class="user-stats">
-                  <div class="row text-center">
-                    <div class="col-4">
-                      <div class="stat-item">
-                        <div class="stat-number">8</div>
-                        <div class="stat-label">Posts</div>
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="stat-item">
-                        <div class="stat-number">24</div>
-                        <div class="stat-label">Comentarios</div>
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="stat-item">
-                        <div class="stat-number">156</div>
-                        <div class="stat-label">Likes</div>
-                      </div>
-                    </div>
-                  </div>
+                  <h5 class="outfit-semibold">Veron Maximo</h5>
+                  <p class="text-muted">1er año - Software</p>
                 </div>
 
                 <hr />
@@ -176,14 +152,6 @@
                     <li class="mb-2">
                       <i class="fas fa-calendar text-success me-2"></i>
                       <strong>Miembro desde:</strong> Marzo 2025
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-clock text-success me-2"></i>
-                      <strong>Última actividad:</strong> Hace 10 min
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-medal text-success me-2"></i>
-                      <strong>Nivel:</strong> Contribuidor Activo
                     </li>
                   </ul>
                 </div>
@@ -206,8 +174,8 @@
             <div class="card info-card h-100">
               <div class="card-header text-white bg-greendegrade">
                 <h5 class="outfit-semibold mb-0">
-                  <i class="fas fa-rss me-2"></i>
-                  Feed Principal
+                  <i class="fas fa-home me-2"></i>
+                  Actividad Reciente
                 </h5>
               </div>
               <div class="card-body">
@@ -234,26 +202,12 @@
                         Estoy desarrollando un sistema web para digitalizar el
                         préstamo de libros. ¿Qué opinan de la interfaz?
                       </p>
-                      <div class="post-actions">
-                        <button
-                          class="btn btn-sm btn-outline-primary me-2"
-                          onclick="likePost('post1')"
-                        >
-                          <i class="fas fa-heart me-1"></i>Me gusta (12)
-                        </button>
-                        <button
-                          class="btn btn-sm btn-outline-secondary me-2"
-                          onclick="openComments('post1')"
-                        >
-                          <i class="fas fa-comment me-1"></i>Comentarios (5)
-                        </button>
-                        <button
-                          class="btn btn-sm btn-outline-info"
-                          onclick="sharePost('post1')"
-                        >
-                          <i class="fas fa-share me-1"></i>Compartir
-                        </button>
-                      </div>
+                      <button
+                        class="btn btn-sm btn-outline-primary me-2"
+                        onclick="openComments('sugerencia2')"
+                      >
+                        <i class="fas fa-comment me-1"></i>Comentarios
+                      </button>
                     </div>
                   </div>
 
@@ -268,7 +222,7 @@
                       <div>
                         <strong>Ana Rodríguez</strong>
                         <span class="text-muted">publicó en</span>
-                        <span class="badge bg-info">Sugerencias</span>
+                        <span class="badge bg-success">Sugerencias</span>
                         <br /><small class="text-muted">Hace 4 horas</small>
                       </div>
                     </div>
@@ -278,26 +232,12 @@
                         ¿Alguien más tiene problemas con la velocidad del WiFi?
                         Propongo crear una petición para mejorarlo.
                       </p>
-                      <div class="post-actions">
-                        <button
-                          class="btn btn-sm btn-outline-primary me-2"
-                          onclick="likePost('post2')"
-                        >
-                          <i class="fas fa-thumbs-up me-1"></i>Apoyo (34)
-                        </button>
-                        <button
-                          class="btn btn-sm btn-outline-secondary me-2"
-                          onclick="openComments('post2')"
-                        >
-                          <i class="fas fa-comment me-1"></i>Comentarios (18)
-                        </button>
-                        <button
-                          class="btn btn-sm btn-outline-warning"
-                          onclick="supportSuggestion('post2')"
-                        >
-                          <i class="fas fa-hand-paper me-1"></i>Unirme
-                        </button>
-                      </div>
+                      <button
+                        class="btn btn-sm btn-outline-primary me-2"
+                        onclick="openComments('sugerencia2')"
+                      >
+                        <i class="fas fa-comment me-1"></i>Comentarios
+                      </button>
                     </div>
                   </div>
 
@@ -312,7 +252,7 @@
                       <div>
                         <strong>Dirección IPF</strong>
                         <span class="text-muted">publicó en</span>
-                        <span class="badge bg-danger">Problemáticas</span>
+                        <span class="badge bg-success">Problemáticas</span>
                         <br /><small class="text-muted">Hace 1 día</small>
                       </div>
                     </div>
@@ -324,27 +264,12 @@
                         Necesitamos sus ideas para reducir el consumo eléctrico.
                         ¡Sus soluciones pueden marcar la diferencia!
                       </p>
-                      <div class="post-actions">
-                        <button
-                          class="btn btn-sm btn-outline-success me-2"
-                          onclick="proposeSolution('problema1')"
-                        >
-                          <i class="fas fa-lightbulb me-1"></i>Proponer Solución
-                        </button>
-                        <button
-                          class="btn btn-sm btn-outline-secondary me-2"
-                          onclick="openComments('problema1')"
-                        >
-                          <i class="fas fa-comments me-1"></i>Ver Soluciones
-                          (12)
-                        </button>
-                        <button
-                          class="btn btn-sm btn-outline-info"
-                          onclick="viewProblem('problema1')"
-                        >
-                          <i class="fas fa-eye me-1"></i>Ver Detalles
-                        </button>
-                      </div>
+                      <button
+                        class="btn btn-sm btn-outline-primary me-2"
+                        onclick="openComments('sugerencia2')"
+                      >
+                        <i class="fas fa-comment me-1"></i>Comentarios
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -365,7 +290,6 @@
       </div>
 
       <!-- Feed Proyectos (Desde perspectiva de usuario) -->
-      <!-- Feeds adicionales (placeholder por ahora) -->
       <div id="feed-proyectos" class="feed-content d-none">
         <div class="row">
           <div class="col-12 mb-4">
@@ -373,7 +297,7 @@
               <div class="card-header bg-greendegrade bg-success text-white">
                 <h5 class="outfit-semibold mb-0">
                   <i class="fas fa-project-diagram me-2"></i>
-                  Proyectos
+                  Proyectos Estudiantiles
                 </h5>
               </div>
             </div>
@@ -414,18 +338,13 @@
                     </div>
                     <div>
                       <small class="fw-bold">Maximo Veron</small>
-                      <br /><small class="text-muted"
-                        >4to año - Informática</small
-                      >
+                      <br /><small class="text-muted">1er año - Software</small>
                     </div>
                   </div>
                 </div>
                 <div class="project-stats mb-3">
                   <span class="badge bg-light text-dark me-2">
                     <i class="fas fa-comment me-1"></i>5 comentarios
-                  </span>
-                  <span class="badge bg-light text-dark">
-                    <i class="fas fa-heart me-1"></i>12 likes
                   </span>
                 </div>
               </div>
@@ -471,18 +390,13 @@
                     </div>
                     <div>
                       <small class="fw-bold">Ana García</small>
-                      <br /><small class="text-muted"
-                        >3er año - Informática</small
-                      >
+                      <br /><small class="text-muted">2do año - Software</small>
                     </div>
                   </div>
                 </div>
                 <div class="project-stats mb-3">
                   <span class="badge bg-light text-dark me-2">
                     <i class="fas fa-comment me-1"></i>8 comentarios
-                  </span>
-                  <span class="badge bg-light text-dark">
-                    <i class="fas fa-heart me-1"></i>15 likes
                   </span>
                 </div>
               </div>
@@ -532,7 +446,7 @@
                     <div>
                       <small class="fw-bold">Carlos López</small>
                       <br /><small class="text-muted"
-                        >4to año - Electrónica</small
+                        >4to año - Mecatronica</small
                       >
                     </div>
                   </div>
@@ -541,19 +455,16 @@
                   <span class="badge bg-light text-dark me-2">
                     <i class="fas fa-comment me-1"></i>12 comentarios
                   </span>
-                  <span class="badge bg-light text-dark">
-                    <i class="fas fa-heart me-1"></i>20 likes
-                  </span>
                 </div>
-              </div>
-              <div class="card-footer bg-light">
-                <div class="moderation-actions-quick">
-                  <button
-                    class="btn btn-sm btn-outline-primary me-2"
-                    onclick="openComments('proyecto3')"
-                  >
-                    <i class="fas fa-comment me-1"></i>Ver Comentarios
-                  </button>
+                <div class="card-footer bg-light">
+                  <div class="moderation-actions-quick">
+                    <button
+                      class="btn btn-sm btn-outline-primary me-2"
+                      onclick="openComments('proyecto2')"
+                    >
+                      <i class="fas fa-comment me-1"></i>Comentarios
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -569,7 +480,7 @@
               <div class="card-header bg-greendegrade text-white">
                 <h5 class="outfit-semibold mb-0">
                   <i class="fas fa-lightbulb me-2"></i>
-                  Sugerencias
+                  Sugerencias de la Comunidad
                 </h5>
               </div>
             </div>
@@ -600,10 +511,6 @@
                     ocupadas. Mi sugerencia es habilitar el aula 201 como sala
                     de estudio durante los recreos y después de clases.
                   </p>
-                  <p class="card-text small text-muted">
-                    También sería útil tener más enchufes para las laptops y
-                    mejorar la iluminación en la zona de lectura.
-                  </p>
                 </div>
 
                 <div class="suggestion-author mb-3">
@@ -612,10 +519,8 @@
                       <i class="fas fa-user"></i>
                     </div>
                     <div>
-                      <small class="fw-bold">María González</small>
-                      <br /><small class="text-muted"
-                        >2do año - Administración</small
-                      >
+                      <small class="fw-bold">Veron Maximo</small>
+                      <br /><small class="text-muted">1er año - Software</small>
                     </div>
                   </div>
                 </div>
@@ -623,9 +528,6 @@
                 <div class="suggestion-stats mb-3">
                   <span class="badge bg-light text-dark me-2">
                     <i class="fas fa-comment me-1"></i>7 comentarios
-                  </span>
-                  <span class="badge bg-light text-dark me-2">
-                    <i class="fas fa-thumbs-up me-1"></i>18 apoyos
                   </span>
                 </div>
               </div>
@@ -664,10 +566,6 @@
                     comprar algo para merendar. Sugiero extender el horario
                     hasta las 16:30 al menos.
                   </p>
-                  <p class="card-text small text-muted">
-                    Además, estaría bueno que agreguen más opciones saludables
-                    como frutas o yogur, no solo comida chatarra.
-                  </p>
                 </div>
 
                 <div class="suggestion-author mb-3">
@@ -678,7 +576,7 @@
                     <div>
                       <small class="fw-bold">Pedro Martínez</small>
                       <br /><small class="text-muted"
-                        >3er año - Electrónica</small
+                        >3er año - Mecatronica</small
                       >
                     </div>
                   </div>
@@ -687,9 +585,6 @@
                 <div class="suggestion-stats mb-3">
                   <span class="badge bg-light text-dark me-2">
                     <i class="fas fa-comment me-1"></i>12 comentarios
-                  </span>
-                  <span class="badge bg-light text-dark me-2">
-                    <i class="fas fa-thumbs-up me-1"></i>31 apoyos
                   </span>
                 </div>
               </div>
@@ -728,10 +623,6 @@
                     estudiantes de todas las carreras. Hoy en día la
                     programación es útil en cualquier campo.
                   </p>
-                  <p class="card-text small text-muted">
-                    Podrían ser los sábados por la mañana, 2 horas por semana.
-                    Estoy seguro que muchos estudiantes se inscribirían.
-                  </p>
                 </div>
 
                 <div class="suggestion-author mb-3">
@@ -741,9 +632,7 @@
                     </div>
                     <div>
                       <small class="fw-bold">Luis Fernández</small>
-                      <br /><small class="text-muted"
-                        >4to año - Informática</small
-                      >
+                      <br /><small class="text-muted">2do año - Software</small>
                     </div>
                   </div>
                 </div>
@@ -751,9 +640,6 @@
                 <div class="suggestion-stats mb-3">
                   <span class="badge bg-light text-dark me-2">
                     <i class="fas fa-comment me-1"></i>15 comentarios
-                  </span>
-                  <span class="badge bg-light text-dark me-2">
-                    <i class="fas fa-thumbs-up me-1"></i>42 apoyos
                   </span>
                 </div>
               </div>
@@ -792,10 +678,6 @@
                     internet o asistir a clases virtuales cuando hay problemas
                     técnicos.
                   </p>
-                  <p class="card-text small text-muted">
-                    Creo que deberían mejorar la infraestructura de red y tener
-                    más puntos de acceso, especialmente en los laboratorios.
-                  </p>
                 </div>
 
                 <div class="suggestion-author mb-3">
@@ -805,9 +687,7 @@
                     </div>
                     <div>
                       <small class="fw-bold">Ana Rodríguez</small>
-                      <br /><small class="text-muted"
-                        >1er año - Informática</small
-                      >
+                      <br /><small class="text-muted">1er año - Software</small>
                     </div>
                   </div>
                 </div>
@@ -815,9 +695,6 @@
                 <div class="suggestion-stats mb-3">
                   <span class="badge bg-light text-dark me-2">
                     <i class="fas fa-comment me-1"></i>23 comentarios
-                  </span>
-                  <span class="badge bg-light text-dark me-2">
-                    <i class="fas fa-thumbs-up me-1"></i>56 apoyos
                   </span>
                 </div>
               </div>
@@ -874,9 +751,6 @@
                       </small>
                     </div>
                   </div>
-                  <div class="problem-status">
-                    <span class="badge bg-warning">🔄 Buscando Soluciones</span>
-                  </div>
                 </div>
               </div>
               <div class="card-body">
@@ -890,42 +764,9 @@
                   </p>
                   <p class="card-text">
                     <strong>Contexto:</strong> Los picos de consumo se registran
-                    principalmente en laboratorios de informática (60%),
-                    sistemas de climatización (25%) y iluminación general (15%).
+                    principalmente en laboratorios de quimica (60%), sistemas de
+                    climatización (25%) y iluminación general (15%).
                   </p>
-                  <div class="problem-requirements">
-                    <h6 class="text-success">¿Qué buscamos de ti?</h6>
-                    <ul class="small">
-                      <li>Soluciones prácticas y implementables</li>
-                      <li>Ideas que no requieran gran inversión inicial</li>
-                      <li>
-                        Propuestas que involucren a la comunidad estudiantil
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="problem-stats mb-3">
-                  <div class="row text-center">
-                    <div class="col-3">
-                      <div class="stat-item">
-                        <div class="stat-number text-primary">12</div>
-                        <div class="stat-label">Soluciones</div>
-                      </div>
-                    </div>
-                    <div class="col-3">
-                      <div class="stat-item">
-                        <div class="stat-number text-warning">45</div>
-                        <div class="stat-label">Comentarios</div>
-                      </div>
-                    </div>
-                    <div class="col-3">
-                      <div class="stat-item">
-                        <div class="stat-number text-success">89</div>
-                        <div class="stat-label">Participantes</div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="card-footer bg-light">
@@ -944,12 +785,6 @@
                       onclick="viewSolutions('problema1')"
                     >
                       <i class="fas fa-eye me-1"></i>Ver Soluciones
-                    </button>
-                    <button
-                      class="btn btn-outline-info"
-                      onclick="shareProblem('problema1')"
-                    >
-                      <i class="fas fa-share me-1"></i>Compartir
                     </button>
                   </div>
                 </div>
@@ -1105,22 +940,6 @@
         font-size: 0.8rem;
       }
 
-      /* Estadísticas del usuario */
-      .user-stats .stat-item {
-        padding: 0.5rem;
-      }
-
-      .user-stats .stat-number {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #2e7b21;
-      }
-
-      .user-stats .stat-label {
-        font-size: 0.8rem;
-        color: #666;
-      }
-
       /* Posts del feed */
       .feed-post {
         border-left: 3px solid #2e7b21;
@@ -1161,13 +980,143 @@
         transform: translateY(-1px);
       }
 
-      /* Mejoras para problemáticas desde perspectiva de usuario */
+      /* Estilos para tarjetas de proyectos */
+      .project-card {
+        border: 1px solid rgba(46, 123, 33, 0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      .project-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(46, 123, 33, 0.15);
+        border-color: rgba(46, 123, 33, 0.3);
+      }
+
+      .project-image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .placeholder-image {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      }
+
+      .project-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
+      .author-avatar {
+        width: 35px;
+        height: 35px;
+        background: linear-gradient(135deg, #2e7b21, #1a4d14);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.9rem;
+      }
+
+      .project-stats .badge {
+        font-size: 0.75rem;
+      }
+
+      .moderation-actions-quick {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .moderation-actions-quick .btn-group .btn {
+        padding: 0.25rem 0.5rem;
+      }
+
+      /* Estilos para tarjetas de sugerencias */
+      .suggestion-card {
+        border: 1px solid rgba(46, 123, 33, 0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      .suggestion-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(46, 123, 33, 0.15);
+        border-color: rgba(46, 123, 33, 0.3);
+      }
+
+      .suggestion-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding-bottom: 0.5rem;
+      }
+
+      .suggestion-topic .badge {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+      }
+
+      .suggestion-content {
+        line-height: 1.6;
+      }
+
+      .suggestion-content p {
+        margin-bottom: 0.8rem;
+      }
+
+      .suggestion-stats .badge {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+      }
+
+      /* Estilos para problemáticas */
+      .problem-card {
+        transition: all 0.3s ease;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+      }
+
+      .problem-header {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-bottom: 1px solid rgba(220, 53, 69, 0.1);
+      }
+
+      .problem-description {
+        line-height: 1.6;
+      }
+
+      .problem-description p {
+        margin-bottom: 1rem;
+      }
+
       .problem-requirements {
         background: rgba(46, 123, 33, 0.05);
         border-radius: 8px;
         padding: 1rem;
         border-left: 4px solid #2e7b21;
         margin-top: 1rem;
+      }
+
+      /* Estilos específicos para navegación de usuario */
+      .navbar-nav .nav-link.active {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        font-weight: 600;
+      }
+
+      /* Modal de creación */
+      .modal-header.bg-success {
+        background: linear-gradient(135deg, #2e7b21, #1a4d14) !important;
       }
 
       /* Responsive para usuario */
@@ -1195,18 +1144,16 @@
           flex: 1;
           min-width: 120px;
         }
-      }
 
-      /* Estilos específicos para navegación de usuario */
-      .navbar-nav .nav-link.active {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 5px;
-        font-weight: 600;
-      }
+        .moderation-actions-quick {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
 
-      /* Modal de creación */
-      .modal-header.bg-success {
-        background: linear-gradient(135deg, #2e7b21, #1a4d14) !important;
+        .moderation-actions-quick .btn-group {
+          width: 100%;
+          justify-content: center;
+        }
       }
     </style>
 

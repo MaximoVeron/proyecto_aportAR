@@ -1,61 +1,75 @@
 import { PublicationModel } from "../models/publications.model.js";
 
-export const createProfile = async (req, res) => {
+// Crear una nueva publicación
+export const createPublication = async (req, res) => {
   try {
-    const newProfile = new ProfileModel(req.body);
-    await newProfile.save();
-    return res.status(201).json(newProfile);
+    const newPublication = new PublicationModel(req.body); // usar el modelo correcto
+    await newPublication.save(); // guardar la nueva publicación
+    return res.status(201).json(newPublication); // devolver la publicación creada
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ msg: "Error al crear el perfil" });
+    return res.status(500).json({ msg: "Error al crear la publicación" });
   }
 };
 
-export const getProfiles = async (req, res) => {
+// Obtener todas las publicaciones activas
+export const getPublications = async (req, res) => {
   try {
-    const profiles = await ProfileModel.find();
-    return res.status(200).json(profiles);
+    const publications = await PublicationModel.find({ is_deleted: false }); // solo activas
+    return res.status(200).json(publications);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ msg: "Error al obtener los perfiles" });
+    return res.status(500).json({ msg: "Error al obtener las publicaciones" });
   }
 };
 
-export const getProfileById = async (req, res) => {
+// Obtener una publicación por ID
+export const getPublicationById = async (req, res) => {
   try {
-    const profile = await ProfileModel.findOne({
+    const publication = await PublicationModel.findOne({
       _id: req.params.id,
       is_deleted: false,
     });
-    return res.status(200).json(profile);
+    if (!publication) {
+      return res.status(404).json({ msg: "Publicación no encontrada" });
+    }
+    return res.status(200).json(publication);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ msg: "Error al obtener el perfil" });
+    return res.status(500).json({ msg: "Error al obtener la publicación" });
   }
 };
 
-export const updateProfile = async (req, res) => {
+// Actualizar una publicación
+export const updatePublication = async (req, res) => {
   try {
-    const updatedProfile = await ProfileModel.findOneAndUpdate(
+    const updatedPublication = await PublicationModel.findOneAndUpdate(
       { _id: req.params.id, is_deleted: false },
       req.body,
       { new: true }
     );
-    return res.status(200).json(updatedProfile);
+    if (!updatedPublication) {
+      return res
+        .status(404)
+        .json({ msg: "Publicación no encontrada o eliminada" });
+    }
+    return res.status(200).json(updatedPublication);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ msg: "Error al actualizar el perfil" });
+    return res.status(500).json({ msg: "Error al actualizar la publicación" });
   }
 };
 
-export const deleteProfile = async (req, res) => {
+export const deletePublication = async (req, res) => {
   try {
-    await ProfileModel.findByIdAndUpdate(req.params.id, {
-      is_deleted: true,
-    });
-    return res.status(200).json({ msg: "Perfil eliminado correctamente" });
+    await PublicationModel.findByIdAndUpdate(
+      req.params.id,
+      { is_deleted: true },
+      { new: true }
+    );
+    return res.status(200).json({ msg: "Publicación eliminada correctamente" });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ msg: "Error al eliminar el perfil" });
+    return res.status(500).json({ msg: "Error al eliminar la publicación" });
   }
 };
