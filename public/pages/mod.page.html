@@ -265,9 +265,6 @@
                                     <i class="fas fa-comment me-1"></i>Ver Comentarios
                                 </button>
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('proyecto1')">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </button>
                                     <button class="btn btn-sm btn-outline-danger" onclick="deletePost('proyecto1')">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -317,9 +314,6 @@
                                     <i class="fas fa-comment me-1"></i>Ver Comentarios
                                 </button>
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('proyecto2')">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </button>
                                     <button class="btn btn-sm btn-outline-danger" onclick="deletePost('proyecto2')">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -369,9 +363,6 @@
                                     <i class="fas fa-comment me-1"></i>Ver Comentarios
                                 </button>
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('proyecto3')">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </button>
                                     <button class="btn btn-sm btn-outline-danger" onclick="deletePost('proyecto3')">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -442,9 +433,6 @@
                                     <i class="fas fa-comment me-1"></i>Ver Comentarios
                                 </button>
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('sugerencia1')">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </button>
                                     <button class="btn btn-sm btn-outline-danger" onclick="deletePost('sugerencia1')">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -496,9 +484,6 @@
                                     <i class="fas fa-comment me-1"></i>Ver Comentarios
                                 </button>
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('sugerencia2')">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </button>
                                     <button class="btn btn-sm btn-outline-danger" onclick="deletePost('sugerencia2')">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -550,9 +535,6 @@
                                     <i class="fas fa-comment me-1"></i>Ver Comentarios
                                 </button>
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('sugerencia3')">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </button>
                                     <button class="btn btn-sm btn-outline-danger" onclick="deletePost('sugerencia3')">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -604,9 +586,6 @@
                                     <i class="fas fa-comment me-1"></i>Ver Comentarios
                                 </button>
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="warnUser('sugerencia4')">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </button>
                                     <button class="btn btn-sm btn-outline-danger" onclick="deletePost('sugerencia4')">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -1080,38 +1059,7 @@
             event.target.classList.add('active');
         }
 
-        // Funciones de moderación para proyectos
-        function openComments(projectId) {
-            alert(`Abriendo comentarios para ${projectId}.\n\nEsta funcionalidad se desarrollará más adelante.`);
-        }
 
-        function warnUser(projectId) {
-            if (confirm(`¿Estás seguro de que quieres enviar una advertencia al autor de ${projectId}?`)) {
-                alert(`Advertencia enviada al autor de ${projectId}.`);
-                // Aquí iría la lógica para enviar la advertencia
-            }
-        }
-
-        function deletePost(projectId) {
-            if (confirm(`¿Estás seguro de que quieres eliminar ${projectId}?\n\nEsta acción no se puede deshacer.`)) {
-                alert(`Post ${projectId} eliminado.`);
-                // Aquí iría la lógica para eliminar el post
-                // Por ahora, podrías ocultar la tarjeta
-                // document.querySelector(`[onclick="deletePost('${projectId}')"]`).closest('.col-lg-6').style.display = 'none';
-            }
-        }
-
-        function reportUser(projectId) {
-            if (confirm(`¿Quieres reportar al autor de ${projectId} a la administración?`)) {
-                alert(`Usuario reportado. El caso ha sido escalado a administración.`);
-                // Aquí iría la lógica para reportar al usuario
-            }
-        }
-
-        // Funciones específicas para problemáticas
-        function viewSolutions(problemId) {
-            alert(`Abriendo sistema de soluciones para ${problemId}.\n\nAquí podrás ver:\n• Todas las soluciones propuestas\n• Hilos de discusión de cada solución\n• Votos y comentarios de la comunidad\n• Herramientas de moderación específicas\n\nEsta funcionalidad se desarrollará próximamente.`);
-        }
     </script>
 </body>
 </html>
