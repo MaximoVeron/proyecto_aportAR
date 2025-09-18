@@ -50,7 +50,7 @@ export const updateProfile = async (req, res) => {
 
 export const deleteProfile = async (req, res) => {
   try {
-    const deletedProfile = await ProfileModel.findByIdAndUpdate(req.params.id, {
+    await ProfileModel.findByIdAndUpdate(req.params.id, {
       is_deleted: true,
     });
     return res.status(200).json({ msg: "Perfil eliminado correctamente" });

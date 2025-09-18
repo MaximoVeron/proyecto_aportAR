@@ -18,4 +18,4 @@ const StrikeSchema = new Schema({
   },
 });
 
-export const StrikeMooel = model("Strikes", StrikeSchema);
+export const StrikeModel = model("Strikes", StrikeSchema);

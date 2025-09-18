@@ -1,6 +1,6 @@
 import { model, Schema, Types } from "mongoose";
 
-const ComentsProblematicSchema = new Schema({
+const CommentsProblematicSchema = new Schema({
   author: {
     type: Types.ObjectId,
     ref: "User",
@@ -17,7 +17,7 @@ const ComentsProblematicSchema = new Schema({
   },
 });
 
-export const ComentProblematicModel = model(
-  "ProblematicComent",
-  ComentsProblematicSchema
+export const CommentProblematicModel = model(
+  "ProblematicComment",
+  CommentsProblematicSchema
 );

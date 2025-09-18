@@ -50,7 +50,7 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    const deleteUser = await UserModel.findByIdAndUpdate(req.params.id, {
+    await UserModel.findByIdAndUpdate(req.params.id, {
       is_deleted: true,
     });
     return res.status(200).json({ msg: "usuario eliminado correctamente" });

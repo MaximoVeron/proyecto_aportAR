@@ -1,6 +1,6 @@
 import { model, Schema, Types } from "mongoose";
 
-const ComentsSchema = new Schema({
+const CommentsSchema = new Schema({
   author: {
     type: Types.ObjectId,
     ref: "User",
@@ -17,4 +17,4 @@ const ComentsSchema = new Schema({
   },
 });
 
-export const ComentsModel = model("Coments", ComentsSchema);
+export const CommentsModel = model("Comments", CommentsSchema);
