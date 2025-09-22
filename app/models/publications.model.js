@@ -25,6 +25,7 @@ const PublicationSchema = new Schema(
       required: true,
     },
     status: {
+      type: String,
       enum: ["in_progress", "resolved"],
       required: false,
     },

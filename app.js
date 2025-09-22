@@ -8,8 +8,13 @@ app.use(express.json());
 const PORT = process.env.PORT;
 app.use("/api", router);
 
-initDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`servidor corriendo en http://localhost:${PORT}`);
+initDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`servidor corriendo en http://localhost:${PORT}👍`);
+    });
+  })
+  .catch((error) => {
+    console.error("Error al iniciar la base de datos", error);
+    process.exit(1);
   });
-});

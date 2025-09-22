@@ -5,7 +5,7 @@ import {
   getPublicationById,
   updatePublication,
   deletePublication,
-} from "../controllers/publications.controller.js";
+} from "../controllers/publication.controller.js";
 
 const publicationRouter = Router();
 
