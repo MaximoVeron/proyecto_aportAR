@@ -1,4 +1,4 @@
-import { UserModel } from "../../../../models/user.model.js";
+import { UserModel } from "../../../models/user.model.js";
 
 export const emailExist = async (email) => {
   const user = await UserModel.findOne({
@@ -7,6 +7,7 @@ export const emailExist = async (email) => {
   if (user) {
     throw new Error("Email already in use");
   }
+  return true;
 };
 
 export const updateEmailExist = async (email, { req }) => {
@@ -16,6 +17,7 @@ export const updateEmailExist = async (email, { req }) => {
   if (user && user.id !== req.params.id) {
     throw new Error("Email already in use");
   }
+  return true;
 };
 
 export const userExist = async (id) => {
@@ -23,4 +25,5 @@ export const userExist = async (id) => {
   if (!user) {
     throw new Error("User not found");
   }
+  return true;
 };
