@@ -10,10 +10,15 @@ const PublicationSchema = new Schema(
     title: {
       type: String,
       required: true,
+      minlength: 5,
+      maxlength: 200,
+      trim: true,
     },
     content: {
       type: String,
       required: false,
+      maxlength: 500,
+      trim: true,
     },
     publication_image: {
       type: String,
@@ -22,6 +27,7 @@ const PublicationSchema = new Schema(
     publication_type: {
       type: String,
       enum: ["proyecto", "sugerencia", "problematica"],
+      default: "sugerencia",
       required: true,
     },
     status: {

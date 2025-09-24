@@ -3,7 +3,7 @@ import { PublicationModel } from "../models/publications.model.js";
 // Crear una nueva publicación
 export const createPublication = async (req, res) => {
   try {
-    const newPublication = new PublicationModel(req.body); // usar el modelo correcto
+    const newPublication = new PublicationModel(req.validatedData); // usar el modelo correcto
     await newPublication.save(); // guardar la nueva publicación
     return res.status(201).json(newPublication); // devolver la publicación creada
   } catch (error) {
@@ -45,7 +45,7 @@ export const updatePublication = async (req, res) => {
   try {
     const updatedPublication = await PublicationModel.findOneAndUpdate(
       { _id: req.params.id, is_deleted: false },
-      req.body,
+      req.validatedData,
       { new: true }
     );
     if (!updatedPublication) {

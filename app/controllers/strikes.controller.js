@@ -2,7 +2,7 @@ import { StrikeModel } from "../models/strikes.model.js";
 
 export const createStrike = async (req, res) => {
   try {
-    const newStrike = new StrikeModel(req.body);
+    const newStrike = new StrikeModel(req.validatedData);
     await newStrike.save();
     return res.status(201).json(newStrike);
   } catch (error) {
@@ -38,7 +38,7 @@ export const updateStrike = async (req, res) => {
   try {
     const updatedStrike = await StrikeModel.findOneAndUpdate(
       { _id: req.params.id, is_deleted: false },
-      req.body,
+      req.validatedData,
       { new: true }
     );
     return res.status(200).json(updatedStrike);

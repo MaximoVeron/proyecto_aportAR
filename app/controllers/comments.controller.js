@@ -2,7 +2,7 @@ import { CommentsModel } from "../models/comments.model.js";
 
 export const createComment = async (req, res) => {
   try {
-    const newComment = new CommentsModel(req.body);
+    const newComment = new CommentsModel(req.validatedData);
     await newComment.save();
     return res.status(201).json(newComment);
   } catch (error) {
@@ -38,7 +38,7 @@ export const updateComment = async (req, res) => {
   try {
     const updatedComment = await CommentsModel.findOneAndUpdate(
       { _id: req.params.id, is_deleted: false },
-      req.body,
+      req.validatedData,
       { new: true }
     );
     return res.status(200).json(updatedComment);

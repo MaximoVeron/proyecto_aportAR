@@ -43,7 +43,8 @@ export const createPublicationValidation = [
 
 export const updatePublicationValidation = [
   body("author")
-    .isEmpty()
+    .not()
+    .exists()
     .withMessage("No se puede cambiar el autor de la publicación"),
   body("title")
     .optional()

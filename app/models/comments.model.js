@@ -9,11 +9,11 @@ const CommentsSchema = new Schema(
     },
     content: {
       type: String,
-      required: false,
+      required: true,
     },
     publicacion: {
       type: Types.ObjectId,
-      ref: "Publications",
+      ref: "Publication",
       required: true,
     },
   },
