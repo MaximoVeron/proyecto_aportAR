@@ -2,16 +2,12 @@ const formData = document.getElementById("registerForm");
 
 formData.addEventListener("submit", (e) => {
   e.preventDefault(); // Agregar () para ejecutar la función
-
-  // Crear FormData para obtener los datos del formulario
-  const data = new FormData(formData);
-
-  console.log(data);
-  // Convertir FormData a objeto para ver mejor en console.log
-  const formObject = {};
-  for (let [key, value] of data.entries()) {
-    formObject[key] = value;
-  }
-
-  console.log("Datos del formulario:", formObject);
+  const name = e.target[0].value;
+  const apellido = e.target[1].value;
+  const correo = e.target[2].value;
+  const password = e.target[3].value;
+  console.log(name);
+  console.log(apellido);
+  console.log(correo);
+  console.log(password);
 });
