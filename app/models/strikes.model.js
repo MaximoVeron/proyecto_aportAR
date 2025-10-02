@@ -9,13 +9,17 @@ const StrikeSchema = new Schema(
     },
     publication_user: {
       type: Types.ObjectId,
-      ref: "Publications",
+      ref: "Publication",
       required: true,
       unique: true,
     },
     reason: {
       type: String,
       required: true,
+    },
+    is_deleted: {
+      type: Boolean,
+      default: false,
     },
   },
   {

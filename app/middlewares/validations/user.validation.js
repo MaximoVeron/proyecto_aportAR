@@ -116,7 +116,7 @@ export const updateUserValidation = [
     .optional()
     .isString()
     .withMessage("Role must be a string")
-    .isIn(["user", "admin", "mod", "profesor"]) //que pasa ssi el usario no envia el rol? pero si un string
+    .isIn(["user", "admin", "mod", "profesor"])
     .withMessage("Invalid role")
     .trim()
     .escape()

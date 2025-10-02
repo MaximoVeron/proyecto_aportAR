@@ -1,16 +1,5 @@
 import { UserModel } from "../models/user.model.js";
 
-export const createUser = async (req, res) => {
-  try {
-    const newUser = new UserModel(req.validatedData);
-    await newUser.save();
-    return res.status(201).json(newUser);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json("error al crear los usuarios");
-  }
-};
-
 export const getUsers = async (req, res) => {
   try {
     const Users = await UserModel.find({ is_deleted: false });
@@ -23,28 +12,17 @@ export const getUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
   try {
-    const user = await UserModel.findById({
+    const user = await UserModel.findOne({
       _id: req.params.id,
       is_deleted: false,
     });
+    if (!user) {
+      return res.status(404).json({ msg: "Usuario no encontrado" });
+    }
     return res.status(200).json(user);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ msg: "error al obtener el usuario" });
-  }
-};
-
-export const updateUser = async (req, res) => {
-  try {
-    const updateUser = await UserModel.findByIdAndUpdate(
-      req.params.id,
-      req.validatedData,
-      { new: true }
-    );
-    return res.status(200).json(updateUser);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ msg: "error al actualizar el usuario" });
   }
 };
 

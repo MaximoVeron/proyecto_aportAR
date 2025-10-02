@@ -16,6 +16,10 @@ const CommentsSchema = new Schema(
       ref: "Publication",
       required: true,
     },
+    is_deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     versionKey: false,

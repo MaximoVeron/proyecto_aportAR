@@ -35,6 +35,10 @@ const PublicationSchema = new Schema(
       enum: ["in_progress", "resolved"],
       required: false,
     },
+    is_deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     versionKey: false,

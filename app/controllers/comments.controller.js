@@ -1,8 +1,10 @@
 import { CommentsModel } from "../models/comments.model.js";
+import { matchedData } from "express-validator";
 
 export const createComment = async (req, res) => {
   try {
-    const newComment = new CommentsModel(req.validatedData);
+    const validatedData = matchedData(req);
+    const newComment = new CommentsModel(validatedData);
     await newComment.save();
     return res.status(201).json(newComment);
   } catch (error) {
@@ -13,7 +15,7 @@ export const createComment = async (req, res) => {
 
 export const getComments = async (req, res) => {
   try {
-    const comments = await CommentsModel.find();
+    const comments = await CommentsModel.find({ is_deleted: false });
     return res.status(200).json(comments);
   } catch (error) {
     console.error(error);
@@ -27,6 +29,9 @@ export const getCommentById = async (req, res) => {
       _id: req.params.id,
       is_deleted: false,
     });
+    if (!comment) {
+      return res.status(404).json({ msg: "Comentario no encontrado" });
+    }
     return res.status(200).json(comment);
   } catch (error) {
     console.error(error);
@@ -36,11 +41,15 @@ export const getCommentById = async (req, res) => {
 
 export const updateComment = async (req, res) => {
   try {
+    const validatedData = matchedData(req);
     const updatedComment = await CommentsModel.findOneAndUpdate(
       { _id: req.params.id, is_deleted: false },
-      req.validatedData,
+      validatedData,
       { new: true }
     );
+    if (!updatedComment) {
+      return res.status(404).json({ msg: "Comentario no encontrado" });
+    }
     return res.status(200).json(updatedComment);
   } catch (error) {
     console.error(error);

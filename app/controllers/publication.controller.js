@@ -1,17 +1,18 @@
 import { PublicationModel } from "../models/publications.model.js";
+import { matchedData } from "express-validator";
 
 // Crear una nueva publicación
 export const createPublication = async (req, res) => {
   try {
-    const newPublication = new PublicationModel(req.validatedData); // usar el modelo correcto
-    await newPublication.save(); // guardar la nueva publicación
-    return res.status(201).json(newPublication); // devolver la publicación creada
+    const newPublication = new PublicationModel(req.body);
+    await newPublication.save();
+    return res.status(201).json(newPublication);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ msg: "Error al crear la publicación" });
   }
 };
-
+0;
 // Obtener todas las publicaciones activas
 export const getPublications = async (req, res) => {
   try {
@@ -45,7 +46,6 @@ export const updatePublication = async (req, res) => {
   try {
     const updatedPublication = await PublicationModel.findOneAndUpdate(
       { _id: req.params.id, is_deleted: false },
-      req.validatedData,
       { new: true }
     );
     if (!updatedPublication) {

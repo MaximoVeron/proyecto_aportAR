@@ -6,43 +6,22 @@ import {
   updatePublication,
   deletePublication,
 } from "../controllers/publication.controller.js";
-import {
-  createPublicationValidation,
-  updatePublicationValidation,
-  publicationIdValidation,
-} from "../middlewares/validations/publication.validation.js";
-import { applyValidations } from "../middlewares/applyValidation.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
+import { responsibleMiddleware } from "../middlewares/responsible.middleware.js";
 
 const publicationRouter = Router();
 
-publicationRouter.post(
-  "/publications",
-  applyValidations,
-  createPublicationValidation,
-  createPublication
-);
+publicationRouter.post("/publications", createPublication);
 
-publicationRouter.get("/publications", getPublications);
+publicationRouter.get("/publications", getPublications); // Público - para ver publicaciones
 
-publicationRouter.get(
-  "/publications/:id",
-  publicationIdValidation,
-  applyValidations,
-  getPublicationById
-);
+publicationRouter.get("/publications/:id", getPublicationById); // Público - para ver una publicación
 
-publicationRouter.put(
-  "/publications/:id",
-  publicationIdValidation,
-  updatePublicationValidation,
-  applyValidations,
-  updatePublication
-);
+publicationRouter.put("/publications/:id", authMiddleware, updatePublication);
 
 publicationRouter.delete(
   "/publications/:id",
-  publicationIdValidation,
-  applyValidations,
+  authMiddleware,
   deletePublication
 );
 

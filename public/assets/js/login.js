@@ -1,41 +1,17 @@
-// public/assets/js/login.js
+const formData = document.getElementById("registerForm");
 
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const errorDiv = document.getElementById('loginError');
-    errorDiv.style.display = 'none';
-    
-    try {
-        const res = await fetch('/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-        if (res.ok) {
-            // Redirección según el rol
-            switch (data.role) {
-                case 'admin':
-                    window.location.href = '/public/pages/admin.page.html';
-                    break;
-                case 'docente':
-                    window.location.href = '/public/pages/docentes.page.html';
-                    break;
-                case 'moderador':
-                    window.location.href = '/public/pages/mod.page.html';
-                    break;
-                case 'usuario':
-                default:
-                    window.location.href = '/public/pages/user.page.html';
-            }
-        } else {
-            errorDiv.textContent = data.message || 'Credenciales incorrectas';
-            errorDiv.style.display = 'block';
-        }
-    } catch (err) {
-        errorDiv.textContent = 'Error de conexión con el servidor';
-        errorDiv.style.display = 'block';
-    }
+formData.addEventListener("submit", (e) => {
+  e.preventDefault(); // Agregar () para ejecutar la función
+
+  // Crear FormData para obtener los datos del formulario
+  const data = new FormData(formData);
+
+  console.log(data);
+  // Convertir FormData a objeto para ver mejor en console.log
+  const formObject = {};
+  for (let [key, value] of data.entries()) {
+    formObject[key] = value;
+  }
+
+  console.log("Datos del formulario:", formObject);
 });
