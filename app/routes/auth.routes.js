@@ -13,6 +13,6 @@ authRouter.post("/auth/register", registerUser);
 authRouter.post("/auth/login", loginUser);
 authRouter.post("/auth/logout", logout);
 authRouter.get("/auth/profile/my", authMiddleware, getProfile);
-authRouter.put("/auth/profile", updateProfile);
+authRouter.put("/auth/profile", authMiddleware, updateProfile);
 
 export default authRouter;

@@ -70,13 +70,15 @@ export const logout = (req, res) => {
 
 // GET /api/auth/profile: Obtener perfil del usuario autenticado. (usuario autenticado)
 export const getProfile = async (req, res) => {
+  const userId = req.user.id;
   try {
-    const userId = req.user.id;
     const user = await UserModel.findById(userId);
-    return res.status(200).json(user.profile);
+    return res.status(200).json({ ok: true, user: user.profile });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Error interno del servidor" });
+    return res
+      .status(500)
+      .json({ ok: false, message: "Error interno del servidor" });
   }
 };
 
