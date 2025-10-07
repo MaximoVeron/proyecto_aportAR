@@ -55,9 +55,11 @@ export const loginUser = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    return res.json({ message: "Login exitoso" });
+    return res.json({ ok: true, message: "Login exitoso" });
   } catch (error) {
-    return res.status(500).json({ message: "Error interno del servidor" });
+    return res
+      .status(500)
+      .json({ ok: false, message: "Error interno del servidor" });
   }
 };
 
