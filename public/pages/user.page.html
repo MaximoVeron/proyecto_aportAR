@@ -23,6 +23,7 @@
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
       crossorigin="anonymous"
     ></script>
+    <script defer src="../../public/assets/js/profile.js"></script>
   </head>
   <body>
     <!-- Navbar de Usuario -->
@@ -89,7 +90,7 @@
                 role="button"
                 data-bs-toggle="dropdown"
               >
-                <i class="fas fa-user me-1"></i> Veron Maximo
+                <i id="userNames" class="fas fa-user me-1"></i> cargando ...
               </a>
               <ul class="dropdown-menu">
                 <li>
@@ -291,19 +292,6 @@
 
       <!-- Feed Proyectos (Desde perspectiva de usuario) -->
       <div id="feed-proyectos" class="feed-content d-none">
-        <div class="row">
-          <div class="col-12 mb-4">
-            <div class="card info-card h-100">
-              <div class="card-header bg-greendegrade bg-success text-white">
-                <h5 class="outfit-semibold mb-0">
-                  <i class="fas fa-project-diagram me-2"></i>
-                  Proyectos Estudiantiles
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- Lista de Proyectos -->
         <div class="row">
           <!-- Proyecto 1 - aportAR Website -->
@@ -360,133 +348,11 @@
               </div>
             </div>
           </div>
-
-          <!-- Proyecto 2 -->
-          <div class="col-lg-6 col-xl-4 mb-4">
-            <div class="card project-card h-100">
-              <div class="project-image">
-                <div
-                  class="placeholder-image d-flex align-items-center justify-content-center"
-                >
-                  <i class="fas fa-mobile-alt fa-3x text-muted"></i>
-                </div>
-                <div class="project-badge"></div>
-              </div>
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-start mb-2"
-                >
-                  <h6 class="card-title outfit-semibold">App de Notas IPF</h6>
-                  <small class="text-muted">Hace 5h</small>
-                </div>
-                <p class="card-text small">
-                  Aplicación móvil para que estudiantes puedan tomar notas,
-                  organizar materias y compartir apuntes entre compañeros.
-                </p>
-                <div class="project-author mb-3">
-                  <div class="d-flex align-items-center">
-                    <div class="author-avatar me-2">
-                      <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                      <small class="fw-bold">Ana García</small>
-                      <br /><small class="text-muted">2do año - Software</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="project-stats mb-3">
-                  <span class="badge bg-light text-dark me-2">
-                    <i class="fas fa-comment me-1"></i>8 comentarios
-                  </span>
-                </div>
-              </div>
-              <div class="card-footer bg-light">
-                <div class="moderation-actions-quick">
-                  <button
-                    class="btn btn-sm btn-outline-primary me-2"
-                    onclick="openComments('proyecto2')"
-                  >
-                    <i class="fas fa-comment me-1"></i>Comentarios
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Proyecto 3 -->
-          <div class="col-lg-6 col-xl-4 mb-4">
-            <div class="card project-card h-100">
-              <div class="project-image">
-                <div
-                  class="placeholder-image d-flex align-items-center justify-content-center"
-                >
-                  <i class="fas fa-microchip fa-3x text-muted"></i>
-                </div>
-                <div class="project-badge"></div>
-              </div>
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-start mb-2"
-                >
-                  <h6 class="card-title outfit-semibold">
-                    Sistema de Riego Automatizado
-                  </h6>
-                  <small class="text-muted">Hace 1d</small>
-                </div>
-                <p class="card-text small">
-                  Proyecto de IoT con Arduino para automatizar el riego del
-                  jardín del instituto. Incluye sensores de humedad y control
-                  remoto.
-                </p>
-                <div class="project-author mb-3">
-                  <div class="d-flex align-items-center">
-                    <div class="author-avatar me-2">
-                      <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                      <small class="fw-bold">Carlos López</small>
-                      <br /><small class="text-muted"
-                        >4to año - Mecatronica</small
-                      >
-                    </div>
-                  </div>
-                </div>
-                <div class="project-stats mb-3">
-                  <span class="badge bg-light text-dark me-2">
-                    <i class="fas fa-comment me-1"></i>12 comentarios
-                  </span>
-                </div>
-                <div class="card-footer bg-light">
-                  <div class="moderation-actions-quick">
-                    <button
-                      class="btn btn-sm btn-outline-primary me-2"
-                      onclick="openComments('proyecto2')"
-                    >
-                      <i class="fas fa-comment me-1"></i>Comentarios
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
       <!-- Feed Sugerencias (Desde perspectiva de usuario) -->
       <div id="feed-sugerencias" class="feed-content d-none">
-        <div class="row">
-          <div class="col-12 mb-4">
-            <div class="card info-card">
-              <div class="card-header bg-greendegrade text-white">
-                <h5 class="outfit-semibold mb-0">
-                  <i class="fas fa-lightbulb me-2"></i>
-                  Sugerencias de la Comunidad
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- Lista de Sugerencias -->
         <div class="row">
           <!-- Sugerencia 1 -->
@@ -503,7 +369,6 @@
                     <small class="text-muted">Hace 1h</small>
                   </div>
                 </div>
-
                 <div class="suggestion-content mb-3">
                   <p class="card-text">
                     Creo que la biblioteca necesita más espacios de estudio
@@ -543,194 +408,11 @@
               </div>
             </div>
           </div>
-
-          <!-- Sugerencia 2 -->
-          <div class="col-lg-6 mb-4">
-            <div class="card suggestion-card h-100">
-              <div class="card-body">
-                <div class="suggestion-header mb-3">
-                  <div class="d-flex justify-content-between align-items-start">
-                    <div class="suggestion-topic">
-                      <h6 class="card-title outfit-semibold">
-                        Horarios del Buffet
-                      </h6>
-                    </div>
-                    <small class="text-muted">Hace 3h</small>
-                  </div>
-                </div>
-
-                <div class="suggestion-content mb-3">
-                  <p class="card-text">
-                    El buffet cierra muy temprano (15:30) y muchos estudiantes
-                    que tenemos clases hasta las 16:00 nos quedamos sin poder
-                    comprar algo para merendar. Sugiero extender el horario
-                    hasta las 16:30 al menos.
-                  </p>
-                </div>
-
-                <div class="suggestion-author mb-3">
-                  <div class="d-flex align-items-center">
-                    <div class="author-avatar me-2">
-                      <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                      <small class="fw-bold">Pedro Martínez</small>
-                      <br /><small class="text-muted"
-                        >3er año - Mecatronica</small
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <div class="suggestion-stats mb-3">
-                  <span class="badge bg-light text-dark me-2">
-                    <i class="fas fa-comment me-1"></i>12 comentarios
-                  </span>
-                </div>
-              </div>
-              <div class="card-footer bg-light">
-                <div class="moderation-actions-quick">
-                  <button
-                    class="btn btn-sm btn-outline-primary me-2"
-                    onclick="openComments('sugerencia2')"
-                  >
-                    <i class="fas fa-comment me-1"></i>Comentarios
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sugerencia 3 -->
-          <div class="col-lg-6 mb-4">
-            <div class="card suggestion-card h-100">
-              <div class="card-body">
-                <div class="suggestion-header mb-3">
-                  <div class="d-flex justify-content-between align-items-start">
-                    <div class="suggestion-topic">
-                      <h6 class="card-title outfit-semibold">
-                        Talleres de Programación
-                      </h6>
-                    </div>
-                    <small class="text-muted">Hace 6h</small>
-                  </div>
-                </div>
-
-                <div class="suggestion-content mb-3">
-                  <p class="card-text">
-                    Propongo que se abran talleres opcionales de programación en
-                    diferentes lenguajes (Python, JavaScript, C++) para
-                    estudiantes de todas las carreras. Hoy en día la
-                    programación es útil en cualquier campo.
-                  </p>
-                </div>
-
-                <div class="suggestion-author mb-3">
-                  <div class="d-flex align-items-center">
-                    <div class="author-avatar me-2">
-                      <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                      <small class="fw-bold">Luis Fernández</small>
-                      <br /><small class="text-muted">2do año - Software</small>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="suggestion-stats mb-3">
-                  <span class="badge bg-light text-dark me-2">
-                    <i class="fas fa-comment me-1"></i>15 comentarios
-                  </span>
-                </div>
-              </div>
-              <div class="card-footer bg-light">
-                <div class="moderation-actions-quick">
-                  <button
-                    class="btn btn-sm btn-outline-primary me-2"
-                    onclick="openComments('sugerencia3')"
-                  >
-                    <i class="fas fa-comment me-1"></i>Comentarios
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sugerencia 4 -->
-          <div class="col-lg-6 mb-4">
-            <div class="card suggestion-card h-100">
-              <div class="card-body">
-                <div class="suggestion-header mb-3">
-                  <div class="d-flex justify-content-between align-items-start">
-                    <div class="suggestion-topic">
-                      <h6 class="card-title outfit-semibold">
-                        Wifi del Instituto
-                      </h6>
-                    </div>
-                    <small class="text-muted">Hace 1d</small>
-                  </div>
-                </div>
-
-                <div class="suggestion-content mb-3">
-                  <p class="card-text">
-                    El wifi del instituto es muy lento y se corta
-                    constantemente. Es imposible hacer trabajos que requieran
-                    internet o asistir a clases virtuales cuando hay problemas
-                    técnicos.
-                  </p>
-                </div>
-
-                <div class="suggestion-author mb-3">
-                  <div class="d-flex align-items-center">
-                    <div class="author-avatar me-2">
-                      <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                      <small class="fw-bold">Ana Rodríguez</small>
-                      <br /><small class="text-muted">1er año - Software</small>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="suggestion-stats mb-3">
-                  <span class="badge bg-light text-dark me-2">
-                    <i class="fas fa-comment me-1"></i>23 comentarios
-                  </span>
-                </div>
-              </div>
-              <div class="card-footer bg-light">
-                <div class="moderation-actions-quick">
-                  <button
-                    class="btn btn-sm btn-outline-primary me-2"
-                    onclick="openComments('sugerencia4')"
-                  >
-                    <i class="fas fa-comment me-1"></i>Comentarios
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
       <!-- Feed Problemáticas (Desde perspectiva de usuario) -->
       <div id="feed-problematicas" class="feed-content d-none">
-        <div class="row">
-          <div class="col-12 mb-4">
-            <div class="card info-card">
-              <div class="card-header bg-greendegrade text-white">
-                <h5 class="outfit-semibold mb-0">
-                  <i class="fas fa-exclamation-triangle me-2"></i>
-                  Problemáticas Institucionales - ¡Tu Ayuda es Valiosa!
-                </h5>
-                <p class="mb-0 small">
-                  Colabora con soluciones a los desafíos del instituto
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- Lista de Problemáticas -->
         <div class="row">
           <!-- Problemática 1 -->

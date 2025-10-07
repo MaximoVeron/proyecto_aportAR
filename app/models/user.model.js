@@ -30,6 +30,16 @@ const UserSchema = new Schema(
       enum: ["user", "admin", "mod", "profesor"],
       default: "user",
     },
+    career: {
+      type: String,
+      required: true,
+      enum: [
+        "software",
+        "mecatronica",
+        "telecomunicaciones",
+        "quimica industrial",
+      ],
+    },
     is_deleted: {
       type: Boolean,
       default: false,

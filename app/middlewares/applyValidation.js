@@ -1,11 +1,13 @@
 import { validationResult, matchedData } from "express-validator";
 
+// * middleware para validar los datos de entrada de express-validator
 export const applyValidations = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors);
+  const result = validationResult(req);
+
+  if (!result.isEmpty()) {
+    return res.status(400).json({ errors: result.mapped() });
   }
-  const validatedData = matchedData(req);
-  console.log(validatedData);
+  req.vData = matchedData(req);
+  console.log(req.vData);
   next();
 };

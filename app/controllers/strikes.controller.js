@@ -1,8 +1,10 @@
 import { StrikeModel } from "../models/strikes.model.js";
+import { matchedData } from "express-validator";
 
 export const createStrike = async (req, res) => {
   try {
-    const newStrike = new StrikeModel(req.validatedData);
+    const validatedData = matchedData(req);
+    const newStrike = new StrikeModel(validatedData);
     await newStrike.save();
     return res.status(201).json(newStrike);
   } catch (error) {
@@ -13,7 +15,7 @@ export const createStrike = async (req, res) => {
 
 export const getStrikes = async (req, res) => {
   try {
-    const strikes = await StrikeModel.find();
+    const strikes = await StrikeModel.find({ is_deleted: false });
     return res.status(200).json(strikes);
   } catch (error) {
     console.error(error);
@@ -27,6 +29,9 @@ export const getStrikeById = async (req, res) => {
       _id: req.params.id,
       is_deleted: false,
     });
+    if (!strike) {
+      return res.status(404).json({ msg: "Strike no encontrado" });
+    }
     return res.status(200).json(strike);
   } catch (error) {
     console.error(error);
@@ -36,11 +41,15 @@ export const getStrikeById = async (req, res) => {
 
 export const updateStrike = async (req, res) => {
   try {
+    const validatedData = matchedData(req);
     const updatedStrike = await StrikeModel.findOneAndUpdate(
       { _id: req.params.id, is_deleted: false },
-      req.validatedData,
+      validatedData,
       { new: true }
     );
+    if (!updatedStrike) {
+      return res.status(404).json({ msg: "Strike no encontrado" });
+    }
     return res.status(200).json(updatedStrike);
   } catch (error) {
     console.error(error);
