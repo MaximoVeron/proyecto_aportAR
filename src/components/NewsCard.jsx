@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Calendar, User, Trash2, Edit, Shield, GraduationCap, Users } from 'lucide-react';
+import { Calendar, Trash2, Edit } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import EditNewsDialog from '@/components/EditNewsDialog';
 
@@ -17,26 +17,11 @@ const NewsCard = ({ newsItem, onUpdate, canEdit }) => {
   }, [newsItem.authorId, getUserAvatar]);
 
   const handleDelete = () => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar esta noticia?')) {
-      const news = JSON.parse(localStorage.getItem('news') || '[]');
-      const newNews = news.filter(n => n.id !== newsItem.id);
-      localStorage.setItem('news', JSON.stringify(newNews));
-      toast({ title: "Noticia eliminada" });
-      onUpdate();
-    }
-  };
-
-  const getRoleIcon = (role) => {
-    switch (role) {
-      case 'admin':
-        return <Shield className="w-4 h-4 text-red-500" />;
-      case 'profesor':
-        return <GraduationCap className="w-4 h-4 text-blue-500" />;
-      case 'administrativo':
-        return <Users className="w-4 h-4 text-purple-500" />;
-      default:
-        return <User className="w-4 h-4 text-gray-500" />;
-    }
+    const news = JSON.parse(localStorage.getItem('news') || '[]');
+    const newNews = news.filter((n) => n.id !== newsItem.id);
+    localStorage.setItem('news', JSON.stringify(newNews));
+    toast({ title: 'Noticia eliminada' });
+    onUpdate();
   };
 
   const getRoleName = (role) => {
@@ -67,10 +52,7 @@ const NewsCard = ({ newsItem, onUpdate, canEdit }) => {
             </AvatarFallback>
           </Avatar>
           <div>
-            <div className="flex items-center gap-2">
-              <p className="font-bold">{newsItem.author}</p>
-              {getRoleIcon(newsItem.authorRole)}
-            </div>
+            <p className="font-bold">{newsItem.author}</p>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               {getRoleName(newsItem.authorRole)}
               {newsItem.career && ` • ${newsItem.career}`}
@@ -79,31 +61,22 @@ const NewsCard = ({ newsItem, onUpdate, canEdit }) => {
               <Calendar className="w-3 h-3" />
               <span>{new Date(newsItem.createdAt).toLocaleDateString('es-AR')}</span>
               <span className="mx-1">•</span>
-              <span>{new Date(newsItem.createdAt).toLocaleTimeString('es-AR', { 
-                hour: '2-digit', 
-                minute: '2-digit' 
-              })}</span>
+              <span>
+                {new Date(newsItem.createdAt).toLocaleTimeString('es-AR', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+              </span>
             </div>
           </div>
         </div>
         <div className="flex gap-2 items-center">
-          <span className="px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 flex items-center gap-1">
-            📰 Noticia
-          </span>
           {canEdit && (
             <div className="flex gap-1">
-              <Button 
-                size="sm" 
-                variant="outline" 
-                onClick={() => setShowEditDialog(true)}
-              >
+              <Button size="sm" variant="outline" onClick={() => setShowEditDialog(true)}>
                 <Edit className="w-4 h-4" />
               </Button>
-              <Button 
-                size="sm" 
-                variant="destructive" 
-                onClick={handleDelete}
-              >
+              <Button size="sm" variant="destructive" onClick={handleDelete}>
                 <Trash2 className="w-4 h-4" />
               </Button>
             </div>
@@ -112,17 +85,15 @@ const NewsCard = ({ newsItem, onUpdate, canEdit }) => {
       </div>
 
       {newsItem.image && (
-        <img 
-          src={newsItem.image} 
+        <img
+          src={newsItem.image}
           alt={newsItem.title}
           className="w-full max-h-[400px] object-cover rounded-2xl mb-4"
         />
       )}
 
-      <h3 className="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">
-        {newsItem.title}
-      </h3>
-      
+      <h3 className="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">{newsItem.title}</h3>
+
       <div className="prose prose-gray dark:prose-invert max-w-none">
         <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed">
           {newsItem.description}

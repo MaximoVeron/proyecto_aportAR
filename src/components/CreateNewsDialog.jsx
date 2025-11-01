@@ -18,11 +18,12 @@ const CreateNewsDialog = ({ open, onClose, onNewsCreated }) => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 10 * 1024 * 1024) { // 10MB limit
-        toast({ 
-          title: "Error", 
-          description: "La imagen no puede superar los 10MB", 
-          variant: "destructive" 
+      if (file.size > 10 * 1024 * 1024) {
+        // 10MB limit
+        toast({
+          title: 'Error',
+          description: 'La imagen no puede superar los 10MB',
+          variant: 'destructive',
         });
         return;
       }
@@ -43,12 +44,12 @@ const CreateNewsDialog = ({ open, onClose, onNewsCreated }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!title.trim() || !description.trim()) {
-      toast({ 
-        title: "Error", 
-        description: "El título y la descripción son obligatorios", 
-        variant: "destructive" 
+      toast({
+        title: 'Error',
+        description: 'El título y la descripción son obligatorios',
+        variant: 'destructive',
       });
       return;
     }
@@ -63,24 +64,24 @@ const CreateNewsDialog = ({ open, onClose, onNewsCreated }) => {
       authorRole: currentUser.role,
       career: currentUser.career,
       createdAt: new Date().toISOString(),
-      type: 'news'
+      type: 'news',
     };
 
     const news = JSON.parse(localStorage.getItem('news') || '[]');
     news.push(newNews);
     localStorage.setItem('news', JSON.stringify(news));
 
-    toast({ 
-      title: "¡Noticia publicada!", 
-      description: "La noticia ha sido publicada exitosamente" 
+    toast({
+      title: '¡Noticia publicada!',
+      description: 'La noticia ha sido publicada exitosamente',
     });
-    
+
     // Reset form
     setTitle('');
     setDescription('');
     setImage(null);
     setImagePreview(null);
-    
+
     onNewsCreated();
   };
 
@@ -92,7 +93,7 @@ const CreateNewsDialog = ({ open, onClose, onNewsCreated }) => {
             Publicar Nueva Noticia
           </DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="title">Título *</Label>
@@ -121,9 +122,9 @@ const CreateNewsDialog = ({ open, onClose, onNewsCreated }) => {
             <Label>Imagen (opcional)</Label>
             {imagePreview ? (
               <div className="relative">
-                <img 
-                  src={imagePreview} 
-                  alt="Preview" 
+                <img
+                  src={imagePreview}
+                  alt="Preview"
                   className="w-full max-h-64 object-cover rounded-lg"
                 />
                 <Button

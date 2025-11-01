@@ -27,11 +27,12 @@ const EditNewsDialog = ({ open, onClose, newsItem, onNewsUpdated }) => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 10 * 1024 * 1024) { // 10MB limit
-        toast({ 
-          title: "Error", 
-          description: "La imagen no puede superar los 10MB", 
-          variant: "destructive" 
+      if (file.size > 10 * 1024 * 1024) {
+        // 10MB limit
+        toast({
+          title: 'Error',
+          description: 'La imagen no puede superar los 10MB',
+          variant: 'destructive',
         });
         return;
       }
@@ -52,19 +53,19 @@ const EditNewsDialog = ({ open, onClose, newsItem, onNewsUpdated }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!title.trim() || !description.trim()) {
-      toast({ 
-        title: "Error", 
-        description: "El título y la descripción son obligatorios", 
-        variant: "destructive" 
+      toast({
+        title: 'Error',
+        description: 'El título y la descripción son obligatorios',
+        variant: 'destructive',
       });
       return;
     }
 
     const news = JSON.parse(localStorage.getItem('news') || '[]');
-    const newsIndex = news.findIndex(n => n.id === newsItem.id);
-    
+    const newsIndex = news.findIndex((n) => n.id === newsItem.id);
+
     if (newsIndex !== -1) {
       news[newsIndex] = {
         ...news[newsIndex],
@@ -72,16 +73,16 @@ const EditNewsDialog = ({ open, onClose, newsItem, onNewsUpdated }) => {
         description: description.trim(),
         image: image,
         updatedAt: new Date().toISOString(),
-        updatedBy: currentUser.id
+        updatedBy: currentUser.id,
       };
 
       localStorage.setItem('news', JSON.stringify(news));
 
-      toast({ 
-        title: "¡Noticia actualizada!", 
-        description: "Los cambios han sido guardados exitosamente" 
+      toast({
+        title: '¡Noticia actualizada!',
+        description: 'Los cambios han sido guardados exitosamente',
       });
-      
+
       onNewsUpdated();
       onClose();
     }
@@ -91,11 +92,9 @@ const EditNewsDialog = ({ open, onClose, newsItem, onNewsUpdated }) => {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold gradient-text">
-            Editar Noticia
-          </DialogTitle>
+          <DialogTitle className="text-2xl font-bold gradient-text">Editar Noticia</DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="title">Título *</Label>
@@ -124,9 +123,9 @@ const EditNewsDialog = ({ open, onClose, newsItem, onNewsUpdated }) => {
             <Label>Imagen (opcional)</Label>
             {imagePreview ? (
               <div className="relative">
-                <img 
-                  src={imagePreview} 
-                  alt="Preview" 
+                <img
+                  src={imagePreview}
+                  alt="Preview"
                   className="w-full max-h-64 object-cover rounded-lg"
                 />
                 <Button

@@ -12,9 +12,10 @@ const NewsPage = () => {
   const [showCreateDialog, setShowCreateDialog] = useState(false);
 
   // Verificar si el usuario puede crear noticias
-  const canCreateNews = currentUser?.role === 'admin' || 
-                       currentUser?.role === 'profesor' || 
-                       currentUser?.role === 'administrativo';
+  const canCreateNews =
+    currentUser?.role === 'admin' ||
+    currentUser?.role === 'profesor' ||
+    currentUser?.role === 'administrativo';
 
   const loadNews = () => {
     const storedNews = JSON.parse(localStorage.getItem('news') || '[]');
@@ -35,8 +36,8 @@ const NewsPage = () => {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold gradient-text">Noticias y Eventos</h1>
         {canCreateNews && (
-          <Button 
-            onClick={() => setShowCreateDialog(true)} 
+          <Button
+            onClick={() => setShowCreateDialog(true)}
             className="bg-green-600 hover:bg-green-700 text-white"
           >
             <Plus className="w-5 h-5 mr-2" />
@@ -47,12 +48,15 @@ const NewsPage = () => {
 
       <div className="space-y-6">
         {news.length > 0 ? (
-          news.map(newsItem => (
-            <NewsCard 
-              key={newsItem.id} 
-              newsItem={newsItem} 
+          news.map((newsItem) => (
+            <NewsCard
+              key={newsItem.id}
+              newsItem={newsItem}
               onUpdate={loadNews}
-              canEdit={canCreateNews && (currentUser?.role === 'admin' || currentUser?.id === newsItem.authorId)}
+              canEdit={
+                canCreateNews &&
+                (currentUser?.role === 'admin' || currentUser?.id === newsItem.authorId)
+              }
             />
           ))
         ) : (
@@ -66,7 +70,8 @@ const NewsPage = () => {
               </p>
             ) : (
               <p className="text-gray-500 dark:text-gray-500">
-                Las noticias y eventos aparecerán aquí cuando sean publicadas por el personal administrativo.
+                Las noticias y eventos aparecerán aquí cuando sean publicadas por el personal
+                administrativo.
               </p>
             )}
           </div>
