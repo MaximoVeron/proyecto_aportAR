@@ -65,9 +65,9 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex transition-colors duration-300">
-      <aside className="fixed left-0 top-0 w-64 h-screen bg-white dark:bg-gray-900 shadow-md p-6 flex flex-col z-10">
+      <aside className={`fixed left-0 top-0 w-64 h-screen bg-white dark:bg-gray-900 shadow-md flex flex-col z-10 ${currentUser?.role === 'admin' ? 'p-4' : 'p-6'}`}>
         <div
-          className="flex items-center gap-3 mb-10 p-2 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+          className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 ${currentUser?.role === 'admin' ? 'mb-4' : 'mb-6'}`}
           onClick={handleProfileClick}
         >
           <Avatar>
@@ -84,7 +84,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <nav className="flex-1 space-y-2">
+        <nav className={`space-y-2 ${currentUser?.role === 'admin' ? 'mb-4' : 'mb-8'}`}>
           {navItems.map((item) => (
             <NavLink
               key={item.path}
@@ -131,7 +131,10 @@ const Dashboard = () => {
           )}
         </nav>
 
-        <div className="space-y-2">
+        {/* Espaciador flexible para empujar los botones hacia abajo */}
+        <div className="flex-1"></div>
+
+        <div className={`space-y-2 ${currentUser?.role === 'admin' ? 'mt-2' : 'mt-4'}`}>
           <Button
             variant="ghost"
             className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
