@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, ArrowLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { toast } from '@/components/ui/use-toast';
 
 const ConversationPage = () => {
   const { conversationId } = useParams();
@@ -33,8 +34,18 @@ const ConversationPage = () => {
 
   const handleSendMessage = () => {
     if (newMessage.trim() === '' || !conversation) return;
-    sendMessage(conversation.otherParticipant.id, newMessage.trim());
-    setNewMessage('');
+    
+    const result = sendMessage(conversation.otherParticipant.id, newMessage.trim());
+    
+    if (result.success) {
+      setNewMessage('');
+    } else {
+      toast({
+        title: "Error al enviar mensaje",
+        description: result.error || "No se pudo enviar el mensaje",
+        variant: "destructive"
+      });
+    }
   };
   
   if (!conversation) {

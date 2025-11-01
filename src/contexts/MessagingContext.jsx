@@ -64,7 +64,24 @@ export function MessagingProvider({ children }) {
   };
   
   const sendMessage = (recipientId, content) => {
-    if (!currentUser) return;
+    if (!currentUser) return { success: false, error: 'No hay usuario autenticado' };
+    
+    // Validación de roles: solo estudiantes pueden iniciar conversaciones
+    if (currentUser.role === 'estudiante') {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const recipient = users.find(u => u.id === recipientId);
+      
+      if (!recipient) {
+        return { success: false, error: 'Usuario destinatario no encontrado' };
+      }
+      
+      // Verificar que el destinatario tenga un rol permitido
+      const allowedRoles = ['profesor', 'administrativo', 'admin'];
+      if (!allowedRoles.includes(recipient.role)) {
+        return { success: false, error: 'Solo puedes enviar mensajes a profesores, administrativos o administradores' };
+      }
+    }
+    
     let allConversations = JSON.parse(localStorage.getItem('conversations') || '[]');
     let conversation = getConversationWithUser(recipientId);
 
@@ -96,6 +113,7 @@ export function MessagingProvider({ children }) {
     addNotification(recipientId, `Nuevo mensaje de ${sender.name}`, `/dashboard/messages/${conversation.id}`);
     
     loadConversations();
+    return { success: true, conversationId: conversation.id };
   };
 
   const markConversationAsRead = (conversationId) => {
@@ -119,6 +137,24 @@ export function MessagingProvider({ children }) {
     }
   };
 
+  const canInitiateConversation = () => {
+    return currentUser?.role === 'estudiante';
+  };
+
+  const getContactableUsers = () => {
+    if (!currentUser || currentUser.role !== 'estudiante') {
+      return [];
+    }
+    
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const allowedRoles = ['profesor', 'administrativo', 'admin'];
+    
+    return users.filter(user => 
+      user.id !== currentUser.id && 
+      allowedRoles.includes(user.role)
+    );
+  };
+
   const value = {
     conversations,
     unreadMessagesCount,
@@ -126,6 +162,8 @@ export function MessagingProvider({ children }) {
     getConversationById,
     getConversationWithUser,
     markConversationAsRead,
+    canInitiateConversation,
+    getContactableUsers,
     refreshConversations: loadConversations
   };
 

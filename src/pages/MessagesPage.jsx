@@ -3,22 +3,55 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useMessaging } from '@/contexts/MessagingContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { MessageSquareDashed } from 'lucide-react';
+import { MessageSquareDashed, Users } from 'lucide-react';
+import UserSearch from '@/components/UserSearch';
 
 const MessagesPage = () => {
   const { conversations } = useMessaging();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
+  // Verificar si el usuario es estudiante
+  const isStudent = currentUser?.role === 'estudiante';
+
   const getUnreadCountForConversation = (conv) => {
-    return conv.messages.filter(m => !m.read).length;
+    return conv.messages.filter(m => !m.read && m.recipientId === currentUser?.id).length;
   };
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
       <h1 className="text-4xl font-bold gradient-text mb-8">Mensajes</h1>
       
+      {/* Verificación de acceso para estudiantes */}
+      {!isStudent && (
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 mb-6">
+          <div className="flex items-center gap-2 text-yellow-800 dark:text-yellow-200">
+            <Users className="h-5 w-5" />
+            <p className="font-medium">Acceso restringido</p>
+          </div>
+          <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-1">
+            Solo los estudiantes pueden iniciar conversaciones. Puedes responder a mensajes que recibas.
+          </p>
+        </div>
+      )}
+
+      {/* Búsqueda de usuarios - solo para estudiantes */}
+      {isStudent && (
+        <div className="glass-effect rounded-2xl p-6 mb-6">
+          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+            Iniciar nueva conversación
+          </h2>
+          <UserSearch />
+        </div>
+      )}
+      
+      {/* Lista de conversaciones */}
       <div className="glass-effect rounded-2xl p-6">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+          Conversaciones recientes
+        </h2>
         {conversations.length > 0 ? (
           <div className="space-y-4">
             {conversations.map(conv => {
@@ -59,7 +92,12 @@ const MessagesPage = () => {
           <div className="text-center py-16">
             <MessageSquareDashed className="mx-auto h-16 w-16 text-gray-400 dark:text-gray-500 mb-4" />
             <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">No tenés conversaciones</h3>
-            <p className="text-gray-600 dark:text-gray-400 mt-2">Iniciá una conversación desde el perfil de un usuario.</p>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">
+              {isStudent 
+                ? 'Buscá a un profesor, administrativo o administrador para iniciar una conversación.'
+                : 'Las conversaciones aparecerán aquí cuando recibas mensajes.'
+              }
+            </p>
           </div>
         )}
       </div>

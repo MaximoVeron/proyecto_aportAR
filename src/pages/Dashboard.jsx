@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, User, FolderKanban, Lightbulb, AlertTriangle, Shield, LogOut, Moon, Sun, Megaphone } from 'lucide-react';
+import { Home, User, FolderKanban, Lightbulb, AlertTriangle, Shield, LogOut, Moon, Sun, Megaphone, MessageSquare } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
@@ -13,12 +13,16 @@ import SuggestionsPage from '@/pages/SuggestionsPage';
 import ProblemsPage from '@/pages/ProblemsPage';
 import AdminPage from '@/pages/AdminPage';
 import AnnouncementsPage from '@/pages/AnnouncementsPage';
+import MessagesPage from '@/pages/MessagesPage';
+import ConversationPage from '@/pages/ConversationPage';
 import NotificationBell from '@/components/NotificationBell';
 import { useAnnouncements } from '@/contexts/AnnouncementsContext';
+import { useMessaging } from '@/contexts/MessagingContext';
 
 const navItems = [
   { path: '/', name: 'Inicio', icon: Home },
   { path: '/announcements', name: 'Anuncios', icon: Megaphone, badge: true },
+  { path: '/messages', name: 'Mensajes', icon: MessageSquare, badge: true },
   { path: '/profile', name: 'Mi Perfil', icon: User },
   { path: '/projects', name: 'Proyectos', icon: FolderKanban },
   { path: '/suggestions', name: 'Sugerencias', icon: Lightbulb },
@@ -29,6 +33,7 @@ const Dashboard = () => {
   const { currentUser, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const { unreadCount } = useAnnouncements();
+  const { unreadMessagesCount } = useMessaging();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -71,9 +76,14 @@ const Dashboard = () => {
                 <item.icon className="w-5 h-5" />
                 <span>{item.name}</span>
               </div>
-              {item.badge && unreadCount > 0 && (
+              {item.badge && item.name === 'Anuncios' && unreadCount > 0 && (
                 <span className="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                   {unreadCount}
+                </span>
+              )}
+              {item.badge && item.name === 'Mensajes' && unreadMessagesCount > 0 && (
+                <span className="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  {unreadMessagesCount}
                 </span>
               )}
             </NavLink>
@@ -121,6 +131,8 @@ const Dashboard = () => {
           <Routes>
             <Route path="/" element={<FeedPage />} />
             <Route path="/announcements" element={<AnnouncementsPage />} />
+            <Route path="/messages" element={<MessagesPage />} />
+            <Route path="/messages/:conversationId" element={<ConversationPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/suggestions" element={<SuggestionsPage />} />

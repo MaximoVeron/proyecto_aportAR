@@ -9,6 +9,7 @@ import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import { NotificationProvider } from '@/contexts/NotificationContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { AnnouncementsProvider } from '@/contexts/AnnouncementsContext';
+import { MessagingProvider } from '@/contexts/MessagingContext';
 
 function PrivateRoute({ children }) {
   const { currentUser } = useAuth();
@@ -26,18 +27,20 @@ function App() {
       <AuthProvider>
         <AnnouncementsProvider>
           <NotificationProvider>
-            <Helmet>
-              <title>aportAR Politécnico - Red Social Institucional</title>
-              <meta name="description" content="Plataforma de comunicación y colaboración para el Instituto Politécnico de Formosa" />
-            </Helmet>
-            <Router>
-              <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/auth" element={<PublicRoute><AuthPage /></PublicRoute>} />
-                <Route path="/dashboard/*" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-              </Routes>
-            </Router>
-            <Toaster />
+            <MessagingProvider>
+              <Helmet>
+                <title>aportAR Politécnico - Red Social Institucional</title>
+                <meta name="description" content="Plataforma de comunicación y colaboración para el Instituto Politécnico de Formosa" />
+              </Helmet>
+              <Router>
+                <Routes>
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/auth" element={<PublicRoute><AuthPage /></PublicRoute>} />
+                  <Route path="/dashboard/*" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+                </Routes>
+              </Router>
+              <Toaster />
+            </MessagingProvider>
           </NotificationProvider>
         </AnnouncementsProvider>
       </AuthProvider>
