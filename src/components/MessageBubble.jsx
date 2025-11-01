@@ -3,14 +3,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useMessaging } from '@/contexts/MessagingContext';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { 
-  MoreVertical, 
-  Edit3, 
-  Trash2, 
-  Check, 
-  X,
-  Clock 
-} from 'lucide-react';
+import { MoreVertical, Edit3, Trash2, Check, X, Clock } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,10 +20,17 @@ const MessageBubble = ({ message, conversationId, onMessageUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(message.content);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentMessage, setCurrentMessage] = useState(message);
   const textareaRef = useRef(null);
 
-  const isOwnMessage = message.senderId === currentUser.id;
-  const isFileMessage = message.type === 'file';
+  const isOwnMessage = currentMessage.senderId === currentUser.id;
+  const isFileMessage = currentMessage.type === 'file';
+
+  // Actualizar el mensaje local cuando cambie la prop
+  useEffect(() => {
+    setCurrentMessage(message);
+    setEditContent(message.content);
+  }, [message]);
 
   useEffect(() => {
     if (isEditing && textareaRef.current) {
@@ -48,7 +48,7 @@ const MessageBubble = ({ message, conversationId, onMessageUpdate }) => {
 
   const handleCancelEdit = () => {
     setIsEditing(false);
-    setEditContent(message.content);
+    setEditContent(currentMessage.content);
   };
 
   const handleSaveEdit = async () => {
@@ -61,11 +61,22 @@ const MessageBubble = ({ message, conversationId, onMessageUpdate }) => {
       return;
     }
 
-    const result = editMessage(conversationId, message.id, editContent.trim());
-    
+    const result = editMessage(conversationId, currentMessage.id, editContent.trim());
+
     if (result.success) {
+      // Actualizar el mensaje local inmediatamente
+      setCurrentMessage(prev => ({
+        ...prev,
+        content: editContent.trim(),
+        editedAt: new Date().toISOString(),
+        isEdited: true,
+      }));
+      
       setIsEditing(false);
+      
+      // Llamar al callback para actualizar la conversación padre
       onMessageUpdate?.();
+      
       toast({
         title: 'Mensaje editado',
         description: 'El mensaje se ha actualizado correctamente',
@@ -80,8 +91,8 @@ const MessageBubble = ({ message, conversationId, onMessageUpdate }) => {
   };
 
   const handleDelete = async () => {
-    const result = deleteMessage(conversationId, message.id);
-    
+    const result = deleteMessage(conversationId, currentMessage.id);
+
     if (result.success) {
       onMessageUpdate?.();
       toast({
@@ -172,26 +183,26 @@ const MessageBubble = ({ message, conversationId, onMessageUpdate }) => {
           </div>
         ) : (
           <div>
-            {isFileMessage && message.fileData ? (
+            {isFileMessage && currentMessage.fileData ? (
               <div className="space-y-2">
-                <MessageFile fileData={message.fileData} />
-                {message.content && <p className="text-sm">{message.content}</p>}
+                <MessageFile fileData={currentMessage.fileData} />
+                {currentMessage.content && <p className="text-sm">{currentMessage.content}</p>}
               </div>
             ) : (
-              <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+              <p className="text-sm whitespace-pre-wrap">{currentMessage.content}</p>
             )}
-            
+
             <div className="flex items-center justify-between mt-1">
               <div className="flex items-center gap-1 text-xs opacity-70">
-                <span>{formatTime(message.timestamp)}</span>
-                {message.isEdited && (
+                <span>{formatTime(currentMessage.timestamp)}</span>
+                {currentMessage.isEdited && (
                   <span className="flex items-center gap-1">
                     <Clock className="w-3 h-3" />
                     editado
                   </span>
                 )}
               </div>
-              
+
               {isOwnMessage && (
                 <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
                   <DropdownMenuTrigger asChild>
@@ -215,8 +226,8 @@ const MessageBubble = ({ message, conversationId, onMessageUpdate }) => {
                         Editar
                       </DropdownMenuItem>
                     )}
-                    <DropdownMenuItem 
-                      onClick={handleDelete} 
+                    <DropdownMenuItem
+                      onClick={handleDelete}
                       className="text-sm text-red-600 dark:text-red-400"
                     >
                       <Trash2 className="w-3 h-3 mr-2" />

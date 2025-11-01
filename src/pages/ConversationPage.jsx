@@ -62,6 +62,20 @@ const ConversationPage = () => {
     markConversationAsRead,
   ]);
 
+  // Función para forzar actualización inmediata (para ediciones)
+  const forceUpdateConversation = useCallback(() => {
+    if (!conversationId) return;
+
+    const conv = getConversationByIdFromStorage(conversationId);
+    
+    if (conv) {
+      console.log('Forzando actualización de conversación por edición/eliminación');
+      setConversation(conv);
+      setLastMessageCount(conv.messages.length);
+      markConversationAsRead(conversationId);
+    }
+  }, [conversationId, getConversationByIdFromStorage, markConversationAsRead]);
+
   useEffect(() => {
     // Cargar conversación inicial
     loadConversation();
@@ -184,10 +198,10 @@ const ConversationPage = () => {
         ) : (
           conversation.messages.map((msg) => (
             <MessageBubble
-              key={msg.id}
+              key={`${msg.id}-${msg.editedAt || msg.timestamp}`}
               message={msg}
               conversationId={conversationId}
-              onMessageUpdate={loadConversation}
+              onMessageUpdate={forceUpdateConversation}
             />
           ))
         )}

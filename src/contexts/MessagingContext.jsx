@@ -377,8 +377,15 @@ export function MessagingProvider({ children }) {
     };
 
     localStorage.setItem('conversations', JSON.stringify(allConversations));
-    setLastUpdate(Date.now());
-    loadConversations();
+    
+    // Forzar actualización inmediata con timestamp
+    const currentTime = Date.now();
+    setLastUpdate(currentTime);
+    
+    // Actualizar conversaciones inmediatamente
+    setTimeout(() => {
+      loadConversations();
+    }, 50);
 
     return { success: true };
   };
@@ -411,8 +418,15 @@ export function MessagingProvider({ children }) {
     allConversations[convIndex].messages.splice(messageIndex, 1);
 
     localStorage.setItem('conversations', JSON.stringify(allConversations));
-    setLastUpdate(Date.now());
-    loadConversations();
+    
+    // Forzar actualización inmediata con timestamp
+    const currentTime = Date.now();
+    setLastUpdate(currentTime);
+    
+    // Actualizar conversaciones inmediatamente
+    setTimeout(() => {
+      loadConversations();
+    }, 50);
 
     return { success: true };
   };
