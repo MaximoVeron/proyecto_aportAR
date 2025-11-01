@@ -26,6 +26,15 @@ const PostCard = ({ post, onUpdate }) => {
     }
   }, [post.authorId, getUserAvatar, isProblem]);
 
+  // Verificar si el usuario actual ya dio like a esta publicación
+  useEffect(() => {
+    if (currentUser && post.id) {
+      const userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
+      const hasLiked = userLikes[currentUser.id]?.includes(post.id) || false;
+      setLiked(hasLiked);
+    }
+  }, [currentUser, post.id]);
+
   const handleComment = () => {
     if (!comment.trim()) return;
 
@@ -49,13 +58,35 @@ const PostCard = ({ post, onUpdate }) => {
   };
 
   const handleLike = () => {
+    if (!currentUser) return;
+    
     const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+    const userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
     const postIndex = posts.findIndex(p => p.id === post.id);
     
     if (postIndex !== -1) {
-      posts[postIndex].reactions += liked ? -1 : 1;
+      // Inicializar array de likes del usuario si no existe
+      if (!userLikes[currentUser.id]) {
+        userLikes[currentUser.id] = [];
+      }
+      
+      const userLikesArray = userLikes[currentUser.id];
+      const hasLiked = userLikesArray.includes(post.id);
+      
+      if (hasLiked) {
+        // Quitar like
+        posts[postIndex].reactions = Math.max(0, posts[postIndex].reactions - 1);
+        userLikes[currentUser.id] = userLikesArray.filter(id => id !== post.id);
+        setLiked(false);
+      } else {
+        // Agregar like
+        posts[postIndex].reactions += 1;
+        userLikes[currentUser.id].push(post.id);
+        setLiked(true);
+      }
+      
       localStorage.setItem('posts', JSON.stringify(posts));
-      setLiked(!liked);
+      localStorage.setItem('userLikes', JSON.stringify(userLikes));
       onUpdate();
     }
   };
@@ -165,7 +196,7 @@ const PostCard = ({ post, onUpdate }) => {
       <div className="flex items-center gap-4 mb-4 pt-4 border-t border-gray-200 dark:border-gray-700">
         <Button variant="ghost" size="sm" onClick={handleLike}>
           <Heart className={`w-5 h-5 mr-2 ${liked ? 'fill-red-500 text-red-500' : ''}`} />
-          {post.reactions + (liked ? 1 : 0)}
+          {post.reactions}
         </Button>
         <Button variant="ghost" size="sm" onClick={() => setShowComments(!showComments)}>
           <MessageCircle className="w-5 h-5 mr-2" />
