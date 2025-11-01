@@ -67,7 +67,7 @@ const ConversationPage = () => {
     if (!conversationId) return;
 
     const conv = getConversationByIdFromStorage(conversationId);
-    
+
     if (conv) {
       console.log('Forzando actualización de conversación por edición/eliminación');
       setConversation(conv);

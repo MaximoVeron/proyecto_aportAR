@@ -65,18 +65,18 @@ const MessageBubble = ({ message, conversationId, onMessageUpdate }) => {
 
     if (result.success) {
       // Actualizar el mensaje local inmediatamente
-      setCurrentMessage(prev => ({
+      setCurrentMessage((prev) => ({
         ...prev,
         content: editContent.trim(),
         editedAt: new Date().toISOString(),
         isEdited: true,
       }));
-      
+
       setIsEditing(false);
-      
+
       // Llamar al callback para actualizar la conversación padre
       onMessageUpdate?.();
-      
+
       toast({
         title: 'Mensaje editado',
         description: 'El mensaje se ha actualizado correctamente',

@@ -377,11 +377,11 @@ export function MessagingProvider({ children }) {
     };
 
     localStorage.setItem('conversations', JSON.stringify(allConversations));
-    
+
     // Forzar actualización inmediata con timestamp
     const currentTime = Date.now();
     setLastUpdate(currentTime);
-    
+
     // Actualizar conversaciones inmediatamente
     setTimeout(() => {
       loadConversations();
@@ -418,11 +418,11 @@ export function MessagingProvider({ children }) {
     allConversations[convIndex].messages.splice(messageIndex, 1);
 
     localStorage.setItem('conversations', JSON.stringify(allConversations));
-    
+
     // Forzar actualización inmediata con timestamp
     const currentTime = Date.now();
     setLastUpdate(currentTime);
-    
+
     // Actualizar conversaciones inmediatamente
     setTimeout(() => {
       loadConversations();
