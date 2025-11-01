@@ -37,31 +37,31 @@ const SurveyCard = ({ survey, onUpdate }) => {
   // Verificar si el usuario ya respondió esta encuesta
   useEffect(() => {
     if (currentUser && survey.responses) {
-      const userResponse = survey.responses.find(r => r.userId === currentUser.id);
+      const userResponse = survey.responses.find((r) => r.userId === currentUser.id);
       setHasResponded(!!userResponse);
     }
   }, [currentUser, survey.responses]);
 
   const handleLike = () => {
     if (!currentUser) return;
-    
+
     const surveys = JSON.parse(localStorage.getItem('surveys') || '[]');
     const userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
-    const surveyIndex = surveys.findIndex(s => s.id === survey.id);
-    
+    const surveyIndex = surveys.findIndex((s) => s.id === survey.id);
+
     if (surveyIndex !== -1) {
       // Inicializar array de likes del usuario si no existe
       if (!userLikes[currentUser.id]) {
         userLikes[currentUser.id] = [];
       }
-      
+
       const userLikesArray = userLikes[currentUser.id];
       const hasLiked = userLikesArray.includes(survey.id);
-      
+
       if (hasLiked) {
         // Quitar like
         surveys[surveyIndex].reactions = Math.max(0, surveys[surveyIndex].reactions - 1);
-        userLikes[currentUser.id] = userLikesArray.filter(id => id !== survey.id);
+        userLikes[currentUser.id] = userLikesArray.filter((id) => id !== survey.id);
         setLiked(false);
       } else {
         // Agregar like
@@ -69,7 +69,7 @@ const SurveyCard = ({ survey, onUpdate }) => {
         userLikes[currentUser.id].push(survey.id);
         setLiked(true);
       }
-      
+
       localStorage.setItem('surveys', JSON.stringify(surveys));
       localStorage.setItem('userLikes', JSON.stringify(userLikes));
       onUpdate();
@@ -78,9 +78,9 @@ const SurveyCard = ({ survey, onUpdate }) => {
 
   const handleDelete = () => {
     const surveys = JSON.parse(localStorage.getItem('surveys') || '[]');
-    const newSurveys = surveys.filter(s => s.id !== survey.id);
+    const newSurveys = surveys.filter((s) => s.id !== survey.id);
     localStorage.setItem('surveys', JSON.stringify(newSurveys));
-    toast({ title: "Encuesta eliminada" });
+    toast({ title: 'Encuesta eliminada' });
     onUpdate();
   };
 
@@ -90,7 +90,7 @@ const SurveyCard = ({ survey, onUpdate }) => {
   };
 
   const handleReportComment = (commentId) => {
-    const comment = survey.comments.find(c => c.id === commentId);
+    const comment = survey.comments.find((c) => c.id === commentId);
     if (comment) {
       setReportData({ postId: survey.id, commentId: comment.id, authorId: comment.authorId });
       setShowReport(true);
@@ -106,7 +106,7 @@ const SurveyCard = ({ survey, onUpdate }) => {
     id: survey.id,
     title: survey.title,
     authorId: survey.authorId,
-    comments: survey.comments || []
+    comments: survey.comments || [],
   };
 
   return (
@@ -145,16 +145,19 @@ const SurveyCard = ({ survey, onUpdate }) => {
       </div>
 
       <h3 className="text-2xl font-bold mb-2">{survey.title}</h3>
-      <p className="text-gray-700 dark:text-gray-300 mb-4 whitespace-pre-wrap">{survey.description}</p>
+      <p className="text-gray-700 dark:text-gray-300 mb-4 whitespace-pre-wrap">
+        {survey.description}
+      </p>
 
       <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 mb-4">
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-          <span className="font-semibold">{survey.questions.length}</span> pregunta{survey.questions.length !== 1 ? 's' : ''}
+          <span className="font-semibold">{survey.questions.length}</span> pregunta
+          {survey.questions.length !== 1 ? 's' : ''}
         </p>
         <div className="flex gap-2">
-          <Button 
-            variant="outline" 
-            className="flex-1" 
+          <Button
+            variant="outline"
+            className="flex-1"
             onClick={() => setShowSurveyDetail(true)}
             disabled={hasResponded}
           >
@@ -185,10 +188,10 @@ const SurveyCard = ({ survey, onUpdate }) => {
       </div>
 
       {showComments && (
-        <CommentThread 
-          post={postForComments} 
-          onUpdate={onUpdate} 
-          onReportComment={handleReportComment} 
+        <CommentThread
+          post={postForComments}
+          onUpdate={onUpdate}
+          onReportComment={handleReportComment}
         />
       )}
 

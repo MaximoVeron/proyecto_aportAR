@@ -12,72 +12,82 @@ const CreateSurveyDialog = ({ open, onClose, onSurveyCreated }) => {
   const { currentUser } = useAuth();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [questions, setQuestions] = useState([
-    { id: 1, text: '', options: ['', ''] }
-  ]);
+  const [questions, setQuestions] = useState([{ id: 1, text: '', options: ['', ''] }]);
 
   const addQuestion = () => {
-    const newId = Math.max(...questions.map(q => q.id)) + 1;
+    const newId = Math.max(...questions.map((q) => q.id)) + 1;
     setQuestions([...questions, { id: newId, text: '', options: ['', ''] }]);
   };
 
   const removeQuestion = (questionId) => {
     if (questions.length > 1) {
-      setQuestions(questions.filter(q => q.id !== questionId));
+      setQuestions(questions.filter((q) => q.id !== questionId));
     }
   };
 
   const updateQuestion = (questionId, text) => {
-    setQuestions(questions.map(q => 
-      q.id === questionId ? { ...q, text } : q
-    ));
+    setQuestions(questions.map((q) => (q.id === questionId ? { ...q, text } : q)));
   };
 
   const addOption = (questionId) => {
-    setQuestions(questions.map(q => 
-      q.id === questionId ? { ...q, options: [...q.options, ''] } : q
-    ));
+    setQuestions(
+      questions.map((q) => (q.id === questionId ? { ...q, options: [...q.options, ''] } : q))
+    );
   };
 
   const removeOption = (questionId, optionIndex) => {
-    setQuestions(questions.map(q => 
-      q.id === questionId 
-        ? { ...q, options: q.options.filter((_, index) => index !== optionIndex) }
-        : q
-    ));
+    setQuestions(
+      questions.map((q) =>
+        q.id === questionId
+          ? { ...q, options: q.options.filter((_, index) => index !== optionIndex) }
+          : q
+      )
+    );
   };
 
   const updateOption = (questionId, optionIndex, value) => {
-    setQuestions(questions.map(q => 
-      q.id === questionId 
-        ? { 
-            ...q, 
-            options: q.options.map((opt, index) => 
-              index === optionIndex ? value : opt
-            )
-          }
-        : q
-    ));
+    setQuestions(
+      questions.map((q) =>
+        q.id === questionId
+          ? {
+              ...q,
+              options: q.options.map((opt, index) => (index === optionIndex ? value : opt)),
+            }
+          : q
+      )
+    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!title.trim() || !description.trim()) {
-      toast({ title: "Error", description: "El título y descripción son obligatorios", variant: "destructive" });
+      toast({
+        title: 'Error',
+        description: 'El título y descripción son obligatorios',
+        variant: 'destructive',
+      });
       return;
     }
 
     // Validar que todas las preguntas tengan texto y al menos 2 opciones válidas
     for (const question of questions) {
       if (!question.text.trim()) {
-        toast({ title: "Error", description: "Todas las preguntas deben tener texto", variant: "destructive" });
+        toast({
+          title: 'Error',
+          description: 'Todas las preguntas deben tener texto',
+          variant: 'destructive',
+        });
         return;
       }
-      
-      const validOptions = question.options.filter(opt => opt.trim());
+
+      const validOptions = question.options.filter((opt) => opt.trim());
       if (validOptions.length < 2) {
-        toast({ title: "Error", description: "Cada pregunta debe tener al menos 2 opciones válidas", variant: "destructive" });
+        toast({
+          title: 'Error',
+          description: 'Cada pregunta debe tener al menos 2 opciones válidas',
+          variant: 'destructive',
+        });
         return;
       }
     }
@@ -86,29 +96,32 @@ const CreateSurveyDialog = ({ open, onClose, onSurveyCreated }) => {
       id: Date.now().toString(),
       title: title.trim(),
       description: description.trim(),
-      questions: questions.map(q => ({
+      questions: questions.map((q) => ({
         ...q,
-        options: q.options.filter(opt => opt.trim())
+        options: q.options.filter((opt) => opt.trim()),
       })),
       author: currentUser.name,
       authorId: currentUser.id,
       career: currentUser.career,
       createdAt: new Date().toISOString(),
       reactions: 0,
-      responses: [] // Array para almacenar respuestas
+      responses: [], // Array para almacenar respuestas
     };
 
     const surveys = JSON.parse(localStorage.getItem('surveys') || '[]');
     surveys.push(newSurvey);
     localStorage.setItem('surveys', JSON.stringify(surveys));
 
-    toast({ title: "¡Encuesta creada!", description: "Tu encuesta ha sido publicada exitosamente" });
-    
+    toast({
+      title: '¡Encuesta creada!',
+      description: 'Tu encuesta ha sido publicada exitosamente',
+    });
+
     // Reset form
     setTitle('');
     setDescription('');
     setQuestions([{ id: 1, text: '', options: ['', ''] }]);
-    
+
     onSurveyCreated();
   };
 
@@ -116,9 +129,11 @@ const CreateSurveyDialog = ({ open, onClose, onSurveyCreated }) => {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold gradient-text">Crear Nueva Encuesta</DialogTitle>
+          <DialogTitle className="text-2xl font-bold gradient-text">
+            Crear Nueva Encuesta
+          </DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="title">Título de la encuesta</Label>
@@ -168,7 +183,7 @@ const CreateSurveyDialog = ({ open, onClose, onSurveyCreated }) => {
                     </Button>
                   )}
                 </div>
-                
+
                 <Input
                   value={question.text}
                   onChange={(e) => updateQuestion(question.id, e.target.value)}
@@ -189,7 +204,7 @@ const CreateSurveyDialog = ({ open, onClose, onSurveyCreated }) => {
                       Opción
                     </Button>
                   </div>
-                  
+
                   {question.options.map((option, optionIndex) => (
                     <div key={optionIndex} className="flex gap-2">
                       <Input

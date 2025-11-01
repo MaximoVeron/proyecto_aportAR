@@ -37,7 +37,6 @@ const navItems = [
   { path: '/', name: 'Inicio', icon: Home },
   { path: '/announcements', name: 'Anuncios', icon: Megaphone, badge: true },
   { path: '/messages', name: 'Mensajes', icon: MessageSquare, badge: true },
-  { path: '/profile', name: 'Mi Perfil', icon: User },
   { path: '/projects', name: 'Proyectos', icon: FolderKanban },
   { path: '/suggestions', name: 'Sugerencias', icon: Lightbulb },
   { path: '/problems', name: 'Problemáticas', icon: AlertTriangle },
@@ -57,10 +56,17 @@ const Dashboard = () => {
     navigate('/');
   };
 
+  const handleProfileClick = () => {
+    navigate('/dashboard/profile');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex transition-colors duration-300">
       <aside className="fixed left-0 top-0 w-64 h-screen bg-white dark:bg-gray-900 shadow-md p-6 flex flex-col z-10">
-        <div className="flex items-center gap-3 mb-10">
+        <div 
+          className="flex items-center gap-3 mb-10 p-2 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+          onClick={handleProfileClick}
+        >
           <Avatar>
             <AvatarImage src={currentUser?.avatar} />
             <AvatarFallback className="bg-gradient-to-br from-green-400 to-green-600 text-white">
@@ -68,7 +74,9 @@ const Dashboard = () => {
             </AvatarFallback>
           </Avatar>
           <div>
-            <p className="font-bold text-gray-800 dark:text-gray-100">{currentUser?.name}</p>
+            <p className="font-bold text-gray-800 dark:text-gray-100 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+              {currentUser?.name}
+            </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">{currentUser?.role}</p>
           </div>
         </div>

@@ -12,21 +12,21 @@ const SurveyResultsDialog = ({ open, onClose, survey }) => {
       return question.options.map((option, index) => ({
         option,
         count: 0,
-        percentage: 0
+        percentage: 0,
       }));
     }
 
     const stats = question.options.map((option, index) => {
-      const count = survey.responses.filter(response => 
-        response.responses[question.id] === index
+      const count = survey.responses.filter(
+        (response) => response.responses[question.id] === index
       ).length;
-      
+
       const percentage = totalResponses > 0 ? (count / totalResponses) * 100 : 0;
-      
+
       return {
         option,
         count,
-        percentage: Math.round(percentage * 100) / 100
+        percentage: Math.round(percentage * 100) / 100,
       };
     });
 
@@ -45,11 +45,9 @@ const SurveyResultsDialog = ({ open, onClose, survey }) => {
             <BarChart3 className="w-6 h-6" />
             Resultados de la Encuesta
           </DialogTitle>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
-            {survey?.title}
-          </p>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">{survey?.title}</p>
         </DialogHeader>
-        
+
         <div className="space-y-6">
           {/* Resumen general */}
           <Card className="border-2 border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20">
@@ -81,7 +79,7 @@ const SurveyResultsDialog = ({ open, onClose, survey }) => {
           {/* Resultados por pregunta */}
           {survey?.questions?.map((question, questionIndex) => {
             const stats = getQuestionStats(question);
-            
+
             return (
               <Card key={question.id} className="border-2 border-gray-200 dark:border-gray-700">
                 <CardHeader>
@@ -89,7 +87,8 @@ const SurveyResultsDialog = ({ open, onClose, survey }) => {
                     Pregunta {questionIndex + 1}: {question.text}
                   </CardTitle>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {totalResponses} respuesta{totalResponses !== 1 ? 's' : ''} total{totalResponses !== 1 ? 'es' : ''}
+                    {totalResponses} respuesta{totalResponses !== 1 ? 's' : ''} total
+                    {totalResponses !== 1 ? 'es' : ''}
                   </p>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -107,7 +106,7 @@ const SurveyResultsDialog = ({ open, onClose, survey }) => {
                         </div>
                       </div>
                       <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                        <div 
+                        <div
                           className="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full transition-all duration-500 ease-out"
                           style={{ width: getProgressBarWidth(stat.percentage) }}
                         />

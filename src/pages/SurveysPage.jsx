@@ -27,7 +27,10 @@ const SurveysPage = () => {
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold gradient-text">Encuestas</h1>
-        <Button onClick={() => setShowCreateDialog(true)} className="bg-green-600 hover:bg-green-700 text-white">
+        <Button
+          onClick={() => setShowCreateDialog(true)}
+          className="bg-green-600 hover:bg-green-700 text-white"
+        >
           <Plus className="w-5 h-5 mr-2" />
           Nueva Encuesta
         </Button>
@@ -35,7 +38,7 @@ const SurveysPage = () => {
 
       <div className="space-y-6">
         {surveys.length > 0 ? (
-          surveys.map(survey => (
+          surveys.map((survey) => (
             <SurveyCard key={survey.id} survey={survey} onUpdate={loadSurveys} />
           ))
         ) : (

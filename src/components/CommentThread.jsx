@@ -43,15 +43,27 @@ const Comment = ({ comment, onReply, onDelete, onReport, level }) => {
             {level < MAX_DEPTH && (
               <>
                 <span>•</span>
-                <button onClick={() => setReplying(!replying)} className="font-semibold hover:underline">Responder</button>
+                <button
+                  onClick={() => setReplying(!replying)}
+                  className="font-semibold hover:underline"
+                >
+                  Responder
+                </button>
               </>
             )}
             <span>•</span>
-            <button onClick={() => onReport(comment.id)} className="font-semibold hover:underline">Reportar</button>
+            <button onClick={() => onReport(comment.id)} className="font-semibold hover:underline">
+              Reportar
+            </button>
             {canDelete && (
               <>
                 <span>•</span>
-                <button onClick={() => onDelete(comment.id)} className="font-semibold text-red-500 hover:underline">Eliminar</button>
+                <button
+                  onClick={() => onDelete(comment.id)}
+                  className="font-semibold text-red-500 hover:underline"
+                >
+                  Eliminar
+                </button>
               </>
             )}
           </div>
@@ -67,14 +79,23 @@ const Comment = ({ comment, onReply, onDelete, onReport, level }) => {
             onKeyPress={(e) => e.key === 'Enter' && handleReply()}
             autoFocus
           />
-          <Button size="sm" onClick={handleReply}>Enviar</Button>
+          <Button size="sm" onClick={handleReply}>
+            Enviar
+          </Button>
         </div>
       )}
 
       {comment.children && comment.children.length > 0 && (
         <div className="pl-6 mt-3 space-y-3 border-l-2 border-gray-200 dark:border-gray-700 ml-4">
-          {comment.children.map(child => (
-            <Comment key={child.id} comment={child} onReply={onReply} onDelete={onDelete} onReport={onReport} level={level + 1} />
+          {comment.children.map((child) => (
+            <Comment
+              key={child.id}
+              comment={child}
+              onReply={onReply}
+              onDelete={onDelete}
+              onReport={onReport}
+              level={level + 1}
+            />
           ))}
         </div>
       )}
@@ -89,12 +110,12 @@ const CommentThread = ({ post, onUpdate, onReportComment }) => {
 
   const buildCommentTree = (comments) => {
     const commentMap = {};
-    comments.forEach(c => {
+    comments.forEach((c) => {
       commentMap[c.id] = { ...c, children: [] };
     });
 
     const tree = [];
-    comments.forEach(c => {
+    comments.forEach((c) => {
       if (c.parentId && commentMap[c.parentId]) {
         commentMap[c.parentId].children.push(commentMap[c.id]);
       } else {
@@ -111,13 +132,13 @@ const CommentThread = ({ post, onUpdate, onReportComment }) => {
 
     // Intentar con posts primero
     let posts = JSON.parse(localStorage.getItem('posts') || '[]');
-    let postIndex = posts.findIndex(p => p.id === post.id);
+    let postIndex = posts.findIndex((p) => p.id === post.id);
     let isPost = postIndex !== -1;
-    
+
     // Si no es un post, intentar con surveys
     if (!isPost) {
       posts = JSON.parse(localStorage.getItem('surveys') || '[]');
-      postIndex = posts.findIndex(p => p.id === post.id);
+      postIndex = posts.findIndex((p) => p.id === post.id);
     }
 
     if (postIndex !== -1) {
@@ -135,66 +156,76 @@ const CommentThread = ({ post, onUpdate, onReportComment }) => {
         posts[postIndex].comments = [];
       }
       posts[postIndex].comments.push(newComment);
-      
+
       // Guardar en el localStorage correspondiente
       if (isPost) {
         localStorage.setItem('posts', JSON.stringify(posts));
       } else {
         localStorage.setItem('surveys', JSON.stringify(posts));
       }
-      
+
       if (parentId) {
         if (parentAuthorId && parentAuthorId !== currentUser.id) {
-          addNotification(parentAuthorId, `${currentUser.name} respondió a tu comentario en "${post.title}"`, `/dashboard/`);
+          addNotification(
+            parentAuthorId,
+            `${currentUser.name} respondió a tu comentario en "${post.title}"`,
+            `/dashboard/`
+          );
         }
       } else {
         if (post.authorId !== currentUser.id) {
-          addNotification(post.authorId, `${currentUser.name} comentó en tu ${isPost ? 'publicación' : 'encuesta'} "${post.title}"`, `/dashboard/`);
+          addNotification(
+            post.authorId,
+            `${currentUser.name} comentó en tu ${isPost ? 'publicación' : 'encuesta'} "${
+              post.title
+            }"`,
+            `/dashboard/`
+          );
         }
       }
 
-      toast({ title: "Comentario agregado" });
+      toast({ title: 'Comentario agregado' });
       onUpdate();
     }
   };
-  
+
   const handleDeleteComment = (commentId) => {
     // Intentar con posts primero
     let posts = JSON.parse(localStorage.getItem('posts') || '[]');
-    let postIndex = posts.findIndex(p => p.id === post.id);
+    let postIndex = posts.findIndex((p) => p.id === post.id);
     let isPost = postIndex !== -1;
-    
+
     // Si no es un post, intentar con surveys
     if (!isPost) {
       posts = JSON.parse(localStorage.getItem('surveys') || '[]');
-      postIndex = posts.findIndex(p => p.id === post.id);
+      postIndex = posts.findIndex((p) => p.id === post.id);
     }
 
     if (postIndex !== -1) {
       const comments = posts[postIndex].comments;
       const commentsToDelete = new Set([commentId]);
       let changed = true;
-      while(changed) {
+      while (changed) {
         changed = false;
         const currentSize = commentsToDelete.size;
-        comments.forEach(c => {
+        comments.forEach((c) => {
           if (c.parentId && commentsToDelete.has(c.parentId)) {
             commentsToDelete.add(c.id);
           }
         });
         if (commentsToDelete.size > currentSize) changed = true;
       }
-      
-      posts[postIndex].comments = comments.filter(c => !commentsToDelete.has(c.id));
-      
+
+      posts[postIndex].comments = comments.filter((c) => !commentsToDelete.has(c.id));
+
       // Guardar en el localStorage correspondiente
       if (isPost) {
         localStorage.setItem('posts', JSON.stringify(posts));
       } else {
         localStorage.setItem('surveys', JSON.stringify(posts));
       }
-      
-      toast({ title: "Comentario eliminado" });
+
+      toast({ title: 'Comentario eliminado' });
       onUpdate();
     }
   };
@@ -213,12 +244,26 @@ const CommentThread = ({ post, onUpdate, onReportComment }) => {
             }
           }}
         />
-        <Button onClick={() => { handleComment(null, comment); setComment(''); }}>Enviar</Button>
+        <Button
+          onClick={() => {
+            handleComment(null, comment);
+            setComment('');
+          }}
+        >
+          Enviar
+        </Button>
       </div>
 
       <div className="space-y-4">
-        {commentTree.map(c => (
-          <Comment key={c.id} comment={c} onReply={handleComment} onDelete={handleDeleteComment} onReport={onReportComment} level={1} />
+        {commentTree.map((c) => (
+          <Comment
+            key={c.id}
+            comment={c}
+            onReply={handleComment}
+            onDelete={handleDeleteComment}
+            onReport={onReportComment}
+            level={1}
+          />
         ))}
       </div>
     </div>
