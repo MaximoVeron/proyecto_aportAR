@@ -39,8 +39,8 @@ const PostCard = ({ post, onUpdate }) => {
     if (!comment.trim()) return;
 
     const posts = JSON.parse(localStorage.getItem('posts') || '[]');
-    const postIndex = posts.findIndex(p => p.id === post.id);
-    
+    const postIndex = posts.findIndex((p) => p.id === post.id);
+
     if (postIndex !== -1) {
       if (!posts[postIndex].comments) posts[postIndex].comments = [];
       posts[postIndex].comments.push({
@@ -48,35 +48,35 @@ const PostCard = ({ post, onUpdate }) => {
         author: currentUser.name,
         authorId: currentUser.id,
         text: comment,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
       });
       localStorage.setItem('posts', JSON.stringify(posts));
       setComment('');
-      toast({ title: isProblem ? "Propuesta enviada" : "Comentario agregado" });
+      toast({ title: isProblem ? 'Propuesta enviada' : 'Comentario agregado' });
       onUpdate();
     }
   };
 
   const handleLike = () => {
     if (!currentUser) return;
-    
+
     const posts = JSON.parse(localStorage.getItem('posts') || '[]');
     const userLikes = JSON.parse(localStorage.getItem('userLikes') || '{}');
-    const postIndex = posts.findIndex(p => p.id === post.id);
-    
+    const postIndex = posts.findIndex((p) => p.id === post.id);
+
     if (postIndex !== -1) {
       // Inicializar array de likes del usuario si no existe
       if (!userLikes[currentUser.id]) {
         userLikes[currentUser.id] = [];
       }
-      
+
       const userLikesArray = userLikes[currentUser.id];
       const hasLiked = userLikesArray.includes(post.id);
-      
+
       if (hasLiked) {
         // Quitar like
         posts[postIndex].reactions = Math.max(0, posts[postIndex].reactions - 1);
-        userLikes[currentUser.id] = userLikesArray.filter(id => id !== post.id);
+        userLikes[currentUser.id] = userLikesArray.filter((id) => id !== post.id);
         setLiked(false);
       } else {
         // Agregar like
@@ -84,7 +84,7 @@ const PostCard = ({ post, onUpdate }) => {
         userLikes[currentUser.id].push(post.id);
         setLiked(true);
       }
-      
+
       localStorage.setItem('posts', JSON.stringify(posts));
       localStorage.setItem('userLikes', JSON.stringify(userLikes));
       onUpdate();
@@ -93,26 +93,29 @@ const PostCard = ({ post, onUpdate }) => {
 
   const handleDelete = () => {
     const posts = JSON.parse(localStorage.getItem('posts') || '[]');
-    const newPosts = posts.filter(p => p.id !== post.id);
+    const newPosts = posts.filter((p) => p.id !== post.id);
     localStorage.setItem('posts', JSON.stringify(newPosts));
-    toast({ title: "Publicación eliminada" });
+    toast({ title: 'Publicación eliminada' });
     onUpdate();
   };
-  
+
   const getCommenterAvatar = (authorId) => {
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      return users.find(u => u.id === authorId)?.avatar;
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    return users.find((u) => u.id === authorId)?.avatar;
   };
 
   const handleSelectWinner = (commentId) => {
     const posts = JSON.parse(localStorage.getItem('posts') || '[]');
-    const postIndex = posts.findIndex(p => p.id === post.id);
+    const postIndex = posts.findIndex((p) => p.id === post.id);
 
     if (postIndex !== -1) {
       posts[postIndex].winningProposalId = commentId;
       posts[postIndex].status = 'Completado';
       localStorage.setItem('posts', JSON.stringify(posts));
-      toast({ title: "¡Solución seleccionada!", description: "La problemática ha sido marcada como completada." });
+      toast({
+        title: '¡Solución seleccionada!',
+        description: 'La problemática ha sido marcada como completada.',
+      });
       onUpdate();
     }
   };
@@ -123,14 +126,15 @@ const PostCard = ({ post, onUpdate }) => {
   };
 
   const handleReportComment = (commentId) => {
-    const comment = post.comments.find(c => c.id === commentId);
+    const comment = post.comments.find((c) => c.id === commentId);
     if (comment) {
       setReportData({ postId: post.id, commentId: comment.id, authorId: comment.authorId });
       setShowReport(true);
     }
   };
 
-  const canDelete = currentUser?.role === 'admin' || (!isProblem && currentUser?.id === post.authorId);
+  const canDelete =
+    currentUser?.role === 'admin' || (!isProblem && currentUser?.id === post.authorId);
 
   return (
     <motion.div
@@ -165,11 +169,13 @@ const PostCard = ({ post, onUpdate }) => {
         )}
         <div className="flex gap-2 items-center">
           {isProblem && (
-            <span className={`px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1 ${
-              post.status === 'Completado' 
-                ? 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300' 
-                : 'bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300'
-            }`}>
+            <span
+              className={`px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1 ${
+                post.status === 'Completado'
+                  ? 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300'
+                  : 'bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300'
+              }`}
+            >
               {post.status === 'Completado' && <CheckCircle className="w-4 h-4" />}
               {post.status}
             </span>
@@ -183,15 +189,17 @@ const PostCard = ({ post, onUpdate }) => {
       </div>
 
       {post.image && (
-        <img 
-          src={post.image} 
+        <img
+          src={post.image}
           alt={post.title}
           className="w-full max-h-[400px] object-cover rounded-2xl mb-4"
         />
       )}
 
       <h3 className="text-2xl font-bold mb-2">{post.title}</h3>
-      <p className="text-gray-700 dark:text-gray-300 mb-4 whitespace-pre-wrap">{post.description}</p>
+      <p className="text-gray-700 dark:text-gray-300 mb-4 whitespace-pre-wrap">
+        {post.description}
+      </p>
 
       <div className="flex items-center gap-4 mb-4 pt-4 border-t border-gray-200 dark:border-gray-700">
         <Button variant="ghost" size="sm" onClick={handleLike}>
@@ -210,8 +218,8 @@ const PostCard = ({ post, onUpdate }) => {
         )}
       </div>
 
-      {showComments && (
-        isProblem ? (
+      {showComments &&
+        (isProblem ? (
           <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
             <div className="flex gap-2">
               <Input
@@ -223,10 +231,15 @@ const PostCard = ({ post, onUpdate }) => {
               <Button onClick={handleComment}>Enviar</Button>
             </div>
             <div className="space-y-3">
-              {post.comments?.map(c => {
+              {post.comments?.map((c) => {
                 const isWinner = post.winningProposalId === c.id;
                 return (
-                  <div key={c.id} className={`glass-effect rounded-xl p-4 flex gap-3 relative ${isWinner ? 'border-2 border-green-500 bg-green-50 dark:bg-green-900/20' : ''}`}>
+                  <div
+                    key={c.id}
+                    className={`glass-effect rounded-xl p-4 flex gap-3 relative ${
+                      isWinner ? 'border-2 border-green-500 bg-green-50 dark:bg-green-900/20' : ''
+                    }`}
+                  >
                     {isWinner && (
                       <div className="absolute -top-3 -left-3 bg-green-500 text-white rounded-full p-1">
                         <Award className="w-5 h-5" />
@@ -239,11 +252,11 @@ const PostCard = ({ post, onUpdate }) => {
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1">
-                        <p className="font-semibold text-sm">{c.author}</p>
-                        <p className="text-gray-700 dark:text-gray-300">{c.text}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                          {new Date(c.createdAt).toLocaleDateString('es-AR')}
-                        </p>
+                      <p className="font-semibold text-sm">{c.author}</p>
+                      <p className="text-gray-700 dark:text-gray-300">{c.text}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        {new Date(c.createdAt).toLocaleDateString('es-AR')}
+                      </p>
                     </div>
                     {currentUser?.role === 'admin' && !post.winningProposalId && (
                       <Button size="sm" onClick={() => handleSelectWinner(c.id)}>
@@ -258,8 +271,7 @@ const PostCard = ({ post, onUpdate }) => {
           </div>
         ) : (
           <CommentThread post={post} onUpdate={onUpdate} onReportComment={handleReportComment} />
-        )
-      )}
+        ))}
 
       <ReportDialog
         open={showReport}

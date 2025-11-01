@@ -56,7 +56,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex transition-colors duration-300">
-      <aside className="w-64 bg-white dark:bg-gray-900 shadow-md p-6 flex flex-col">
+      <aside className="fixed left-0 top-0 w-64 h-screen bg-white dark:bg-gray-900 shadow-md p-6 flex flex-col z-10">
         <div className="flex items-center gap-3 mb-10">
           <Avatar>
             <AvatarImage src={currentUser?.avatar} />
@@ -141,7 +141,7 @@ const Dashboard = () => {
         </div>
       </aside>
 
-      <main className="flex-1 p-8 overflow-y-auto">
+      <main className="flex-1 ml-64 p-8 overflow-y-auto h-screen">
         <div className="flex justify-end mb-4">
           <NotificationBell />
         </div>
