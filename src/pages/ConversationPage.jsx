@@ -6,28 +6,32 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Send, ArrowLeft, MessageSquare } from 'lucide-react';
+import { Send, ArrowLeft, MessageSquare, Paperclip } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from '@/components/ui/use-toast';
+import MessageFile from '@/components/MessageFile';
+import FileUpload from '@/components/FileUpload';
 
 const ConversationPage = () => {
   const { conversationId } = useParams();
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const { getConversationByIdFromStorage, sendMessage, markConversationAsRead } = useMessaging();
+  const { getConversationByIdFromStorage, sendMessage, sendFileMessage, markConversationAsRead } =
+    useMessaging();
   const [conversation, setConversation] = useState(null);
   const [newMessage, setNewMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [lastMessageCount, setLastMessageCount] = useState(0);
+  const [showFileUpload, setShowFileUpload] = useState(false);
   const messagesEndRef = useRef(null);
   const pollingIntervalRef = useRef(null);
 
   // Función para cargar la conversación desde localStorage
   const loadConversation = useCallback(() => {
     if (!conversationId) return;
-    
+
     const conv = getConversationByIdFromStorage(conversationId);
-    
+
     if (!conv) {
       setConversation(null);
       return;
@@ -35,22 +39,28 @@ const ConversationPage = () => {
 
     // Verificar si hay cambios en el número de mensajes
     const newMessageCount = conv.messages.length;
-    
+
     if (!conversation || newMessageCount !== lastMessageCount) {
       console.log('Actualizando conversación:', {
         oldCount: lastMessageCount,
         newCount: newMessageCount,
-        conversationId
+        conversationId,
       });
-      
+
       setConversation(conv);
       setLastMessageCount(newMessageCount);
-      
+
       if (conv) {
         markConversationAsRead(conversationId);
       }
     }
-  }, [conversationId, conversation, lastMessageCount, getConversationByIdFromStorage, markConversationAsRead]);
+  }, [
+    conversationId,
+    conversation,
+    lastMessageCount,
+    getConversationByIdFromStorage,
+    markConversationAsRead,
+  ]);
 
   useEffect(() => {
     // Cargar conversación inicial
@@ -86,18 +96,45 @@ const ConversationPage = () => {
     if (result.success) {
       console.log('Mensaje enviado exitosamente:', result);
       setNewMessage('');
-      
+
       // Forzar actualización inmediata
       setTimeout(() => {
         loadConversation();
       }, 200);
-      
+
       setIsSending(false);
     } else {
       setIsSending(false);
       toast({
         title: 'Error al enviar mensaje',
         description: result.error || 'No se pudo enviar el mensaje',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleFileSelect = async (file, caption) => {
+    if (!conversation || isSending) return;
+
+    setIsSending(true);
+    setShowFileUpload(false);
+
+    const result = await sendFileMessage(conversation.otherParticipant.id, file, caption);
+
+    if (result.success) {
+      console.log('Archivo enviado exitosamente:', result);
+
+      // Forzar actualización inmediata
+      setTimeout(() => {
+        loadConversation();
+      }, 200);
+
+      setIsSending(false);
+    } else {
+      setIsSending(false);
+      toast({
+        title: 'Error al enviar archivo',
+        description: result.error || 'No se pudo enviar el archivo',
         variant: 'destructive',
       });
     }
@@ -161,7 +198,14 @@ const ConversationPage = () => {
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-bl-none'
                 )}
               >
-                <p className="text-sm">{msg.content}</p>
+                {msg.type === 'file' && msg.fileData ? (
+                  <div className="space-y-2">
+                    <MessageFile fileData={msg.fileData} />
+                    {msg.content && <p className="text-sm">{msg.content}</p>}
+                  </div>
+                ) : (
+                  <p className="text-sm">{msg.content}</p>
+                )}
               </div>
             </div>
           ))
@@ -170,24 +214,51 @@ const ConversationPage = () => {
       </div>
 
       <div className="mt-6 p-4 border-t dark:border-gray-700">
-        <div className="flex items-center gap-4">
-          <Textarea
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Escribe un mensaje..."
-            className="flex-1"
+        {showFileUpload ? (
+          <div className="mb-4">
+            <FileUpload
+              onFileSelect={handleFileSelect}
+              onCancel={() => setShowFileUpload(false)}
+              disabled={isSending}
+            />
+          </div>
+        ) : null}
+
+        <div className="flex items-end gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setShowFileUpload(!showFileUpload)}
             disabled={isSending}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey && !isSending) {
-                e.preventDefault();
-                handleSendMessage();
-              }
-            }}
-          />
-          <Button onClick={handleSendMessage} disabled={!newMessage.trim() || isSending}>
-            <Send className="w-5 h-5 mr-2" />
-            {isSending ? 'Enviando...' : 'Enviar'}
+            className="flex-shrink-0"
+          >
+            <Paperclip className="w-5 h-5" />
           </Button>
+
+          <div className="flex-1 flex items-end gap-2">
+            <Textarea
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              placeholder="Escribe un mensaje..."
+              className="flex-1 min-h-[40px] resize-none"
+              disabled={isSending}
+              rows={1}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey && !isSending) {
+                  e.preventDefault();
+                  handleSendMessage();
+                }
+              }}
+            />
+            <Button
+              onClick={handleSendMessage}
+              disabled={!newMessage.trim() || isSending}
+              className="flex-shrink-0"
+            >
+              <Send className="w-4 h-4 mr-2" />
+              {isSending ? 'Enviando...' : 'Enviar'}
+            </Button>
+          </div>
         </div>
       </div>
     </motion.div>

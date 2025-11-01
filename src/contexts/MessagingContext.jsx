@@ -15,6 +15,16 @@ export function MessagingProvider({ children }) {
   const [unreadMessagesCount, setUnreadMessagesCount] = useState(0);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
 
+  // Función para convertir archivos a base64
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
   const loadConversations = useCallback(() => {
     if (!currentUser) return;
     const allConversations = JSON.parse(localStorage.getItem('conversations') || '[]');
@@ -80,7 +90,7 @@ export function MessagingProvider({ children }) {
           if (lastModified > lastUpdate) {
             console.log('Detectado cambio en mensajes, actualizando...', {
               lastModified: new Date(lastModified),
-              lastUpdate: new Date(lastUpdate)
+              lastUpdate: new Date(lastUpdate),
             });
             setLastUpdate(lastModified);
             loadConversations();
@@ -124,8 +134,63 @@ export function MessagingProvider({ children }) {
     );
   };
 
-  const sendMessage = (recipientId, content) => {
+  const sendFileMessage = async (recipientId, file, caption = '') => {
     if (!currentUser) return { success: false, error: 'No hay usuario autenticado' };
+    if (!file) return { success: false, error: 'No se seleccionó ningún archivo' };
+
+    // Validar tamaño del archivo (máximo 10MB)
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+      return { success: false, error: 'El archivo es demasiado grande (máximo 10MB)' };
+    }
+
+    // Validar tipos de archivo permitidos
+    const allowedTypes = [
+      'image/jpeg',
+      'image/jpg',
+      'image/png',
+      'image/gif',
+      'image/webp',
+      'application/pdf',
+      'text/plain',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/vnd.ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+      return {
+        success: false,
+        error:
+          'Tipo de archivo no permitido. Solo se permiten imágenes, PDF y documentos de oficina.',
+      };
+    }
+
+    try {
+      const base64Data = await fileToBase64(file);
+
+      const fileData = {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        data: base64Data,
+        isImage: file.type.startsWith('image/'),
+      };
+
+      return sendMessage(recipientId, caption, fileData);
+    } catch (error) {
+      return { success: false, error: 'Error al procesar el archivo' };
+    }
+  };
+
+  const sendMessage = (recipientId, content, fileData = null) => {
+    if (!currentUser) return { success: false, error: 'No hay usuario autenticado' };
+
+    // Validación de contenido: debe haber texto o archivo
+    if (!content?.trim() && !fileData) {
+      return { success: false, error: 'No se puede enviar un mensaje vacío' };
+    }
 
     // Validación de roles actualizada
     if (currentUser.role === 'estudiante') {
@@ -147,19 +212,21 @@ export function MessagingProvider({ children }) {
     }
 
     let allConversations = JSON.parse(localStorage.getItem('conversations') || '[]');
-    
+
     // Buscar conversación existente
-    let conversationIndex = allConversations.findIndex(c => 
-      c.participants.includes(currentUser.id) && c.participants.includes(recipientId)
+    let conversationIndex = allConversations.findIndex(
+      (c) => c.participants.includes(currentUser.id) && c.participants.includes(recipientId)
     );
 
     const message = {
       id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       senderId: currentUser.id,
       recipientId,
-      content,
+      content: content?.trim() || '',
       timestamp: new Date().toISOString(),
       read: false,
+      type: fileData ? 'file' : 'text',
+      fileData: fileData || null,
     };
 
     let conversationId;
@@ -187,15 +254,15 @@ export function MessagingProvider({ children }) {
     // Send notification
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const sender = users.find((u) => u.id === currentUser.id);
-    addNotification(
-      recipientId,
-      `Nuevo mensaje de ${sender.name}`,
-      `/dashboard/messages/${conversationId}`
-    );
+    const notificationContent = fileData
+      ? `${sender.name} envió un archivo`
+      : `Nuevo mensaje de ${sender.name}`;
+
+    addNotification(recipientId, notificationContent, `/dashboard/messages/${conversationId}`);
 
     // Forzar recarga inmediata
     loadConversations();
-    
+
     return { success: true, conversationId };
   };
 
@@ -273,6 +340,7 @@ export function MessagingProvider({ children }) {
     conversations,
     unreadMessagesCount,
     sendMessage,
+    sendFileMessage,
     createConversation,
     getConversationById,
     getConversationByIdFromStorage,
