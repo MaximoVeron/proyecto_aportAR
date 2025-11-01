@@ -7,9 +7,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, ArrowLeft, MessageSquare, Paperclip } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { toast } from '@/components/ui/use-toast';
 import MessageFile from '@/components/MessageFile';
+import MessageBubble from '@/components/MessageBubble';
 import FileUpload from '@/components/FileUpload';
 
 const ConversationPage = () => {
@@ -183,31 +183,12 @@ const ConversationPage = () => {
           </div>
         ) : (
           conversation.messages.map((msg) => (
-            <div
+            <MessageBubble
               key={msg.id}
-              className={cn(
-                'flex items-end gap-2 max-w-lg',
-                msg.senderId === currentUser.id ? 'ml-auto flex-row-reverse' : 'mr-auto'
-              )}
-            >
-              <div
-                className={cn(
-                  'rounded-2xl px-4 py-2',
-                  msg.senderId === currentUser.id
-                    ? 'bg-green-600 text-white rounded-br-none'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-bl-none'
-                )}
-              >
-                {msg.type === 'file' && msg.fileData ? (
-                  <div className="space-y-2">
-                    <MessageFile fileData={msg.fileData} />
-                    {msg.content && <p className="text-sm">{msg.content}</p>}
-                  </div>
-                ) : (
-                  <p className="text-sm">{msg.content}</p>
-                )}
-              </div>
-            </div>
+              message={msg}
+              conversationId={conversationId}
+              onMessageUpdate={loadConversation}
+            />
           ))
         )}
         <div ref={messagesEndRef} />

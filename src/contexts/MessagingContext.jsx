@@ -336,11 +336,94 @@ export function MessagingProvider({ children }) {
     return [];
   };
 
+  const editMessage = (conversationId, messageId, newContent) => {
+    if (!currentUser) return { success: false, error: 'No hay usuario autenticado' };
+    if (!newContent?.trim()) {
+      return { success: false, error: 'El mensaje no puede estar vacío' };
+    }
+
+    let allConversations = JSON.parse(localStorage.getItem('conversations') || '[]');
+    const convIndex = allConversations.findIndex((c) => c.id === conversationId);
+
+    if (convIndex === -1) {
+      return { success: false, error: 'Conversación no encontrada' };
+    }
+
+    const conversation = allConversations[convIndex];
+    const messageIndex = conversation.messages.findIndex((m) => m.id === messageId);
+
+    if (messageIndex === -1) {
+      return { success: false, error: 'Mensaje no encontrado' };
+    }
+
+    const message = conversation.messages[messageIndex];
+
+    // Verificar que el usuario sea el autor del mensaje
+    if (message.senderId !== currentUser.id) {
+      return { success: false, error: 'No tienes permisos para editar este mensaje' };
+    }
+
+    // No permitir editar mensajes de archivo
+    if (message.type === 'file') {
+      return { success: false, error: 'No se pueden editar mensajes con archivos' };
+    }
+
+    // Actualizar el mensaje
+    allConversations[convIndex].messages[messageIndex] = {
+      ...message,
+      content: newContent.trim(),
+      editedAt: new Date().toISOString(),
+      isEdited: true,
+    };
+
+    localStorage.setItem('conversations', JSON.stringify(allConversations));
+    setLastUpdate(Date.now());
+    loadConversations();
+
+    return { success: true };
+  };
+
+  const deleteMessage = (conversationId, messageId) => {
+    if (!currentUser) return { success: false, error: 'No hay usuario autenticado' };
+
+    let allConversations = JSON.parse(localStorage.getItem('conversations') || '[]');
+    const convIndex = allConversations.findIndex((c) => c.id === conversationId);
+
+    if (convIndex === -1) {
+      return { success: false, error: 'Conversación no encontrada' };
+    }
+
+    const conversation = allConversations[convIndex];
+    const messageIndex = conversation.messages.findIndex((m) => m.id === messageId);
+
+    if (messageIndex === -1) {
+      return { success: false, error: 'Mensaje no encontrado' };
+    }
+
+    const message = conversation.messages[messageIndex];
+
+    // Verificar que el usuario sea el autor del mensaje
+    if (message.senderId !== currentUser.id) {
+      return { success: false, error: 'No tienes permisos para eliminar este mensaje' };
+    }
+
+    // Eliminar el mensaje
+    allConversations[convIndex].messages.splice(messageIndex, 1);
+
+    localStorage.setItem('conversations', JSON.stringify(allConversations));
+    setLastUpdate(Date.now());
+    loadConversations();
+
+    return { success: true };
+  };
+
   const value = {
     conversations,
     unreadMessagesCount,
     sendMessage,
     sendFileMessage,
+    editMessage,
+    deleteMessage,
     createConversation,
     getConversationById,
     getConversationByIdFromStorage,
