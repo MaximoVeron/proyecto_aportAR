@@ -30,13 +30,30 @@ function App() {
             <MessagingProvider>
               <Helmet>
                 <title>aportAR Politécnico - Red Social Institucional</title>
-                <meta name="description" content="Plataforma de comunicación y colaboración para el Instituto Politécnico de Formosa" />
+                <meta
+                  name="description"
+                  content="Plataforma de comunicación y colaboración para el Instituto Politécnico de Formosa"
+                />
               </Helmet>
               <Router>
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
-                  <Route path="/auth" element={<PublicRoute><AuthPage /></PublicRoute>} />
-                  <Route path="/dashboard/*" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+                  <Route
+                    path="/auth"
+                    element={
+                      <PublicRoute>
+                        <AuthPage />
+                      </PublicRoute>
+                    }
+                  />
+                  <Route
+                    path="/dashboard/*"
+                    element={
+                      <PrivateRoute>
+                        <Dashboard />
+                      </PrivateRoute>
+                    }
+                  />
                 </Routes>
               </Router>
               <Toaster />

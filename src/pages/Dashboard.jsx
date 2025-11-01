@@ -1,7 +1,19 @@
 import React from 'react';
 import { Routes, Route, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, User, FolderKanban, Lightbulb, AlertTriangle, Shield, LogOut, Moon, Sun, Megaphone, MessageSquare } from 'lucide-react';
+import {
+  Home,
+  User,
+  FolderKanban,
+  Lightbulb,
+  AlertTriangle,
+  Shield,
+  LogOut,
+  Moon,
+  Sun,
+  Megaphone,
+  MessageSquare,
+} from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
@@ -59,7 +71,7 @@ const Dashboard = () => {
         </div>
 
         <nav className="flex-1 space-y-2">
-          {navItems.map(item => (
+          {navItems.map((item) => (
             <NavLink
               key={item.path}
               to={`/dashboard${item.path}`}
@@ -106,11 +118,23 @@ const Dashboard = () => {
         </nav>
 
         <div className="space-y-2">
-          <Button variant="ghost" className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" onClick={toggleTheme}>
-            {theme === 'light' ? <Moon className="w-5 h-5 mr-3" /> : <Sun className="w-5 h-5 mr-3" />}
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            onClick={toggleTheme}
+          >
+            {theme === 'light' ? (
+              <Moon className="w-5 h-5 mr-3" />
+            ) : (
+              <Sun className="w-5 h-5 mr-3" />
+            )}
             Modo {theme === 'light' ? 'Oscuro' : 'Claro'}
           </Button>
-          <Button variant="ghost" className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" onClick={handleLogout}>
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            onClick={handleLogout}
+          >
             <LogOut className="w-5 h-5 mr-3" />
             Cerrar Sesión
           </Button>
