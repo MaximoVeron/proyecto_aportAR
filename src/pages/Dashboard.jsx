@@ -13,6 +13,7 @@ import {
   Sun,
   Megaphone,
   MessageSquare,
+  BarChart3,
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -27,6 +28,7 @@ import AdminPage from '@/pages/AdminPage';
 import AnnouncementsPage from '@/pages/AnnouncementsPage';
 import MessagesPage from '@/pages/MessagesPage';
 import ConversationPage from '@/pages/ConversationPage';
+import SurveysPage from '@/pages/SurveysPage';
 import NotificationBell from '@/components/NotificationBell';
 import { useAnnouncements } from '@/contexts/AnnouncementsContext';
 import { useMessaging } from '@/contexts/MessagingContext';
@@ -39,6 +41,7 @@ const navItems = [
   { path: '/projects', name: 'Proyectos', icon: FolderKanban },
   { path: '/suggestions', name: 'Sugerencias', icon: Lightbulb },
   { path: '/problems', name: 'Problemáticas', icon: AlertTriangle },
+  { path: '/surveys', name: 'Encuestas', icon: BarChart3 },
 ];
 
 const Dashboard = () => {
@@ -161,6 +164,7 @@ const Dashboard = () => {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/suggestions" element={<SuggestionsPage />} />
             <Route path="/problems" element={<ProblemsPage />} />
+            <Route path="/surveys" element={<SurveysPage />} />
             {currentUser?.role === 'admin' && <Route path="/admin" element={<AdminPage />} />}
           </Routes>
         </motion.div>

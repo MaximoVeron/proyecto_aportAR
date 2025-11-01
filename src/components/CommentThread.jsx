@@ -109,8 +109,16 @@ const CommentThread = ({ post, onUpdate, onReportComment }) => {
   const handleComment = (parentId = null, text, parentAuthorId = null) => {
     if (!text.trim()) return;
 
-    const posts = JSON.parse(localStorage.getItem('posts') || '[]');
-    const postIndex = posts.findIndex(p => p.id === post.id);
+    // Intentar con posts primero
+    let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+    let postIndex = posts.findIndex(p => p.id === post.id);
+    let isPost = postIndex !== -1;
+    
+    // Si no es un post, intentar con surveys
+    if (!isPost) {
+      posts = JSON.parse(localStorage.getItem('surveys') || '[]');
+      postIndex = posts.findIndex(p => p.id === post.id);
+    }
 
     if (postIndex !== -1) {
       const newComment = {
@@ -127,7 +135,13 @@ const CommentThread = ({ post, onUpdate, onReportComment }) => {
         posts[postIndex].comments = [];
       }
       posts[postIndex].comments.push(newComment);
-      localStorage.setItem('posts', JSON.stringify(posts));
+      
+      // Guardar en el localStorage correspondiente
+      if (isPost) {
+        localStorage.setItem('posts', JSON.stringify(posts));
+      } else {
+        localStorage.setItem('surveys', JSON.stringify(posts));
+      }
       
       if (parentId) {
         if (parentAuthorId && parentAuthorId !== currentUser.id) {
@@ -135,7 +149,7 @@ const CommentThread = ({ post, onUpdate, onReportComment }) => {
         }
       } else {
         if (post.authorId !== currentUser.id) {
-          addNotification(post.authorId, `${currentUser.name} comentó en tu publicación "${post.title}"`, `/dashboard/`);
+          addNotification(post.authorId, `${currentUser.name} comentó en tu ${isPost ? 'publicación' : 'encuesta'} "${post.title}"`, `/dashboard/`);
         }
       }
 
@@ -145,8 +159,16 @@ const CommentThread = ({ post, onUpdate, onReportComment }) => {
   };
   
   const handleDeleteComment = (commentId) => {
-    const posts = JSON.parse(localStorage.getItem('posts') || '[]');
-    const postIndex = posts.findIndex(p => p.id === post.id);
+    // Intentar con posts primero
+    let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+    let postIndex = posts.findIndex(p => p.id === post.id);
+    let isPost = postIndex !== -1;
+    
+    // Si no es un post, intentar con surveys
+    if (!isPost) {
+      posts = JSON.parse(localStorage.getItem('surveys') || '[]');
+      postIndex = posts.findIndex(p => p.id === post.id);
+    }
 
     if (postIndex !== -1) {
       const comments = posts[postIndex].comments;
@@ -164,7 +186,14 @@ const CommentThread = ({ post, onUpdate, onReportComment }) => {
       }
       
       posts[postIndex].comments = comments.filter(c => !commentsToDelete.has(c.id));
-      localStorage.setItem('posts', JSON.stringify(posts));
+      
+      // Guardar en el localStorage correspondiente
+      if (isPost) {
+        localStorage.setItem('posts', JSON.stringify(posts));
+      } else {
+        localStorage.setItem('surveys', JSON.stringify(posts));
+      }
+      
       toast({ title: "Comentario eliminado" });
       onUpdate();
     }
