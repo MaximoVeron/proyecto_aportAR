@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useMessaging } from '@/contexts/MessagingContext';
@@ -18,64 +18,64 @@ const ConversationPage = () => {
   const [conversation, setConversation] = useState(null);
   const [newMessage, setNewMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
+  const [lastMessageCount, setLastMessageCount] = useState(0);
   const messagesEndRef = useRef(null);
   const pollingIntervalRef = useRef(null);
 
   // Función para cargar la conversación desde localStorage
-  const loadConversation = () => {
+  const loadConversation = useCallback(() => {
     if (!conversationId) return;
+    
     const conv = getConversationByIdFromStorage(conversationId);
-
-    // Solo actualizar si hay cambios reales en los mensajes
-    if (!conversation || !conv) {
-      setConversation(conv);
-      if (conv) {
-        markConversationAsRead(conversationId);
-      }
+    
+    if (!conv) {
+      setConversation(null);
       return;
     }
 
-    // Comparar los IDs de mensajes para detectar cambios
-    const currentMessageIds = conversation.messages.map((m) => m.id).sort();
-    const newMessageIds = conv.messages.map((m) => m.id).sort();
-    const hasChanges =
-      currentMessageIds.length !== newMessageIds.length ||
-      currentMessageIds.some((id, index) => id !== newMessageIds[index]);
-
-    if (hasChanges) {
+    // Verificar si hay cambios en el número de mensajes
+    const newMessageCount = conv.messages.length;
+    
+    if (!conversation || newMessageCount !== lastMessageCount) {
+      console.log('Actualizando conversación:', {
+        oldCount: lastMessageCount,
+        newCount: newMessageCount,
+        conversationId
+      });
+      
       setConversation(conv);
+      setLastMessageCount(newMessageCount);
+      
       if (conv) {
         markConversationAsRead(conversationId);
       }
     }
-  };
+  }, [conversationId, conversation, lastMessageCount, getConversationByIdFromStorage, markConversationAsRead]);
 
   useEffect(() => {
+    // Cargar conversación inicial
     loadConversation();
 
     // Configurar polling para esta conversación específica
     pollingIntervalRef.current = setInterval(() => {
       loadConversation();
-    }, 2000); // Polling cada 2 segundos para esta conversación
+    }, 1500); // Polling cada 1.5 segundos
 
     return () => {
       if (pollingIntervalRef.current) {
         clearInterval(pollingIntervalRef.current);
       }
     };
-  }, [conversationId]);
+  }, [loadConversation]);
 
   useEffect(() => {
-    const conv = getConversationByIdFromStorage(conversationId);
-    setConversation(conv);
-    if (conv) {
-      markConversationAsRead(conversationId);
+    // Scroll al final cuando cambien los mensajes
+    if (conversation?.messages?.length > 0) {
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
-  }, [conversationId, getConversationByIdFromStorage, markConversationAsRead]);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [conversation?.messages]);
+  }, [conversation?.messages?.length]);
 
   const handleSendMessage = async () => {
     if (newMessage.trim() === '' || !conversation || isSending) return;
@@ -84,12 +84,15 @@ const ConversationPage = () => {
     const result = sendMessage(conversation.otherParticipant.id, newMessage.trim());
 
     if (result.success) {
+      console.log('Mensaje enviado exitosamente:', result);
       setNewMessage('');
-      // Actualizar inmediatamente la conversación local
+      
+      // Forzar actualización inmediata
       setTimeout(() => {
         loadConversation();
-        setIsSending(false);
-      }, 100);
+      }, 200);
+      
+      setIsSending(false);
     } else {
       setIsSending(false);
       toast({

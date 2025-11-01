@@ -57,7 +57,7 @@ export function MessagingProvider({ children }) {
   useEffect(() => {
     loadConversations();
 
-    // Polling para detectar cambios en localStorage cada 3 segundos
+    // Polling para detectar cambios en localStorage cada 2 segundos
     const interval = setInterval(() => {
       if (!currentUser) return;
 
@@ -68,20 +68,26 @@ export function MessagingProvider({ children }) {
           c.participants.includes(currentUser.id)
         );
 
-        const lastModified = Math.max(
-          ...userConversations.flatMap((conv) =>
-            conv.messages.map((msg) => new Date(msg.timestamp).getTime())
-          ),
-          0
-        );
+        if (userConversations.length > 0) {
+          const lastModified = Math.max(
+            ...userConversations.flatMap((conv) =>
+              conv.messages.map((msg) => new Date(msg.timestamp).getTime())
+            ),
+            0
+          );
 
-        // Solo recargar si hay cambios nuevos
-        if (lastModified > lastUpdate) {
-          setLastUpdate(lastModified);
-          loadConversations();
+          // Solo recargar si hay cambios nuevos
+          if (lastModified > lastUpdate) {
+            console.log('Detectado cambio en mensajes, actualizando...', {
+              lastModified: new Date(lastModified),
+              lastUpdate: new Date(lastUpdate)
+            });
+            setLastUpdate(lastModified);
+            loadConversations();
+          }
         }
       }
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [loadConversations, lastUpdate, currentUser]);
@@ -139,14 +145,16 @@ export function MessagingProvider({ children }) {
         };
       }
     }
-    // Los roles privilegiados (admin, profesor, administrativo) pueden enviar mensajes a cualquier usuario
-    // No necesitan validación adicional
 
     let allConversations = JSON.parse(localStorage.getItem('conversations') || '[]');
-    let conversation = getConversationWithUser(recipientId);
+    
+    // Buscar conversación existente
+    let conversationIndex = allConversations.findIndex(c => 
+      c.participants.includes(currentUser.id) && c.participants.includes(recipientId)
+    );
 
     const message = {
-      id: Date.now().toString(),
+      id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       senderId: currentUser.id,
       recipientId,
       content,
@@ -154,15 +162,21 @@ export function MessagingProvider({ children }) {
       read: false,
     };
 
-    if (conversation) {
-      conversation.messages.push(message);
+    let conversationId;
+
+    if (conversationIndex !== -1) {
+      // Conversación existente
+      allConversations[conversationIndex].messages.push(message);
+      conversationId = allConversations[conversationIndex].id;
     } else {
-      conversation = {
+      // Nueva conversación
+      const newConversation = {
         id: `conv_${currentUser.id}_${recipientId}_${Date.now()}`,
         participants: [currentUser.id, recipientId],
         messages: [message],
       };
-      allConversations.push(conversation);
+      allConversations.push(newConversation);
+      conversationId = newConversation.id;
     }
 
     localStorage.setItem('conversations', JSON.stringify(allConversations));
@@ -176,11 +190,13 @@ export function MessagingProvider({ children }) {
     addNotification(
       recipientId,
       `Nuevo mensaje de ${sender.name}`,
-      `/dashboard/messages/${conversation.id}`
+      `/dashboard/messages/${conversationId}`
     );
 
+    // Forzar recarga inmediata
     loadConversations();
-    return { success: true, conversationId: conversation.id };
+    
+    return { success: true, conversationId };
   };
 
   const markConversationAsRead = (conversationId) => {
