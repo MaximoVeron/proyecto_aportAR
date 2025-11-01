@@ -14,6 +14,7 @@ import {
   Megaphone,
   MessageSquare,
   BarChart3,
+  Newspaper,
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -29,12 +30,14 @@ import AnnouncementsPage from '@/pages/AnnouncementsPage';
 import MessagesPage from '@/pages/MessagesPage';
 import ConversationPage from '@/pages/ConversationPage';
 import SurveysPage from '@/pages/SurveysPage';
+import NewsPage from '@/pages/NewsPage';
 import NotificationBell from '@/components/NotificationBell';
 import { useAnnouncements } from '@/contexts/AnnouncementsContext';
 import { useMessaging } from '@/contexts/MessagingContext';
 
 const navItems = [
   { path: '/', name: 'Inicio', icon: Home },
+  { path: '/news', name: 'Noticias', icon: Newspaper },
   { path: '/announcements', name: 'Anuncios', icon: Megaphone, badge: true },
   { path: '/messages', name: 'Mensajes', icon: MessageSquare, badge: true },
   { path: '/projects', name: 'Proyectos', icon: FolderKanban },
@@ -63,7 +66,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex transition-colors duration-300">
       <aside className="fixed left-0 top-0 w-64 h-screen bg-white dark:bg-gray-900 shadow-md p-6 flex flex-col z-10">
-        <div 
+        <div
           className="flex items-center gap-3 mb-10 p-2 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
           onClick={handleProfileClick}
         >
@@ -165,6 +168,7 @@ const Dashboard = () => {
         >
           <Routes>
             <Route path="/" element={<FeedPage />} />
+            <Route path="/news" element={<NewsPage />} />
             <Route path="/announcements" element={<AnnouncementsPage />} />
             <Route path="/messages" element={<MessagesPage />} />
             <Route path="/messages/:conversationId" element={<ConversationPage />} />
