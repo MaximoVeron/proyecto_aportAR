@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Routes, Route, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -12,6 +13,14 @@ import {
   Moon,
   Sun,
   Megaphone,
+import {
+  Home,
+  User,
+  FolderKanban,
+  Lightbulb,
+  AlertTriangle,
+  Megaphone,
+  HelpCircle,
   MessageSquare,
   BarChart3,
   Newspaper,
@@ -25,6 +34,7 @@ import ProfilePage from '@/pages/ProfilePage';
 import ProjectsPage from '@/pages/ProjectsPage';
 import SuggestionsPage from '@/pages/SuggestionsPage';
 import ProblemsPage from '@/pages/ProblemsPage';
+import QueriesPage from '@/pages/QueriesPage';
 import AdminPage from '@/pages/AdminPage';
 import AnnouncementsPage from '@/pages/AnnouncementsPage';
 import MessagesPage from '@/pages/MessagesPage';
@@ -43,7 +53,10 @@ const navItems = [
   { path: '/projects', name: 'Proyectos', icon: FolderKanban },
   { path: '/suggestions', name: 'Sugerencias', icon: Lightbulb },
   { path: '/problems', name: 'Problemáticas', icon: AlertTriangle },
+  { path: '/queries', name: 'Consultas', icon: HelpCircle },
   { path: '/surveys', name: 'Encuestas', icon: BarChart3 },
+];
+
 ];
 
 const Dashboard = () => {
@@ -56,7 +69,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   const handleProfileClick = () => {
@@ -83,6 +96,7 @@ const Dashboard = () => {
             </AvatarFallback>
           </Avatar>
           <div>
+
             <p className="font-bold text-gray-800 dark:text-gray-100 hover:text-green-600 dark:hover:text-green-400 transition-colors">
               {currentUser?.name}
             </p>
@@ -91,16 +105,17 @@ const Dashboard = () => {
         </div>
 
         <nav className={`space-y-2 ${currentUser?.role === 'admin' ? 'mb-4' : 'mb-8'}`}>
+
           {navItems.map((item) => (
             <NavLink
               key={item.path}
               to={`/dashboard${item.path}`}
-              end={item.path === '/'}
+              end={item.path === "/"}
               className={({ isActive }) =>
                 `flex items-center justify-between gap-3 px-4 py-2 rounded-lg transition-colors ${
                   isActive
-                    ? 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 font-bold'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 font-bold"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`
               }
             >
@@ -120,14 +135,14 @@ const Dashboard = () => {
               )}
             </NavLink>
           ))}
-          {currentUser?.role === 'admin' && (
+          {currentUser?.role === "admin" && (
             <NavLink
               to="/dashboard/admin"
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-2 rounded-lg transition-colors ${
                   isActive
-                    ? 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 font-bold'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 font-bold"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`
               }
             >
@@ -136,6 +151,7 @@ const Dashboard = () => {
             </NavLink>
           )}
         </nav>
+
 
         {/* Espaciador flexible para empujar los botones hacia abajo */}
         <div className="flex-1"></div>
@@ -146,12 +162,16 @@ const Dashboard = () => {
             className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={toggleTheme}
           >
+
             {theme === 'light' ? (
+
               <Moon className="w-5 h-5 mr-3" />
             ) : (
               <Sun className="w-5 h-5 mr-3" />
             )}
+
             Modo {theme === 'light' ? 'Oscuro' : 'Claro'}
+
           </Button>
           <Button
             variant="ghost"
@@ -185,8 +205,10 @@ const Dashboard = () => {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/suggestions" element={<SuggestionsPage />} />
             <Route path="/problems" element={<ProblemsPage />} />
-            <Route path="/surveys" element={<SurveysPage />} />
-            {currentUser?.role === 'admin' && <Route path="/admin" element={<AdminPage />} />}
+<Route path="/queries" element={<QueriesPage />} />
+<Route path="/surveys" element={<SurveysPage />} />
+{currentUser?.role === 'admin' && <Route path="/admin" element={<AdminPage />} />}
+
           </Routes>
         </motion.div>
       </main>
