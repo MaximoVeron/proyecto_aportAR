@@ -1,7 +1,12 @@
-
-import React from 'react';
-import { Routes, Route, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React from "react";
+import {
+  Routes,
+  Route,
+  NavLink,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   Home,
   User,
@@ -9,83 +14,69 @@ import {
   Lightbulb,
   AlertTriangle,
   Shield,
-  LogOut,
   Moon,
   Sun,
-  Megaphone,
-import {
-  Home,
-  User,
-  FolderKanban,
-  Lightbulb,
-  AlertTriangle,
   Megaphone,
   HelpCircle,
   MessageSquare,
   BarChart3,
   Newspaper,
-} from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
-import { useTheme } from '@/contexts/ThemeContext';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import FeedPage from '@/pages/FeedPage';
-import ProfilePage from '@/pages/ProfilePage';
-import ProjectsPage from '@/pages/ProjectsPage';
-import SuggestionsPage from '@/pages/SuggestionsPage';
-import ProblemsPage from '@/pages/ProblemsPage';
-import QueriesPage from '@/pages/QueriesPage';
-import AdminPage from '@/pages/AdminPage';
-import AnnouncementsPage from '@/pages/AnnouncementsPage';
-import MessagesPage from '@/pages/MessagesPage';
-import ConversationPage from '@/pages/ConversationPage';
-import SurveysPage from '@/pages/SurveysPage';
-import NewsPage from '@/pages/NewsPage';
-import NotificationBell from '@/components/NotificationBell';
-import { useAnnouncements } from '@/contexts/AnnouncementsContext';
-import { useMessaging } from '@/contexts/MessagingContext';
+} from "lucide-react";
+
+import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "@/contexts/ThemeContext";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import FeedPage from "@/pages/FeedPage";
+import ProfilePage from "@/pages/ProfilePage";
+import ProjectsPage from "@/pages/ProjectsPage";
+import SuggestionsPage from "@/pages/SuggestionsPage";
+import ProblemsPage from "@/pages/ProblemsPage";
+import QueriesPage from "@/pages/QueriesPage";
+import AdminPage from "@/pages/AdminPage";
+import AnnouncementsPage from "@/pages/AnnouncementsPage";
+import MessagesPage from "@/pages/MessagesPage";
+import ConversationPage from "@/pages/ConversationPage";
+import SurveysPage from "@/pages/SurveysPage";
+import NewsPage from "@/pages/NewsPage";
+import NotificationBell from "@/components/NotificationBell";
+import { useAnnouncements } from "@/contexts/AnnouncementsContext";
+import { useMessaging } from "@/contexts/MessagingContext";
 
 const navItems = [
-  { path: '/', name: 'Inicio', icon: Home },
-  { path: '/news', name: 'Noticias', icon: Newspaper },
-  { path: '/announcements', name: 'Anuncios', icon: Megaphone, badge: true },
-  { path: '/messages', name: 'Mensajes', icon: MessageSquare, badge: true },
-  { path: '/projects', name: 'Proyectos', icon: FolderKanban },
-  { path: '/suggestions', name: 'Sugerencias', icon: Lightbulb },
-  { path: '/problems', name: 'Problemáticas', icon: AlertTriangle },
-  { path: '/queries', name: 'Consultas', icon: HelpCircle },
-  { path: '/surveys', name: 'Encuestas', icon: BarChart3 },
-];
-
+  { path: "/", name: "Inicio", icon: Home },
+  { path: "/news", name: "Noticias", icon: Newspaper },
+  { path: "/announcements", name: "Anuncios", icon: Megaphone, badge: true },
+  { path: "/messages", name: "Mensajes", icon: MessageSquare, badge: true },
+  { path: "/projects", name: "Proyectos", icon: FolderKanban },
+  { path: "/suggestions", name: "Sugerencias", icon: Lightbulb },
+  { path: "/problems", name: "Problemáticas", icon: AlertTriangle },
+  { path: "/queries", name: "Consultas", icon: HelpCircle },
+  { path: "/surveys", name: "Encuestas", icon: BarChart3 },
 ];
 
 const Dashboard = () => {
-  const { currentUser, logout } = useAuth();
+  const { currentUser } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const { unreadCount } = useAnnouncements();
   const { unreadMessagesCount } = useMessaging();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
   const handleProfileClick = () => {
-    navigate('/dashboard/profile');
+    navigate("/dashboard/profile");
   };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex transition-colors duration-300">
       <aside
         className={`fixed left-0 top-0 w-64 h-screen bg-white dark:bg-gray-900 shadow-md flex flex-col z-10 ${
-          currentUser?.role === 'admin' ? 'p-4' : 'p-6'
+          currentUser?.role === "admin" ? "p-4" : "p-6"
         }`}
       >
         <div
           className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 ${
-            currentUser?.role === 'admin' ? 'mb-4' : 'mb-6'
+            currentUser?.role === "admin" ? "mb-4" : "mb-6"
           }`}
           onClick={handleProfileClick}
         >
@@ -96,16 +87,20 @@ const Dashboard = () => {
             </AvatarFallback>
           </Avatar>
           <div>
-
             <p className="font-bold text-gray-800 dark:text-gray-100 hover:text-green-600 dark:hover:text-green-400 transition-colors">
               {currentUser?.name}
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{currentUser?.role}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              {currentUser?.role}
+            </p>
           </div>
         </div>
 
-        <nav className={`space-y-2 ${currentUser?.role === 'admin' ? 'mb-4' : 'mb-8'}`}>
-
+        <nav
+          className={`space-y-2 ${
+            currentUser?.role === "admin" ? "mb-4" : "mb-8"
+          }`}
+        >
           {navItems.map((item) => (
             <NavLink
               key={item.path}
@@ -123,16 +118,18 @@ const Dashboard = () => {
                 <item.icon className="w-5 h-5" />
                 <span>{item.name}</span>
               </div>
-              {item.badge && item.name === 'Anuncios' && unreadCount > 0 && (
+              {item.badge && item.name === "Anuncios" && unreadCount > 0 && (
                 <span className="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                   {unreadCount}
                 </span>
               )}
-              {item.badge && item.name === 'Mensajes' && unreadMessagesCount > 0 && (
-                <span className="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                  {unreadMessagesCount}
-                </span>
-              )}
+              {item.badge &&
+                item.name === "Mensajes" &&
+                unreadMessagesCount > 0 && (
+                  <span className="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                    {unreadMessagesCount}
+                  </span>
+                )}
             </NavLink>
           ))}
           {currentUser?.role === "admin" && (
@@ -152,34 +149,22 @@ const Dashboard = () => {
           )}
         </nav>
 
-
-        {/* Espaciador flexible para empujar los botones hacia abajo */}
+        {/* Espaciador flexible para empujar el botón hacia abajo */}
         <div className="flex-1"></div>
 
-        <div className={`space-y-2 ${currentUser?.role === 'admin' ? 'mt-2' : 'mt-4'}`}>
+        {/* Botón de tema - Fijo en la parte inferior */}
+        <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
           <Button
             variant="ghost"
-            className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             onClick={toggleTheme}
           >
-
-            {theme === 'light' ? (
-
+            {theme === "light" ? (
               <Moon className="w-5 h-5 mr-3" />
             ) : (
               <Sun className="w-5 h-5 mr-3" />
             )}
-
-            Modo {theme === 'light' ? 'Oscuro' : 'Claro'}
-
-          </Button>
-          <Button
-            variant="ghost"
-            className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-            onClick={handleLogout}
-          >
-            <LogOut className="w-5 h-5 mr-3" />
-            Cerrar Sesión
+            Modo {theme === "light" ? "Oscuro" : "Claro"}
           </Button>
         </div>
       </aside>
@@ -200,15 +185,19 @@ const Dashboard = () => {
             <Route path="/news" element={<NewsPage />} />
             <Route path="/announcements" element={<AnnouncementsPage />} />
             <Route path="/messages" element={<MessagesPage />} />
-            <Route path="/messages/:conversationId" element={<ConversationPage />} />
+            <Route
+              path="/messages/:conversationId"
+              element={<ConversationPage />}
+            />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/suggestions" element={<SuggestionsPage />} />
             <Route path="/problems" element={<ProblemsPage />} />
-<Route path="/queries" element={<QueriesPage />} />
-<Route path="/surveys" element={<SurveysPage />} />
-{currentUser?.role === 'admin' && <Route path="/admin" element={<AdminPage />} />}
-
+            <Route path="/queries" element={<QueriesPage />} />
+            <Route path="/surveys" element={<SurveysPage />} />
+            {currentUser?.role === "admin" && (
+              <Route path="/admin" element={<AdminPage />} />
+            )}
           </Routes>
         </motion.div>
       </main>
