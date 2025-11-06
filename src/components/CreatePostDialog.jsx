@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/components/ui/use-toast';
-import { X } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { X } from "lucide-react";
 
 const CreatePostDialog = ({ open, onClose, onSubmit, type }) => {
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    imageFile: null
+    title: "",
+    description: "",
+    imageFile: null,
   });
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -19,12 +24,20 @@ const CreatePostDialog = ({ open, onClose, onSubmit, type }) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-          toast({ title: "Error", description: "El archivo es muy grande (máx 5MB)", variant: "destructive" });
-          return;
+        toast({
+          title: "Error",
+          description: "El archivo es muy grande (máx 5MB)",
+          variant: "destructive",
+        });
+        return;
       }
-      if (!['image/jpeg', 'image/png', 'image/gif'].includes(file.type)) {
-          toast({ title: "Error", description: "Formato no permitido (JPG, PNG, GIF)", variant: "destructive" });
-          return;
+      if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
+        toast({
+          title: "Error",
+          description: "Formato no permitido (JPG, PNG, GIF)",
+          variant: "destructive",
+        });
+        return;
       }
       setFormData({ ...formData, imageFile: file });
       setImagePreview(URL.createObjectURL(file));
@@ -37,7 +50,7 @@ const CreatePostDialog = ({ open, onClose, onSubmit, type }) => {
       toast({
         title: "Error",
         description: "Completa todos los campos requeridos",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
@@ -46,19 +59,20 @@ const CreatePostDialog = ({ open, onClose, onSubmit, type }) => {
   };
 
   const resetForm = () => {
-    setFormData({ title: '', description: '', imageFile: null });
+    setFormData({ title: "", description: "", imageFile: null });
     setImagePreview(null);
   };
-  
+
   const handleClose = () => {
     resetForm();
     onClose();
   };
 
   const titles = {
-    project: 'Nuevo Proyecto',
-    suggestion: 'Nueva Sugerencia',
-    problem: 'Nueva Problemática'
+    project: "Nuevo Proyecto",
+    suggestion: "Nueva Sugerencia",
+    problem: "Nueva Problemática",
+    query: "Nueva Consulta",
   };
 
   return (
@@ -73,7 +87,9 @@ const CreatePostDialog = ({ open, onClose, onSubmit, type }) => {
             <Input
               id="title"
               value={formData.title}
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, title: e.target.value })
+              }
               placeholder="Título de tu publicación"
               required
             />
@@ -83,7 +99,9 @@ const CreatePostDialog = ({ open, onClose, onSubmit, type }) => {
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
               placeholder="Describe tu publicación..."
               rows={5}
               required
@@ -101,7 +119,11 @@ const CreatePostDialog = ({ open, onClose, onSubmit, type }) => {
           </div>
           {imagePreview && (
             <div className="relative">
-              <img src={imagePreview} alt="Previsualización" className="w-full max-h-60 object-contain rounded-lg" />
+              <img
+                src={imagePreview}
+                alt="Previsualización"
+                className="w-full max-h-60 object-contain rounded-lg"
+              />
               <Button
                 variant="destructive"
                 size="icon"
@@ -111,7 +133,7 @@ const CreatePostDialog = ({ open, onClose, onSubmit, type }) => {
                   setFormData({ ...formData, imageFile: null });
                 }}
               >
-                <X className="h-4 w-4"/>
+                <X className="h-4 w-4" />
               </Button>
             </div>
           )}

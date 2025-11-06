@@ -1,28 +1,48 @@
-import React from 'react';
-import { Routes, Route, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Home, User, FolderKanban, Lightbulb, AlertTriangle, Shield, LogOut, Moon, Sun, Megaphone } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
-import { useTheme } from '@/contexts/ThemeContext';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import FeedPage from '@/pages/FeedPage';
-import ProfilePage from '@/pages/ProfilePage';
-import ProjectsPage from '@/pages/ProjectsPage';
-import SuggestionsPage from '@/pages/SuggestionsPage';
-import ProblemsPage from '@/pages/ProblemsPage';
-import AdminPage from '@/pages/AdminPage';
-import AnnouncementsPage from '@/pages/AnnouncementsPage';
-import NotificationBell from '@/components/NotificationBell';
-import { useAnnouncements } from '@/contexts/AnnouncementsContext';
+import React from "react";
+import {
+  Routes,
+  Route,
+  NavLink,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  Home,
+  User,
+  FolderKanban,
+  Lightbulb,
+  AlertTriangle,
+  Shield,
+  LogOut,
+  Moon,
+  Sun,
+  Megaphone,
+  HelpCircle,
+} from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "@/contexts/ThemeContext";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import FeedPage from "@/pages/FeedPage";
+import ProfilePage from "@/pages/ProfilePage";
+import ProjectsPage from "@/pages/ProjectsPage";
+import SuggestionsPage from "@/pages/SuggestionsPage";
+import ProblemsPage from "@/pages/ProblemsPage";
+import QueriesPage from "@/pages/QueriesPage";
+import AdminPage from "@/pages/AdminPage";
+import AnnouncementsPage from "@/pages/AnnouncementsPage";
+import NotificationBell from "@/components/NotificationBell";
+import { useAnnouncements } from "@/contexts/AnnouncementsContext";
 
 const navItems = [
-  { path: '/', name: 'Inicio', icon: Home },
-  { path: '/announcements', name: 'Anuncios', icon: Megaphone, badge: true },
-  { path: '/profile', name: 'Mi Perfil', icon: User },
-  { path: '/projects', name: 'Proyectos', icon: FolderKanban },
-  { path: '/suggestions', name: 'Sugerencias', icon: Lightbulb },
-  { path: '/problems', name: 'Problemáticas', icon: AlertTriangle },
+  { path: "/", name: "Inicio", icon: Home },
+  { path: "/announcements", name: "Anuncios", icon: Megaphone, badge: true },
+  { path: "/profile", name: "Mi Perfil", icon: User },
+  { path: "/projects", name: "Proyectos", icon: FolderKanban },
+  { path: "/suggestions", name: "Sugerencias", icon: Lightbulb },
+  { path: "/problems", name: "Problemáticas", icon: AlertTriangle },
+  { path: "/queries", name: "Consultas", icon: HelpCircle },
 ];
 
 const Dashboard = () => {
@@ -34,7 +54,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -48,22 +68,26 @@ const Dashboard = () => {
             </AvatarFallback>
           </Avatar>
           <div>
-            <p className="font-bold text-gray-800 dark:text-gray-100">{currentUser?.name}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{currentUser?.role}</p>
+            <p className="font-bold text-gray-800 dark:text-gray-100">
+              {currentUser?.name}
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              {currentUser?.role}
+            </p>
           </div>
         </div>
 
         <nav className="flex-1 space-y-2">
-          {navItems.map(item => (
+          {navItems.map((item) => (
             <NavLink
               key={item.path}
               to={`/dashboard${item.path}`}
-              end={item.path === '/'}
+              end={item.path === "/"}
               className={({ isActive }) =>
                 `flex items-center justify-between gap-3 px-4 py-2 rounded-lg transition-colors ${
                   isActive
-                    ? 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 font-bold'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 font-bold"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`
               }
             >
@@ -78,14 +102,14 @@ const Dashboard = () => {
               )}
             </NavLink>
           ))}
-          {currentUser?.role === 'admin' && (
+          {currentUser?.role === "admin" && (
             <NavLink
               to="/dashboard/admin"
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-2 rounded-lg transition-colors ${
                   isActive
-                    ? 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 font-bold'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 font-bold"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`
               }
             >
@@ -96,11 +120,23 @@ const Dashboard = () => {
         </nav>
 
         <div className="space-y-2">
-          <Button variant="ghost" className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" onClick={toggleTheme}>
-            {theme === 'light' ? <Moon className="w-5 h-5 mr-3" /> : <Sun className="w-5 h-5 mr-3" />}
-            Modo {theme === 'light' ? 'Oscuro' : 'Claro'}
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            onClick={toggleTheme}
+          >
+            {theme === "light" ? (
+              <Moon className="w-5 h-5 mr-3" />
+            ) : (
+              <Sun className="w-5 h-5 mr-3" />
+            )}
+            Modo {theme === "light" ? "Oscuro" : "Claro"}
           </Button>
-          <Button variant="ghost" className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" onClick={handleLogout}>
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            onClick={handleLogout}
+          >
             <LogOut className="w-5 h-5 mr-3" />
             Cerrar Sesión
           </Button>
@@ -125,7 +161,10 @@ const Dashboard = () => {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/suggestions" element={<SuggestionsPage />} />
             <Route path="/problems" element={<ProblemsPage />} />
-            {currentUser?.role === 'admin' && <Route path="/admin" element={<AdminPage />} />}
+            <Route path="/queries" element={<QueriesPage />} />
+            {currentUser?.role === "admin" && (
+              <Route path="/admin" element={<AdminPage />} />
+            )}
           </Routes>
         </motion.div>
       </main>
