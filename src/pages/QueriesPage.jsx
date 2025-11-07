@@ -119,7 +119,7 @@ const QueriesPage = () => {
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
             <Input
-              placeholder="Buscar por palabra clave en título o descripción..."
+              placeholder="¿Qué quieres consultar?"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"

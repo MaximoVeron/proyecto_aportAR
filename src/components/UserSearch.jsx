@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Search, MessageSquare } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/contexts/AuthContext';
-import { useMessaging } from '@/contexts/MessagingContext';
-import { useNavigate } from 'react-router-dom';
-import { toast } from '@/components/ui/use-toast';
+import React, { useState, useEffect } from "react";
+import { Search, MessageSquare } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
+import { useMessaging } from "@/contexts/MessagingContext";
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/components/ui/use-toast";
 
 const UserSearch = ({ onSelectUser }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const { currentUser } = useAuth();
-  const { getConversationWithUser, createConversation, getContactableUsers } = useMessaging();
+  const { getConversationWithUser, createConversation, getContactableUsers } =
+    useMessaging();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (searchQuery.trim() === '') {
+    if (searchQuery.trim() === "") {
       setSearchResults([]);
       return;
     }
@@ -42,7 +43,7 @@ const UserSearch = ({ onSelectUser }) => {
 
       if (result.success) {
         toast({
-          title: 'Conversación iniciada',
+          title: "Conversación iniciada",
           description: `Conversación creada con ${user.name}`,
         });
 
@@ -50,15 +51,15 @@ const UserSearch = ({ onSelectUser }) => {
         navigate(`/dashboard/messages/${result.conversationId}`);
       } else {
         toast({
-          title: 'Error',
-          description: result.error || 'No se pudo crear la conversación',
-          variant: 'destructive',
+          title: "Error",
+          description: result.error || "No se pudo crear la conversación",
+          variant: "destructive",
         });
       }
     }
 
     // Limpiar búsqueda
-    setSearchQuery('');
+    setSearchQuery("");
     setSearchResults([]);
 
     // Notificar al componente padre si es necesario
@@ -69,29 +70,29 @@ const UserSearch = ({ onSelectUser }) => {
 
   const getRoleBadgeColor = (role) => {
     switch (role) {
-      case 'estudiante':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300';
-      case 'profesor':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300';
-      case 'administrativo':
-        return 'bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300';
-      case 'admin':
-        return 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300';
+      case "estudiante":
+        return "bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300";
+      case "profesor":
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300";
+      case "administrativo":
+        return "bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300";
+      case "admin":
+        return "bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300";
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/50 dark:text-gray-300';
+        return "bg-gray-100 text-gray-800 dark:bg-gray-900/50 dark:text-gray-300";
     }
   };
 
   const getRoleDisplayName = (role) => {
     switch (role) {
-      case 'estudiante':
-        return 'Estudiante';
-      case 'profesor':
-        return 'Profesor';
-      case 'administrativo':
-        return 'Administrativo';
-      case 'admin':
-        return 'Administrador';
+      case "estudiante":
+        return "Estudiante";
+      case "profesor":
+        return "Profesor";
+      case "administrativo":
+        return "Administrativo";
+      case "admin":
+        return "Administrador";
       default:
         return role;
     }
@@ -104,9 +105,9 @@ const UserSearch = ({ onSelectUser }) => {
         <Input
           type="text"
           placeholder={
-            currentUser?.role === 'estudiante'
-              ? 'Buscar profesores, administrativos o administradores...'
-              : 'Buscar cualquier usuario...'
+            currentUser?.role === "estudiante"
+              ? "¿A quién quieres contactar...?"
+              : "Buscar cualquier usuario..."
           }
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -134,7 +135,9 @@ const UserSearch = ({ onSelectUser }) => {
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-medium text-gray-900 dark:text-gray-100">{user.name}</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-100">
+                        {user.name}
+                      </p>
                       <span
                         className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${getRoleBadgeColor(
                           user.role
@@ -159,14 +162,14 @@ const UserSearch = ({ onSelectUser }) => {
         </div>
       )}
 
-      {searchQuery.trim() !== '' && searchResults.length === 0 && (
+      {searchQuery.trim() !== "" && searchResults.length === 0 && (
         <div className="text-center py-8 text-gray-500 dark:text-gray-400">
           <Search className="mx-auto h-12 w-12 mb-2 opacity-50" />
           <p>No se encontraron usuarios con ese nombre</p>
           <p className="text-sm mt-1">
-            {currentUser?.role === 'estudiante'
-              ? 'Solo puedes buscar profesores, administrativos y administradores'
-              : 'Puedes buscar cualquier usuario registrado'}
+            {currentUser?.role === "estudiante"
+              ? "Solo puedes buscar profesores, administrativos y administradores"
+              : "Puedes buscar cualquier usuario registrado"}
           </p>
         </div>
       )}

@@ -1,50 +1,37 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { useMessaging } from '@/contexts/MessagingContext';
-import { useAuth } from '@/contexts/AuthContext';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { MessageSquareDashed, Users } from 'lucide-react';
-import UserSearch from '@/components/UserSearch';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useMessaging } from "@/contexts/MessagingContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { MessageSquareDashed } from "lucide-react";
+import UserSearch from "@/components/UserSearch";
 
 const MessagesPage = () => {
-  const { conversations, canInitiateConversation } = useMessaging();
+  const { conversations } = useMessaging();
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
-  // Verificar si el usuario puede iniciar conversaciones
-  const canStartConversations = canInitiateConversation();
-
   const getUnreadCountForConversation = (conv) => {
-    return conv.messages.filter((m) => !m.read && m.recipientId === currentUser?.id).length;
+    return conv.messages.filter(
+      (m) => !m.read && m.recipientId === currentUser?.id
+    ).length;
   };
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
       <h1 className="text-4xl font-bold gradient-text mb-8">Mensajes</h1>
 
-      {/* Verificación de acceso para usuarios sin permisos */}
-      {!canStartConversations && (
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 mb-6">
-          <div className="flex items-center gap-2 text-yellow-800 dark:text-yellow-200">
-            <Users className="h-5 w-5" />
-            <p className="font-medium">Acceso restringido</p>
-          </div>
-          <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-1">
-            No tienes permisos para iniciar conversaciones. Puedes responder a mensajes que recibas.
-          </p>
-        </div>
-      )}
-
-      {/* Búsqueda de usuarios - para usuarios con permisos */}
-      {canStartConversations && (
-        <div className="glass-effect rounded-2xl p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-            Iniciar nueva conversación
-          </h2>
-          <UserSearch />
-        </div>
-      )}
+      {/* Búsqueda de usuarios - disponible para todos */}
+      <div className="glass-effect rounded-2xl p-6 mb-6">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+          Iniciar nueva conversación
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+          Busca y conecta con cualquier usuario de la comunidad
+        </p>
+        <UserSearch />
+      </div>
 
       {/* Lista de conversaciones */}
       <div className="glass-effect rounded-2xl p-6">
@@ -59,7 +46,7 @@ const MessagesPage = () => {
                 <div
                   key={conv.id}
                   className={`flex items-center p-4 rounded-lg cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800/50 ${
-                    unreadCount > 0 ? 'bg-green-50 dark:bg-green-900/10' : ''
+                    unreadCount > 0 ? "bg-green-50 dark:bg-green-900/10" : ""
                   }`}
                   onClick={() => navigate(`/dashboard/messages/${conv.id}`)}
                 >
@@ -79,16 +66,20 @@ const MessagesPage = () => {
                       </p>
                       {conv.lastMessage && (
                         <p className="text-xs text-gray-500 dark:text-gray-400">
-                          {new Date(conv.lastMessage.timestamp).toLocaleTimeString('es-AR', {
-                            hour: '2-digit',
-                            minute: '2-digit',
+                          {new Date(
+                            conv.lastMessage.timestamp
+                          ).toLocaleTimeString("es-AR", {
+                            hour: "2-digit",
+                            minute: "2-digit",
                           })}
                         </p>
                       )}
                     </div>
                     <div className="flex justify-between items-center">
                       <p className="text-sm text-gray-600 dark:text-gray-300 truncate pr-4">
-                        {conv.lastMessage ? conv.lastMessage.content : 'No hay mensajes'}
+                        {conv.lastMessage
+                          ? conv.lastMessage.content
+                          : "No hay mensajes"}
                       </p>
                       {unreadCount > 0 && (
                         <span className="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
@@ -108,9 +99,7 @@ const MessagesPage = () => {
               No tenés conversaciones
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mt-2">
-              {canStartConversations
-                ? 'Busca a cualquier usuario para iniciar una conversación.'
-                : 'Las conversaciones aparecerán aquí cuando recibas mensajes.'}
+              Busca a cualquier usuario arriba para iniciar una conversación.
             </p>
           </div>
         )}
