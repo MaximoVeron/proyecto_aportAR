@@ -21,6 +21,7 @@ import {
   MessageSquare,
   BarChart3,
   Newspaper,
+  CalendarCheck,
 } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
@@ -39,6 +40,7 @@ import MessagesPage from "@/pages/MessagesPage";
 import ConversationPage from "@/pages/ConversationPage";
 import SurveysPage from "@/pages/SurveysPage";
 import NewsPage from "@/pages/NewsPage";
+import AttendancePage from "@/pages/AttendancePage";
 import NotificationBell from "@/components/NotificationBell";
 import { useAnnouncements } from "@/contexts/AnnouncementsContext";
 import { useMessaging } from "@/contexts/MessagingContext";
@@ -48,6 +50,7 @@ const navItems = [
   { path: "/news", name: "Noticias", icon: Newspaper },
   { path: "/announcements", name: "Anuncios", icon: Megaphone, badge: true },
   { path: "/messages", name: "Mensajes", icon: MessageSquare, badge: true },
+  { path: "/attendance", name: "Asistencias", icon: CalendarCheck },
   { path: "/projects", name: "Proyectos", icon: FolderKanban },
   { path: "/suggestions", name: "Sugerencias", icon: Lightbulb },
   { path: "/problems", name: "Problemáticas", icon: AlertTriangle },
@@ -148,29 +151,25 @@ const Dashboard = () => {
             </NavLink>
           )}
         </nav>
-
-        {/* Espaciador flexible para empujar el botón hacia abajo */}
-        <div className="flex-1"></div>
-
-        {/* Botón de tema - Fijo en la parte inferior */}
-        <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
-          <Button
-            variant="ghost"
-            className="w-full justify-start text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            onClick={toggleTheme}
-          >
-            {theme === "light" ? (
-              <Moon className="w-5 h-5 mr-3" />
-            ) : (
-              <Sun className="w-5 h-5 mr-3" />
-            )}
-            Modo {theme === "light" ? "Oscuro" : "Claro"}
-          </Button>
-        </div>
       </aside>
 
       <main className="flex-1 ml-64 p-8 overflow-y-auto h-screen">
-        <div className="flex justify-end mb-4">
+        <div className="flex justify-end items-center gap-3 mb-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            onClick={toggleTheme}
+            title={
+              theme === "light" ? "Activar modo oscuro" : "Activar modo claro"
+            }
+          >
+            {theme === "light" ? (
+              <Moon className="w-5 h-5" />
+            ) : (
+              <Sun className="w-5 h-5" />
+            )}
+          </Button>
           <NotificationBell />
         </div>
         <motion.div
@@ -190,6 +189,7 @@ const Dashboard = () => {
               element={<ConversationPage />}
             />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/attendance" element={<AttendancePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/suggestions" element={<SuggestionsPage />} />
             <Route path="/problems" element={<ProblemsPage />} />

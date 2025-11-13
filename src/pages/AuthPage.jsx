@@ -1,32 +1,39 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { GraduationCap } from 'lucide-react';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { GraduationCap } from "lucide-react";
 
 const AuthPage = () => {
   const navigate = useNavigate();
   const { register, login } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
-  
-  const [loginData, setLoginData] = useState({ email: '', password: '' });
+
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [registerData, setRegisterData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    role: '',
-    career: ''
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+    career: "",
+    academicYear: "",
   });
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (login(loginData.email, loginData.password)) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     }
   };
 
@@ -34,8 +41,30 @@ const AuthPage = () => {
     e.preventDefault();
     if (register(registerData)) {
       setIsLogin(true);
-      setRegisterData({ name: '', email: '', password: '', role: '', career: '' });
+      setRegisterData({
+        name: "",
+        email: "",
+        password: "",
+        role: "",
+        career: "",
+        academicYear: "",
+      });
     }
+  };
+
+  // Obtener los años disponibles según la carrera
+  const getAvailableYears = () => {
+    if (registerData.career === "Software") {
+      return [
+        { value: "1", label: "Primer año" },
+        { value: "2", label: "Segundo año" },
+      ];
+    }
+    return [
+      { value: "1", label: "Primer año" },
+      { value: "2", label: "Segundo año" },
+      { value: "3", label: "Tercer año" },
+    ];
   };
 
   return (
@@ -48,10 +77,15 @@ const AuthPage = () => {
         <div className="glass-effect rounded-3xl p-8 shadow-2xl">
           <div className="flex items-center justify-center gap-2 mb-8">
             <GraduationCap className="w-10 h-10 text-green-600 dark:text-green-400" />
-            <span className="text-3xl font-bold gradient-text">aportAR Politécnico</span>
+            <span className="text-3xl font-bold gradient-text">
+              aportAR Politécnico
+            </span>
           </div>
 
-          <Tabs value={isLogin ? "login" : "register"} onValueChange={(v) => setIsLogin(v === "login")}>
+          <Tabs
+            value={isLogin ? "login" : "register"}
+            onValueChange={(v) => setIsLogin(v === "login")}
+          >
             <TabsList className="grid w-full grid-cols-2 mb-6">
               <TabsTrigger value="login">Iniciar Sesión</TabsTrigger>
               <TabsTrigger value="register">Registrarse</TabsTrigger>
@@ -66,7 +100,9 @@ const AuthPage = () => {
                     type="email"
                     placeholder="tu@email.com"
                     value={loginData.email}
-                    onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+                    onChange={(e) =>
+                      setLoginData({ ...loginData, email: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -77,11 +113,15 @@ const AuthPage = () => {
                     type="password"
                     placeholder="••••••••"
                     value={loginData.password}
-                    onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+                    onChange={(e) =>
+                      setLoginData({ ...loginData, password: e.target.value })
+                    }
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full">Ingresar</Button>
+                <Button type="submit" className="w-full">
+                  Ingresar
+                </Button>
               </form>
             </TabsContent>
 
@@ -93,7 +133,9 @@ const AuthPage = () => {
                     id="name"
                     placeholder="Juan Pérez"
                     value={registerData.name}
-                    onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
+                    onChange={(e) =>
+                      setRegisterData({ ...registerData, name: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -104,7 +146,12 @@ const AuthPage = () => {
                     type="email"
                     placeholder="tu@email.com"
                     value={registerData.email}
-                    onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        email: e.target.value,
+                      })
+                    }
                     required
                   />
                 </div>
@@ -115,46 +162,108 @@ const AuthPage = () => {
                     type="password"
                     placeholder="••••••••"
                     value={registerData.password}
-                    onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        password: e.target.value,
+                      })
+                    }
                     required
                   />
                 </div>
                 <div>
                   <Label htmlFor="role">Rol</Label>
-                  <Select value={registerData.role} onValueChange={(v) => setRegisterData({ ...registerData, role: v, career: '' })}>
+                  <Select
+                    value={registerData.role}
+                    onValueChange={(v) =>
+                      setRegisterData({ ...registerData, role: v, career: "" })
+                    }
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Selecciona tu rol" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="estudiante">Estudiante</SelectItem>
                       <SelectItem value="profesor">Profesor</SelectItem>
-                      <SelectItem value="administrativo">Administrativo</SelectItem>
+                      <SelectItem value="administrativo">
+                        Administrativo
+                      </SelectItem>
                       <SelectItem value="trabajador">Trabajador</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-                {registerData.role === 'estudiante' && (
-                  <div>
-                    <Label htmlFor="career">Carrera</Label>
-                    <Select value={registerData.career} onValueChange={(v) => setRegisterData({ ...registerData, career: v })}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecciona tu carrera" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Software">Desarrollo de Software</SelectItem>
-                        <SelectItem value="Telecomunicaciones">Telecomunicaciones</SelectItem>
-                        <SelectItem value="Química Industrial">Química Industrial</SelectItem>
-                        <SelectItem value="Mecatrónica">Mecatrónica</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                {registerData.role === "estudiante" && (
+                  <>
+                    <div>
+                      <Label htmlFor="career">Carrera</Label>
+                      <Select
+                        value={registerData.career}
+                        onValueChange={(v) =>
+                          setRegisterData({
+                            ...registerData,
+                            career: v,
+                            academicYear: "",
+                          })
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona tu carrera" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Software">
+                            Desarrollo de Software
+                          </SelectItem>
+                          <SelectItem value="Telecomunicaciones">
+                            Telecomunicaciones
+                          </SelectItem>
+                          <SelectItem value="Química Industrial">
+                            Química Industrial
+                          </SelectItem>
+                          <SelectItem value="Mecatrónica">
+                            Mecatrónica
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {registerData.career && (
+                      <div>
+                        <Label htmlFor="academicYear">Año académico</Label>
+                        <Select
+                          value={registerData.academicYear}
+                          onValueChange={(v) =>
+                            setRegisterData({
+                              ...registerData,
+                              academicYear: v,
+                            })
+                          }
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecciona tu año" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {getAvailableYears().map((year) => (
+                              <SelectItem key={year.value} value={year.value}>
+                                {year.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
+                  </>
                 )}
-                <Button type="submit" className="w-full">Registrarse</Button>
+                <Button type="submit" className="w-full">
+                  Registrarse
+                </Button>
               </form>
             </TabsContent>
           </Tabs>
 
-          <Button variant="ghost" onClick={() => navigate('/')} className="w-full mt-4">
+          <Button
+            variant="ghost"
+            onClick={() => navigate("/")}
+            className="w-full mt-4"
+          >
             Volver al inicio
           </Button>
         </div>

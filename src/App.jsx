@@ -1,15 +1,21 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import { Toaster } from '@/components/ui/toaster';
-import LandingPage from '@/pages/LandingPage';
-import AuthPage from '@/pages/AuthPage';
-import Dashboard from '@/pages/Dashboard';
-import { AuthProvider, useAuth } from '@/contexts/AuthContext';
-import { NotificationProvider } from '@/contexts/NotificationContext';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { AnnouncementsProvider } from '@/contexts/AnnouncementsContext';
-import { MessagingProvider } from '@/contexts/MessagingContext';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { Toaster } from "@/components/ui/toaster";
+import LandingPage from "@/pages/LandingPage";
+import AuthPage from "@/pages/AuthPage";
+import Dashboard from "@/pages/Dashboard";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { NotificationProvider } from "@/contexts/NotificationContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { AnnouncementsProvider } from "@/contexts/AnnouncementsContext";
+import { MessagingProvider } from "@/contexts/MessagingContext";
+import { AttendanceProvider } from "@/contexts/AttendanceContext";
 
 function PrivateRoute({ children }) {
   const { currentUser } = useAuth();
@@ -28,35 +34,37 @@ function App() {
         <AnnouncementsProvider>
           <NotificationProvider>
             <MessagingProvider>
-              <Helmet>
-                <title>aportAR Politécnico - Red Social Institucional</title>
-                <meta
-                  name="description"
-                  content="Plataforma de comunicación y colaboración para el Instituto Politécnico de Formosa"
-                />
-              </Helmet>
-              <Router>
-                <Routes>
-                  <Route path="/" element={<LandingPage />} />
-                  <Route
-                    path="/auth"
-                    element={
-                      <PublicRoute>
-                        <AuthPage />
-                      </PublicRoute>
-                    }
+              <AttendanceProvider>
+                <Helmet>
+                  <title>aportAR Politécnico - Red Social Institucional</title>
+                  <meta
+                    name="description"
+                    content="Plataforma de comunicación y colaboración para el Instituto Politécnico de Formosa"
                   />
-                  <Route
-                    path="/dashboard/*"
-                    element={
-                      <PrivateRoute>
-                        <Dashboard />
-                      </PrivateRoute>
-                    }
-                  />
-                </Routes>
-              </Router>
-              <Toaster />
+                </Helmet>
+                <Router>
+                  <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route
+                      path="/auth"
+                      element={
+                        <PublicRoute>
+                          <AuthPage />
+                        </PublicRoute>
+                      }
+                    />
+                    <Route
+                      path="/dashboard/*"
+                      element={
+                        <PrivateRoute>
+                          <Dashboard />
+                        </PrivateRoute>
+                      }
+                    />
+                  </Routes>
+                </Router>
+                <Toaster />
+              </AttendanceProvider>
             </MessagingProvider>
           </NotificationProvider>
         </AnnouncementsProvider>
