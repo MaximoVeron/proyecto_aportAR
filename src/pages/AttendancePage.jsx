@@ -54,6 +54,21 @@ const AttendancePage = () => {
   const [selectedQuarter, setSelectedQuarter] = useState(null);
   const [isManageAttendanceOpen, setIsManageAttendanceOpen] = useState(false);
 
+  // Nuevo estado para el diálogo de actualización de asistencia
+  const [isUpdateAttendanceDialogOpen, setIsUpdateAttendanceDialogOpen] =
+    useState(false);
+  const [attendanceUpdate, setAttendanceUpdate] = useState({
+    quarterId: null,
+    studentId: null,
+    studentName: "",
+    subjectId: null,
+    subjectName: "",
+    currentAttended: 0,
+    totalClasses: 0,
+    newAttended: "",
+  });
+  const [isUpdating, setIsUpdating] = useState(false);
+
   const [newQuarter, setNewQuarter] = useState({
     name: "",
     career: "",
@@ -147,30 +162,80 @@ const AttendancePage = () => {
   const handleUpdateAttendance = (
     quarterId,
     studentId,
+    studentName,
     subjectId,
+    subjectName,
     currentAttended,
     totalClasses
   ) => {
-    const newAttended = prompt(
-      `Asistencias actuales: ${currentAttended}/${totalClasses}\nIngresa la nueva cantidad de asistencias:`,
-      currentAttended
-    );
+    setAttendanceUpdate({
+      quarterId,
+      studentId,
+      studentName,
+      subjectId,
+      subjectName,
+      currentAttended,
+      totalClasses,
+      newAttended: currentAttended.toString(),
+    });
+    setIsUpdateAttendanceDialogOpen(true);
+  };
 
-    if (newAttended !== null) {
-      const attended = parseInt(newAttended);
-      if (isNaN(attended) || attended < 0 || attended > totalClasses) {
-        toast({
-          title: "Error",
-          description: `Ingresa un número válido entre 0 y ${totalClasses}`,
-          variant: "destructive",
-        });
-        return;
-      }
-      updateStudentAttendance(quarterId, studentId, subjectId, attended);
+  const handleConfirmUpdateAttendance = async () => {
+    const attended = parseInt(attendanceUpdate.newAttended);
+
+    if (
+      isNaN(attended) ||
+      attended < 0 ||
+      attended > attendanceUpdate.totalClasses
+    ) {
       toast({
-        title: "Asistencia actualizada",
-        description: "La asistencia se actualizó correctamente",
+        title: "Error",
+        description: `Ingresa un número válido entre 0 y ${attendanceUpdate.totalClasses}`,
+        variant: "destructive",
       });
+      return;
+    }
+
+    setIsUpdating(true);
+
+    // Simular un pequeño delay para mejor UX (puedes quitarlo si no te gusta)
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    try {
+      updateStudentAttendance(
+        attendanceUpdate.quarterId,
+        attendanceUpdate.studentId,
+        attendanceUpdate.subjectId,
+        attended
+      );
+
+      toast({
+        title: "✓ Asistencia actualizada",
+        description: `${attendanceUpdate.studentName} - ${attendanceUpdate.subjectName}: ${attended}/${attendanceUpdate.totalClasses} clases`,
+        className:
+          "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800",
+      });
+
+      setIsUpdateAttendanceDialogOpen(false);
+      setAttendanceUpdate({
+        quarterId: null,
+        studentId: null,
+        studentName: "",
+        subjectId: null,
+        subjectName: "",
+        currentAttended: 0,
+        totalClasses: 0,
+        newAttended: "",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "No se pudo actualizar la asistencia. Intenta nuevamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsUpdating(false);
     }
   };
 
@@ -488,7 +553,9 @@ const AttendancePage = () => {
                                       handleUpdateAttendance(
                                         selectedQuarter.id,
                                         student.userId,
+                                        student.name,
                                         subject.id,
+                                        subject.name,
                                         attendance.attended,
                                         subject.totalClasses
                                       )
@@ -508,6 +575,97 @@ const AttendancePage = () => {
                 )}
               </div>
             )}
+          </DialogContent>
+        </Dialog>
+
+        {/* Nuevo Dialog para actualizar asistencia individual */}
+        <Dialog
+          open={isUpdateAttendanceDialogOpen}
+          onOpenChange={setIsUpdateAttendanceDialogOpen}
+        >
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Actualizar Asistencia</DialogTitle>
+              <DialogDescription>
+                {attendanceUpdate.studentName} - {attendanceUpdate.subjectName}
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="space-y-4 py-4">
+              <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                  Asistencias actuales:
+                </p>
+                <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                  {attendanceUpdate.currentAttended}/
+                  {attendanceUpdate.totalClasses} clases
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  {attendanceUpdate.totalClasses > 0
+                    ? Math.round(
+                        (attendanceUpdate.currentAttended /
+                          attendanceUpdate.totalClasses) *
+                          100
+                      )
+                    : 0}
+                  % de asistencia
+                </p>
+              </div>
+
+              <div>
+                <Label htmlFor="newAttended">
+                  Ingresa la nueva cantidad de asistencias:
+                </Label>
+                <Input
+                  id="newAttended"
+                  type="number"
+                  min="0"
+                  max={attendanceUpdate.totalClasses}
+                  value={attendanceUpdate.newAttended}
+                  onChange={(e) =>
+                    setAttendanceUpdate({
+                      ...attendanceUpdate,
+                      newAttended: e.target.value,
+                    })
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleConfirmUpdateAttendance();
+                    }
+                  }}
+                  className="mt-2"
+                  autoFocus
+                />
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Valor entre 0 y {attendanceUpdate.totalClasses}
+                </p>
+              </div>
+
+              <div className="flex gap-2 pt-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsUpdateAttendanceDialogOpen(false)}
+                  className="flex-1"
+                  disabled={isUpdating}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  onClick={handleConfirmUpdateAttendance}
+                  className="flex-1"
+                  disabled={isUpdating}
+                >
+                  {isUpdating ? (
+                    <>
+                      <span className="mr-2">Guardando...</span>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    </>
+                  ) : (
+                    "Actualizar"
+                  )}
+                </Button>
+              </div>
+            </div>
           </DialogContent>
         </Dialog>
       </div>
