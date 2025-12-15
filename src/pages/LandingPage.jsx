@@ -1,9 +1,16 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { GraduationCap, Users, Lightbulb, AlertCircle, Moon, Sun } from 'lucide-react';
-import { useTheme } from '@/contexts/ThemeContext';
+import React from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  GraduationCap,
+  Users,
+  Lightbulb,
+  AlertCircle,
+  Moon,
+  Sun,
+} from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -31,12 +38,16 @@ const LandingPage = () => {
             className="flex gap-3 items-center"
           >
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
-              {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+              {theme === "light" ? (
+                <Moon className="h-5 w-5" />
+              ) : (
+                <Sun className="h-5 w-5" />
+              )}
             </Button>
-            <Button variant="outline" onClick={() => navigate('/auth')}>
+            <Button variant="outline" onClick={() => navigate("/auth")}>
               Iniciar Sesión
             </Button>
-            <Button onClick={() => navigate('/auth')}>Registrarse</Button>
+            <Button onClick={() => navigate("/auth")}>Registrarse</Button>
           </motion.div>
         </div>
       </nav>
@@ -53,7 +64,7 @@ const LandingPage = () => {
             <img
               className="w-full h-full object-cover"
               alt="Estudiantes del Politécnico colaborando"
-              src="https://horizons-cdn.hostinger.com/8dd8155e-64e6-4fdb-9cd7-f35577bd5a5c/banneraportar-XjyNu.png"
+              src="../../banner_aportar.png"
             />
           </motion.div>
 
@@ -65,12 +76,19 @@ const LandingPage = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-center"
             >
-              <h1 className="text-6xl font-bold mb-6 gradient-text">Conecta, Colabora, Crece</h1>
+              <h1 className="text-6xl font-bold mb-6 gradient-text">
+                Conecta, Colabora, Crece
+              </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-                La plataforma oficial del Instituto Politécnico de Formosa para compartir proyectos,
-                proponer mejoras y resolver desafíos institucionales juntos.
+                La plataforma oficial del Instituto Politécnico de Formosa para
+                compartir proyectos, proponer mejoras y resolver desafíos
+                institucionales juntos.
               </p>
-              <Button size="lg" onClick={() => navigate('/auth')} className="text-lg px-8 py-6">
+              <Button
+                size="lg"
+                onClick={() => navigate("/auth")}
+                className="text-lg px-8 py-6"
+              >
                 Únete Ahora
               </Button>
             </motion.div>
@@ -93,21 +111,24 @@ const LandingPage = () => {
             {[
               {
                 icon: Users,
-                title: 'Proyectos',
-                description: 'Comparte tus trabajos académicos y desarrollos con toda la comunidad',
-                color: 'from-blue-500 to-blue-600',
+                title: "Proyectos",
+                description:
+                  "Comparte tus trabajos académicos y desarrollos con toda la comunidad",
+                color: "from-blue-500 to-blue-600",
               },
               {
                 icon: Lightbulb,
-                title: 'Sugerencias',
-                description: 'Propón ideas y mejoras para fortalecer nuestra institución',
-                color: 'from-yellow-500 to-orange-500',
+                title: "Sugerencias",
+                description:
+                  "Propón ideas y mejoras para fortalecer nuestra institución",
+                color: "from-yellow-500 to-orange-500",
               },
               {
                 icon: AlertCircle,
-                title: 'Problemáticas',
-                description: 'Colabora en la resolución de desafíos institucionales',
-                color: 'from-red-500 to-pink-500',
+                title: "Problemáticas",
+                description:
+                  "Colabora en la resolución de desafíos institucionales",
+                color: "from-red-500 to-pink-500",
               },
             ].map((feature, index) => (
               <motion.div
@@ -124,7 +145,9 @@ const LandingPage = () => {
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -139,12 +162,18 @@ const LandingPage = () => {
             viewport={{ once: true }}
             className="glass-effect rounded-3xl p-12 text-center"
           >
-            <h2 className="text-4xl font-bold mb-6 gradient-text">Exclusivo para el Politécnico</h2>
+            <h2 className="text-4xl font-bold mb-6 gradient-text">
+              Exclusivo para el Politécnico
+            </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-              Carreras participantes: Desarrollo de Software, Química Industrial, Telecomunicaciones
-              y Mecatrónica
+              Carreras participantes: Desarrollo de Software, Química
+              Industrial, Telecomunicaciones y Mecatrónica
             </p>
-            <Button size="lg" onClick={() => navigate('/auth')} className="text-lg px-8 py-6">
+            <Button
+              size="lg"
+              onClick={() => navigate("/auth")}
+              className="text-lg px-8 py-6"
+            >
               Comienza Tu Experiencia
             </Button>
           </motion.div>
@@ -171,17 +200,22 @@ const LandingPage = () => {
                 className="flex items-center gap-3 mb-4"
               >
                 <GraduationCap className="w-10 h-10 text-green-200" />
-                <span className="text-2xl font-bold text-white">aportAR Politécnico</span>
+                <span className="text-2xl font-bold text-white">
+                  aportAR Politécnico
+                </span>
               </motion.div>
               <p className="text-green-100 text-lg mb-6 max-w-md">
-                La plataforma oficial del Instituto Politécnico de Formosa para conectar
-                estudiantes, compartir proyectos y construir el futuro juntos.
+                La plataforma oficial del Instituto Politécnico de Formosa para
+                conectar estudiantes, compartir proyectos y construir el futuro
+                juntos.
               </p>
             </div>
 
             {/* Quick links */}
             <div>
-              <h3 className="text-xl font-semibold mb-4 text-white">Enlaces Rápidos</h3>
+              <h3 className="text-xl font-semibold mb-4 text-white">
+                Enlaces Rápidos
+              </h3>
               <ul className="space-y-3">
                 <li>
                   <a
@@ -215,7 +249,9 @@ const LandingPage = () => {
 
             {/* Carreras */}
             <div>
-              <h3 className="text-xl font-semibold mb-4 text-white">Carreras</h3>
+              <h3 className="text-xl font-semibold mb-4 text-white">
+                Carreras
+              </h3>
               <ul className="space-y-3 text-sm">
                 <li className="text-green-100">Desarrollo de Software</li>
                 <li className="text-green-100">Química Industrial</li>
@@ -229,8 +265,12 @@ const LandingPage = () => {
           <div className="border-t border-green-400/30 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               <div className="text-center md:text-left">
-                <p className="text-lg font-medium text-white mb-1">© 2025 aportAR Politécnico</p>
-                <p className="text-green-100">Instituto Politécnico de Formosa</p>
+                <p className="text-lg font-medium text-white mb-1">
+                  © 2025 aportAR Politécnico
+                </p>
+                <p className="text-green-100">
+                  Instituto Politécnico de Formosa
+                </p>
                 <p className="text-green-200 mt-2 font-medium">
                   Conectando estudiantes, construyendo futuro
                 </p>

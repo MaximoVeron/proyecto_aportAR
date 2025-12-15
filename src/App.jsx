@@ -36,7 +36,7 @@ function App() {
             <MessagingProvider>
               <AttendanceProvider>
                 <Helmet>
-                  <title>aportAR Politécnico - Red Social Institucional</title>
+                  <title>aportAR Politécnico - IPF</title>
                   <meta
                     name="description"
                     content="Plataforma de comunicación y colaboración para el Instituto Politécnico de Formosa"
